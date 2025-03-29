@@ -3,10 +3,10 @@ package login;
 import User.User;
 
 public class LoginController {
-    public static User login(String username, String password)
+    public static boolean login(String username, String password)
     {
         User user = new User();
 
-        return null;
+        return false;
     }
 }

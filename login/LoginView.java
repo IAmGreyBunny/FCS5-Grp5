@@ -19,9 +19,8 @@ public class LoginView {
 
         System.out.println("Logging in... ");
         LoginController loginController = new LoginController();
-        User user = loginController.login(username, password);
 
-        if (user != null) {
+        if (loginController.login(username, password)) {
             System.out.println("Logged in successfully");
         } else {
             System.out.println("Login Failed");

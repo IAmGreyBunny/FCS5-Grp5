@@ -7,6 +7,6 @@ public class LoginController {
     {
         User user = new User();
 
-        return user;
+        return null;
     }
 }

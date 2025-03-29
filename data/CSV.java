@@ -1,6 +1,6 @@
 package data;
 
-import User.User;
+import user.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;

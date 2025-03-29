@@ -1,4 +1,4 @@
-package User.Rule;
+package user.rule;
 
 public class Rule {
 }

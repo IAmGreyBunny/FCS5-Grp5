@@ -1,6 +1,6 @@
 package login;
 
-import User.User;
+import user.User;
 
 import java.util.Scanner;
 

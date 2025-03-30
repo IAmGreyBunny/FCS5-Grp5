@@ -1,6 +1,6 @@
 package login;
 
-import User.User;
+import user.User;
 
 public class LoginController {
     public static boolean login(String username, String password)

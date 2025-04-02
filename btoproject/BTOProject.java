@@ -1,3 +1,5 @@
+package btoproject;
+
 import java.time.LocalDate;
 
 public class BTOProject {
@@ -65,7 +67,7 @@ public class BTOProject {
 
     @Override
     public String toString() {
-        return "BTOProject{" +
+        return "btoproject.BTOProject{" +
                 "projectName='" + projectName + '\'' +
                 ", location='" + location + '\'' +
                 ", totalUnits=" + totalUnits +

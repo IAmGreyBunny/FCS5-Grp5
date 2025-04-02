@@ -7,6 +7,7 @@ public class BTOProject {
     private double pricePerUnit;
     private LocalDate estimatedCompletionDate;
 
+    // Constructor
     public BTOProject(String projectName, String location, int totalUnits, double pricePerUnit, LocalDate estimatedCompletionDate) {
         this.projectName = projectName;
         this.location = location;
@@ -15,6 +16,7 @@ public class BTOProject {
         this.estimatedCompletionDate = estimatedCompletionDate;
     }
 
+    // Getters and Setters
     public String getProjectName() {
         return projectName;
     }
@@ -55,14 +57,17 @@ public class BTOProject {
         this.estimatedCompletionDate = estimatedCompletionDate;
     }
 
+    // Method to calculate total project value
     public double calculateTotalValue() {
         return totalUnits * pricePerUnit;
     }
 
+    // Method to check if project is completed
     public boolean isCompleted() {
         return LocalDate.now().isAfter(estimatedCompletionDate);
     }
 
+    // toString Method
     @Override
     public String toString() {
         return "BTOProject{" +

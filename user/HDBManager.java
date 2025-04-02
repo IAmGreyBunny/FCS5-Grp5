@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HDBManager extends User{
-    private BTOListing activeProject;
-    private List<BTOListing> btoListings = new ArrayList<>();
+    // private BTOListing activeProject;
+    // private List<BTOListing> btoListings = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
     public HDBManager (String name, String nric, int age, boolean maritalStatus,String password) {
         super(name, nric, age, maritalStatus, password);
     }
 
+    /*
     public boolean createListing(String projectName, String neighbourhood, int twoRoomFlats, int threeRoomFlats,
                                 int avail2Room, int avail3Room, String openingDate, String closingDate) {
         if (activeProject != null) {
@@ -147,4 +148,5 @@ public class HDBManager extends User{
         }
         project.replyEnquiry(enquiryID, response);        // function to add response to the enquiry
     }
+    */
 }

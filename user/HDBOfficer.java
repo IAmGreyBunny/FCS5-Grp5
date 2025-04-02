@@ -1,3 +1,5 @@
+package user;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -6,6 +8,7 @@ public class HDBOfficer extends User {
     private boolean registrationApproved;
     private LocalDateTime registrationDate;
 
+    /*
     public HDBOfficer(String name, String nric, int age, String maritalStatus, String password) {
         super(name, nric, age, maritalStatus, password, "HDB_OFFICER");
         this.assignedProject = null;
@@ -130,4 +133,5 @@ public class HDBOfficer extends User {
     private boolean hasAppliedForProject(String projectName) {
         return false;
     }
+    */
 }

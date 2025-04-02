@@ -67,7 +67,7 @@ public class BTOProject {
 
     @Override
     public String toString() {
-        return "btoproject.BTOProject{" +
+        return "BTOProject{" +
                 "projectName='" + projectName + '\'' +
                 ", location='" + location + '\'' +
                 ", totalUnits=" + totalUnits +

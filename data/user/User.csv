@@ -1,0 +1,12 @@
+uid,nric,password,role
+0,T8765432F,password,0
+1,S5678901G,password,0
+2,T2109876H,password,1
+3,S6543210I,password,1
+4,T1234567J,password,1
+5,S1234567A,password,2
+6,T7654321B,password,2
+7,S9876543C,password,2
+8,T2345678D,password,2
+9,S3456789E,password,2
+

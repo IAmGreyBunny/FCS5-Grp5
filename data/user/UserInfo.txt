@@ -1,0 +1,11 @@
+uid,name,age,maritalStatus
+0,Michael,36,0
+1,Jessica,26,1
+2,Daniel,36,0
+3,Emily,28,0
+4,David,29,1
+5,John,35,0
+6,Sarah,40,1
+7,Grace,37,1
+8,James,30,1
+9,Rachel,25,0

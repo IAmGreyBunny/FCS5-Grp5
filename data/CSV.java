@@ -1,9 +1,11 @@
 package data;
 
+import btoproject.BTOProject;
 import user.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,6 +48,37 @@ public class CSV {
         }
 
         return userList;
+    }
+    public static ArrayList<BTOProject> readProjectFromCSV(File file) throws FileNotFoundException{
+        ArrayList<BTOProject> projectList = new ArrayList<BTOProject>();
+
+        Scanner fileScanner = new Scanner(file);
+
+        fileScanner.nextLine();                         // Skips Header
+
+        while (fileScanner.hasNextLine()) {
+            String line = fileScanner.nextLine();       //Gets next line
+
+            Scanner lineScanner = new Scanner(line);    // Create scanner object to read line
+            lineScanner.useDelimiter(",");       // Sets comma to be delimiter
+
+            String projectField[] = new String[13];
+
+            for (int i = 0; i < projectField.length; i++) {
+                projectField[i] = lineScanner.next();
+            }
+
+            /*
+            //Create a User object based on information from csv file
+            BTOProject btoProject = new BTOProject(projectField[0],projectField[1]);
+
+
+            projectList.add(btoProject);
+            */
+
+        }
+
+        return projectList;
     }
 
 }

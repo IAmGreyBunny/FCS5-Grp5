@@ -2,6 +2,7 @@ package session;
 
 import data.GlobalData;
 import user.User;
+import view.StartUpView;
 import view.View;
 
 public class Session {
@@ -16,6 +17,7 @@ public class Session {
     }
 
     public void loadInitialData() {
+        currentView = new StartUpView();
     }
 
     public static Session getSession() {

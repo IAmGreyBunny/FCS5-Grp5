@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class LoginView extends FormView{
 
-    HashMap<String,String> userInput;
+    HashMap<String,String> userInput = new HashMap<>();
 
     @Override
     public void prompt() {

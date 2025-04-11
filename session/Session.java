@@ -1,11 +1,9 @@
-package programstate;
+package session;
 
 import data.GlobalData;
 import user.CurrentUser;
 
-import java.io.File;
-
-public class ProgramState {
+public class Session {
     private CurrentUser currentUser = null;
     private GlobalData globalData = GlobalData.getGlobalData();
 

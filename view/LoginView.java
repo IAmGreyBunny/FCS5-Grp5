@@ -1,6 +1,6 @@
 package view;
 
-import login.LoginController;
+import login.AuthController;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -25,7 +25,7 @@ public class LoginView extends FormView{
         userInput.put("password",password);
 
         System.out.println("Logging in... ");
-        LoginController.login(this.getUserInput());
+        AuthController.authenticate(this.getUserInput());
     }
 
     @Override

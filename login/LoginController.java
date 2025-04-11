@@ -2,11 +2,16 @@ package login;
 
 import user.User;
 
-public class LoginController {
-    public static boolean login(String username, String password)
-    {
-        User user = new User();
+import java.util.HashMap;
 
-        return false;
+public class LoginController {
+    public static void login(HashMap<String,String> userInput)
+    {
+        //Checks userInput
+
+        //Authenticate
+
+        //Update View
+
     }
 }

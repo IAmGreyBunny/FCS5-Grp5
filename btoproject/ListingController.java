@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.time.LocalDate;
 
 //public class ListingController {
-//    public static void listing(HashMap<String, Object> userInput) {
+//    public static void create(HashMap<String, Object> userInput) {
 //        String name = (String) userInput.get("name");
 //        String location = (String) userInput.get("location");
 //        LocalDate estimatedCompletionDate = (LocalDate) userInput.get("estimatedCompletionDate");

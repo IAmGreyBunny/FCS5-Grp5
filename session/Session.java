@@ -2,7 +2,7 @@ package session;
 
 import data.GlobalData;
 import user.User;
-import view.StartUpView;
+import view.general.StartUpView;
 import view.View;
 
 public class Session {

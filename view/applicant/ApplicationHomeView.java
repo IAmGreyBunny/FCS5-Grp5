@@ -1,11 +1,11 @@
-package view;
+package view.applicant;
 
-import session.Session;
+import view.MenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ApplicationHomeView extends HomeView {
+public class ApplicationHomeView extends MenuView {
     private int userInput;
 
 

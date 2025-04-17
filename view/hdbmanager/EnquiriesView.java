@@ -1,21 +1,20 @@
-package view;
+package view.hdbmanager;
 
 import session.Session;
-import view.HDBManager.*;
+import view.MenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class HDBManagerHomeView extends HomeView {
+public class EnquiriesView extends MenuView {
     private int userInput;
-
 
     @Override
     public void show() {
-        System.out.println("Welcome!");
-        System.out.println("1) Manage Project");
-        System.out.println("2) Manage Applications");
-        System.out.println("3) Manage Enquiries");
+        System.out.println("====== Manage Enquiries ======");
+        System.out.println("1. View All Enquiries");
+        System.out.println("2. Reply to Enquiries");
+        System.out.println("3. Return");
 
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         try {
@@ -23,13 +22,13 @@ public class HDBManagerHomeView extends HomeView {
 
             switch (userInput) {
                 case 1:
-                    Session.getSession().setCurrentView(new ProjectView());
+                    // code to view all enquiries
                     break;
                 case 2:
-                    Session.getSession().setCurrentView(new ApplicationView());
+                    // code to answer enquiry
                     break;
                 case 3:
-                    Session.getSession().setCurrentView(new EnquiriesView());
+                    Session.getSession().setCurrentView(new HDBManagerHomeView());
                     break;
                 default: System.out.println("Invalid Input");
             }

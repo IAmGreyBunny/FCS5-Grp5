@@ -1,13 +1,13 @@
-package view.HDBManager;
+package view.hdbmanager;
 
 import session.Session;
-import view.HDBManagerHomeView;
-import view.HDBManager.Applications.*;
+import view.hdbmanager.applications.*;
+import view.MenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ApplicationView extends HDBManagerHomeView {
+public class ApplicationView extends MenuView {
     private int userInput;
 
     @Override

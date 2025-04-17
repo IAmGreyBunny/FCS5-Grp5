@@ -1,12 +1,14 @@
-package view;
+package view.hdbofficer;
 
 import session.Session;
-import view.HDBManager.OfficerProjectView;
+import view.MenuView;
+import view.general.BTOApplicationMenuView;
+import view.hdbmanager.OfficerProjectView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class HDBOfficerHomeView extends HomeView {
+public class HDBOfficerHomeView extends MenuView {
     private int userInput;
 
 
@@ -23,7 +25,7 @@ public class HDBOfficerHomeView extends HomeView {
 
             switch (userInput) {
                 case 1:
-                    Session.getSession().setCurrentView(new ApplicationHomeView());
+                    Session.getSession().setCurrentView(new BTOApplicationMenuView());
                     break;
                 case 2:
                     // code to apply to be an officer for a project

@@ -10,23 +10,35 @@ import java.io.IOException;
 public class UserRepository {
 
     // Create User in database
-    public static void createUser(User user){
+    public static void createUser(User user) {
 
     }
 
     // Delete User in database
-    public static void deleteUser(User user)
-    {
+    public static void deleteUser(User user) {
+        // Find user by id
 
+        // Delete user in UserInfo Table
+
+        // Delete user in User Table
+
+        // Check for traces in project data and delete accordingly
+
+        // Check for traces in enquiries and delete accordingly
     }
 
     // Updates User in database
-    public static void updateUser(User user){
+    public static void updateUser(User user) {
+        //Find the row in the UserInfo table and update accordingly
+
+        //Find the row in UserLogin table and update accordingly
+
+        //Update user entry
 
     }
 
     //Read Operations
-    public static User findUserById(){
+    public static User findUserById(int uid) {
         User user = null;
         return user;
     }
@@ -38,28 +50,25 @@ public class UserRepository {
 
         User user = null;
 
-        try{
+        try {
             file = new FileInputStream(new File("data/user/User.xlsx"));
             workbook = WorkbookFactory.create(file);
             sheet = workbook.getSheetAt(0);
-        }
-        catch(FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             System.out.println("Error");
             return null;
         }
 
-        for(Row row: sheet){
+        // Go through row in the Excel sheet
+        for (Row row : sheet) {
             //Get username
             Cell cell = row.getCell(1);
 
             // Looks for username
-            if(cell.toString().equals(username))
-            {
+            if (cell.toString().equals(username)) {
                 // Checks password if username is found
                 cell = row.getCell(2);
-                if(cell.toString().equals(password))
-                {
+                if (cell.toString().equals(password)) {
                     // Create User to return as result
                     System.out.println("User found");
                     user = new User();

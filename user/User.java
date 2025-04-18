@@ -1,14 +1,16 @@
 package user;
 
 public class User {
+    private int uid;
     private String name;
     private String nric;              //user id
     private int age;
     private boolean maritalStatus;
     private String password;
 
-    public User(String name, String nric, int age, boolean maritalStatus,String password)
+    public User(int uid, String name, String nric, int age, boolean maritalStatus,String password)
     {
+        this.uid = uid;
         this.name = name;
         this.nric = nric;
         this.age = age;
@@ -24,6 +26,14 @@ public class User {
         this.age = 0;
         this.maritalStatus = false;
         this.password = "";
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getName() {

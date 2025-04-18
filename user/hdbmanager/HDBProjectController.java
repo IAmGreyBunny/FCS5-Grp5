@@ -48,7 +48,7 @@ public class HDBProjectController {
         return btoProjects.removeIf(p -> p.getProjectName().equals(projectName));
     }
 
-    public boolean toggleVisibility(BTOProject project, String visible) {
+    public boolean toggleVisibility(BTOProject project, boolean visible) {
         project.setVisibility(visible);
         return true;
     }

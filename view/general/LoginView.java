@@ -1,11 +1,12 @@
-package view;
+package view.general;
 
 import login.AuthController;
+import view.FormView;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class LoginView extends FormView{
+public class LoginView extends FormView {
 
     HashMap<String,String> userInput = new HashMap<>();
 

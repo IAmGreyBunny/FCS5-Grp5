@@ -32,12 +32,13 @@ public class HDBOfficerHomeView extends MenuView {
                     break;
                 case 3:
                     // check if user is an officer for a project
-                    if ( /* if officer is handling a project */ ) {
-                        Session.getSession().setCurrentView(new OfficerProjectView());
-                    }
-                    else {
-                        System.out.println("Not handling any BTO Projects!");
-                    }
+
+//                    if (/* if officer is handling a project */ ) {
+//                        Session.getSession().setCurrentView(new OfficerProjectView());
+//                    }
+//                    else {
+//                        System.out.println("Not handling any BTO Projects!");
+//                    }
 
                 default: System.out.println("Invalid Input");
             }

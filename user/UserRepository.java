@@ -61,10 +61,15 @@ public class UserRepository {
                 if(cell.toString().equals(password))
                 {
                     // Create User to return as result
+                    System.out.println("User found");
                     user = new User();
                 }
             }
         }
+
+        // Close resources
+        workbook.close();
+        file.close();
 
         return user;
     }

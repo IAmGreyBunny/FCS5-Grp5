@@ -12,6 +12,7 @@ public class BTOProject {
     private LocalDate applicationOpeningDate;
     private LocalDate applicationClosingDate;
     private int officerSlots;
+    private String visibility;
 
     private HDBManager manager;
 
@@ -21,6 +22,7 @@ public class BTOProject {
         this.applicationOpeningDate = applicationOpeningDate;
         this.applicationClosingDate = applicationClosingDate;
         this.officerSlots = officerSlots;
+        this.visibility = "off";            // default is "off"
     }
 
     public String getProjectName() {
@@ -78,6 +80,14 @@ public class BTOProject {
 
     public void setManager(HDBManager manager) {
         this.manager = manager;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
     }
 
     /*

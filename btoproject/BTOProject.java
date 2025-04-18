@@ -12,7 +12,7 @@ public class BTOProject {
     private LocalDate applicationOpeningDate;
     private LocalDate applicationClosingDate;
     private int officerSlots;
-    private String visibility;
+    private boolean visibility;   // false represents "off" and true represents "on"
 
     private HDBManager manager;
 
@@ -22,7 +22,7 @@ public class BTOProject {
         this.applicationOpeningDate = applicationOpeningDate;
         this.applicationClosingDate = applicationClosingDate;
         this.officerSlots = officerSlots;
-        this.visibility = "off";            // default is "off"
+        this.visibility = false;            // default is false - "off"
     }
 
     public String getProjectName() {
@@ -82,11 +82,11 @@ public class BTOProject {
         this.manager = manager;
     }
 
-    public String getVisibility() {
+    public boolean getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(String visibility) {
+    public void setVisibility(boolean visibility) {
         this.visibility = visibility;
     }
 

@@ -2,30 +2,25 @@ package user;
 
 public class User {
     private int uid;
-    private String name;
-    private String nric;              //user id
+    private String name;            //user id
     private int age;
     private boolean maritalStatus;
-    private String password;
 
-    public User(int uid, String name, String nric, int age, boolean maritalStatus,String password)
+    public User(int uid, String name, int age, boolean maritalStatus)
     {
         this.uid = uid;
         this.name = name;
-        this.nric = nric;
         this.age = age;
         this.maritalStatus = maritalStatus;
-        this.password = password;
     }
 
     //Overloaded Method to create User with default values for attributes
     public User()
     {
+        this.uid = -1;
         this.name = "";
-        this.nric = "";
         this.age = 0;
         this.maritalStatus = false;
-        this.password = "";
     }
 
     public int getUid() {
@@ -44,14 +39,6 @@ public class User {
         this.name = name;
     }
 
-    public String getNric() {
-        return nric;
-    }
-
-    public void setNric(String nric) {
-        this.nric = nric;
-    }
-
     public int getAge() {
         return age;
     }
@@ -68,17 +55,9 @@ public class User {
         this.maritalStatus = maritalStatus;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     // For testing purposes only
     public void printUser()
     {
-        System.out.printf("%s %s %d %s %s\n", name,nric,age,maritalStatus,password);
+        System.out.printf("%d %s %d %s\n", uid,name,age,maritalStatus);
     }
 }

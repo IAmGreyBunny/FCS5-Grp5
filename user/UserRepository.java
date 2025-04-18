@@ -38,8 +38,42 @@ public class UserRepository {
     }
 
     //Read Operations
-    public static User findUserById(int uid) {
+    public static User findUserById(int uid) throws IOException {
+        FileInputStream file;
+        Workbook workbook;
+        Sheet sheet;
+
         User user = null;
+
+        try {
+            file = new FileInputStream(new File("data/user/User.xlsx"));
+            workbook = WorkbookFactory.create(file);
+            sheet = workbook.getSheetAt(0);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+            return null;
+        }
+
+        // Go through row in the Excel sheet
+        for (Row row : sheet) {
+            //Get uid
+            Cell cell = row.getCell(0);
+
+            // Compare uid
+            if (cell.getNumericCellValue() == uid) {
+                //Gets other info
+                String name = row.getCell(1).toString();
+                int age = (int) row.getCell(2).getNumericCellValue();
+                boolean maritalStatus = row.getCell(3).getBooleanCellValue();
+
+                user = new User(uid,name,age,maritalStatus);
+            }
+        }
+
+        // Close resources
+        workbook.close();
+        file.close();
+
         return user;
     }
 
@@ -69,9 +103,8 @@ public class UserRepository {
                 // Checks password if username is found
                 cell = row.getCell(2);
                 if (cell.toString().equals(password)) {
-                    // Create User to return as result
                     System.out.println("User found");
-                    user = new User();
+                    //get uid
                 }
             }
         }

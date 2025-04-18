@@ -45,7 +45,7 @@ public class UserRepository {
         }
         catch(FileNotFoundException e)
         {
-            System.out.println("File Not Found");
+            System.out.println("Error");
             return null;
         }
 

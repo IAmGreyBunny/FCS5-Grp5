@@ -57,9 +57,9 @@ public class HDBProjectController {
         return new ArrayList<>(btoProjects);
     }
 
-    public List<BTOProject> getMyProjects(String managerNric) {
+    public List<BTOProject> getMyProjects(String managerId) {
         return btoProjects.stream()
-                .filter(p -> p.getManager().equals(managerNric))
+                .filter(p -> p.getManager().equals(managerId))
                 .collect(Collectors.toList());
     }
 

@@ -93,11 +93,10 @@ public class UserRepository {
 
     // Updates in UserLogin
     public static void updateUserLogin(User user, String username, String password) {
-        //Find the row in the UserInfo table and update accordingly
-
+        //Find the row in the UserLogin table and update accordingly
         //Update user entry
         try (
-                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserLogin")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
 
@@ -113,7 +112,7 @@ public class UserRepository {
                 }
             }
 
-            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserInfo"))) {
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserLogin"))) {
                 workbook.write(outFile);
             }
 
@@ -160,7 +159,7 @@ public class UserRepository {
 
             // Go through row in the Excel sheet
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-                Row row = sheet.getRow(1);
+                Row row = sheet.getRow(i);
 
                 //Get uid
                 Cell cell = row.getCell(0);

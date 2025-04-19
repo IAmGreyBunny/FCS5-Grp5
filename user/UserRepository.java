@@ -3,10 +3,7 @@ package user;
 import config.Config;
 import org.apache.poi.ss.usermodel.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class UserRepository {
 
@@ -23,8 +20,13 @@ public class UserRepository {
             newRow.createCell(0).setCellValue(user.getUid());
             newRow.createCell(1).setCellValue(user.getName());
             newRow.createCell(2).setCellValue(user.getAge());
-            //newRow.createCell(3).setCellValue(user.getMaritalStatus());
+            newRow.createCell(3).setCellValue(user.getMaritalStatus());
 
+            file.close();
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserInfo"))) {
+                workbook.write(outFile);
+            }
 
         }
         catch (Exception e)
@@ -32,11 +34,6 @@ public class UserRepository {
             System.out.println("Error");
             e.printStackTrace();
         }
-
-
-        // Insert UserInfo
-
-        // Insert UserRole
 
     }
 

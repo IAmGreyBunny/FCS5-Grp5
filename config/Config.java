@@ -3,7 +3,7 @@ package config;
 import java.util.Map;
 
 public class Config {
-    public final Map<String, String> filepath = Map.ofEntries(
+    public static final Map<String, String> filepath = Map.ofEntries(
             Map.entry("Project","data/project/Project.xlsx"),
             Map.entry("ProjectApplicationDetails","data/project/ProjectApplicationDetails.xlsx"),
             Map.entry("ProjectManager","data/project/ProjectManager.xlsx"),

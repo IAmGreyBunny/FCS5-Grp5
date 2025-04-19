@@ -9,8 +9,8 @@ public class Config {
             Map.entry("ProjectManager","data/project/ProjectManager.xlsx"),
             Map.entry("ProjectOfficer","data/project/ProjectOfficer.xlsx"),
             Map.entry("UnitType","data/project/UnitType.xlsx"),
-            Map.entry("UserInfo","data/project/UserInfo.xlsx"),
-            Map.entry("UserLogin","data/project/UserLogin.xlsx")
+            Map.entry("UserInfo","data/user/UserInfo.xlsx"),
+            Map.entry("UserLogin","data/user/UserLogin.xlsx")
     );
 
 }

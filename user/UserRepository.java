@@ -22,8 +22,6 @@ public class UserRepository {
             newRow.createCell(2).setCellValue(user.getAge());
             newRow.createCell(3).setCellValue(user.getMaritalStatus());
 
-            file.close();
-
             try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserInfo"))) {
                 workbook.write(outFile);
             }
@@ -55,6 +53,35 @@ public class UserRepository {
         //Find the row in the UserInfo table and update accordingly
 
         //Update user entry
+        try(
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for(int i=1;i<sheet.getLastRowNum();i++){
+                Row row = sheet.getRow(i);
+
+                if((int) row.getCell(0).getNumericCellValue() == user.getUid())
+                {
+                    row.getCell(0).setCellValue(user.getUid());
+                    row.getCell(1).setCellValue(user.getName());
+                    row.getCell(2).setCellValue(user.getAge());
+                    row.getCell(3).setCellValue(user.getMaritalStatus());
+                }
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserInfo"))) {
+                workbook.write(outFile);
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
 
     }
 

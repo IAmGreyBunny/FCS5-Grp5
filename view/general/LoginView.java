@@ -1,7 +1,10 @@
 package view.general;
 
 import login.AuthController;
+import session.Session;
 import view.FormView;
+import view.hdbmanager.ApplicationView;
+import view.hdbmanager.applications.BTOProjectApplicationView;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -26,7 +29,10 @@ public class LoginView extends FormView {
         userInput.put("password",password);
 
         System.out.println("Logging in... ");
-        AuthController.authenticate(this.getUserInput());
+        if(AuthController.authenticate(this.getUserInput()))
+        {
+            Session.getSession().setCurrentView(new BTOApplicationMenuView()); //This is a placeholder
+        }
     }
 
     @Override

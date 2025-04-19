@@ -47,7 +47,7 @@ public class User {
         this.age = age;
     }
 
-    public boolean isMaritalStatus() {
+    public boolean getMaritalStatus() {
         return maritalStatus;
     }
 

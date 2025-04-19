@@ -12,7 +12,6 @@ public class UserRepository {
 
     // Create User in database
     public static void createUser(User user) {
-        // Insert UserLogin
         try(
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
                 Workbook workbook = WorkbookFactory.create(file)
@@ -20,15 +19,13 @@ public class UserRepository {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            // Find max uid
-            int maxId=0;
+            Row newRow = sheet.createRow(sheet.getLastRowNum()+1);
+            newRow.createCell(0).setCellValue(user.getUid());
+            newRow.createCell(1).setCellValue(user.getName());
+            newRow.createCell(2).setCellValue(user.getAge());
+            //newRow.createCell(3).setCellValue(user.getMaritalStatus());
 
-            for(int i = 1; i <= sheet.getLastRowNum(); i++){
-                Row row = sheet.getRow(i);
-                if((int) row.getCell(0).getNumericCellValue() > maxId) {
-                    maxId = (int) row.getCell(0).getNumericCellValue();
-                }
-            }
+
         }
         catch (Exception e)
         {
@@ -63,6 +60,10 @@ public class UserRepository {
         //Update user entry
 
     }
+
+    // Update username
+
+    // Update password
 
     //Read Operations
     public static int findMaxId(){

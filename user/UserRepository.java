@@ -1,5 +1,6 @@
 package user;
 
+import config.Config;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
@@ -43,7 +44,7 @@ public class UserRepository {
         User user = null;
 
         try(
-                FileInputStream file = new FileInputStream(new File("data/user/User.xlsx"));
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
             Sheet sheet = workbook.getSheetAt(0);
@@ -76,7 +77,7 @@ public class UserRepository {
         User user = null;
 
         try(
-                FileInputStream file = new FileInputStream(new File("data/user/User.xlsx"));
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserLogin")));
                 Workbook workbook = WorkbookFactory.create(file)
         )
         {

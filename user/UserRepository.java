@@ -99,7 +99,9 @@ public class UserRepository {
             Sheet sheet = workbook.getSheetAt(0);
 
             // Go through row in the Excel sheet
-            for (Row row : sheet) {
+            for(int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(1);
+
                 //Get uid
                 Cell cell = row.getCell(0);
 
@@ -132,7 +134,9 @@ public class UserRepository {
         {
             Sheet sheet = workbook.getSheetAt(0);
             // Go through row in the Excel sheet
-            for (Row row : sheet) {
+            for(int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
                 //Get username
                 Cell cell = row.getCell(1);
 

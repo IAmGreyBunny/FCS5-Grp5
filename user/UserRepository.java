@@ -12,6 +12,34 @@ public class UserRepository {
 
     // Create User in database
     public static void createUser(User user) {
+        // Insert UserLogin
+        try(
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Find max uid
+            int maxId=0;
+
+            for(int i = 1; i <= sheet.getLastRowNum(); i++){
+                Row row = sheet.getRow(i);
+                if((int) row.getCell(0).getNumericCellValue() > maxId) {
+                    maxId = (int) row.getCell(0).getNumericCellValue();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+
+
+        // Insert UserInfo
+
+        // Insert UserRole
 
     }
 
@@ -32,13 +60,36 @@ public class UserRepository {
     public static void updateUser(User user) {
         //Find the row in the UserInfo table and update accordingly
 
-        //Find the row in UserLogin table and update accordingly
-
         //Update user entry
 
     }
 
     //Read Operations
+    public static int findMaxId(){
+        int maxId=0;
+        try(
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for(int i = 1; i <= sheet.getLastRowNum(); i++){
+                Row row = sheet.getRow(i);
+                if((int) row.getCell(0).getNumericCellValue() > maxId) {
+                    maxId = (int) row.getCell(0).getNumericCellValue();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+
+        return maxId;
+    }
+
     public static User findUserById(int uid){
 
         User user = null;

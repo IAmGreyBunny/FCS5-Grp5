@@ -7,16 +7,16 @@ import java.io.*;
 
 public class UserRepository {
 
-    // Create User in database
-    public static void createUser(User user) {
-        try(
+    // Create in UserInfo
+    public static void createUserInfo(User user) {
+        try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            Row newRow = sheet.createRow(sheet.getLastRowNum()+1);
+            Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
             newRow.createCell(0).setCellValue(user.getUid());
             newRow.createCell(1).setCellValue(user.getName());
             newRow.createCell(2).setCellValue(user.getAge());
@@ -26,45 +26,53 @@ public class UserRepository {
                 workbook.write(outFile);
             }
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error");
             e.printStackTrace();
         }
 
     }
 
-    // Delete User in database
-    public static void deleteUser(User user) {
-        // Find user by id
+    // Create User in UserLogin
+    public static void createUserLogin(User user, String username, String password) {
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserLogin")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
 
-        // Delete user in UserInfo Table
+            Sheet sheet = workbook.getSheetAt(0);
 
-        // Delete user in User Table
+            Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
+            newRow.createCell(0).setCellValue(user.getUid());
+            newRow.createCell(1).setCellValue(username);
+            newRow.createCell(2).setCellValue(password);
 
-        // Check for traces in project data and delete accordingly
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserLogin"))) {
+                workbook.write(outFile);
+            }
 
-        // Check for traces in enquiries and delete accordingly
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
     }
 
-    // Updates User in database
-    public static void updateUser(User user) {
+    // Updates in UserInfo
+    public static void updateUserInfo(User user) {
         //Find the row in the UserInfo table and update accordingly
 
         //Update user entry
-        try(
+        try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            for(int i=1;i<sheet.getLastRowNum();i++){
+            for (int i = 1; i < sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
-                if((int) row.getCell(0).getNumericCellValue() == user.getUid())
-                {
+                if ((int) row.getCell(0).getNumericCellValue() == user.getUid()) {
                     row.getCell(0).setCellValue(user.getUid());
                     row.getCell(1).setCellValue(user.getName());
                     row.getCell(2).setCellValue(user.getAge());
@@ -76,38 +84,62 @@ public class UserRepository {
                 workbook.write(outFile);
             }
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error");
             e.printStackTrace();
         }
 
     }
 
-    // Update username
+    // Updates in UserLogin
+    public static void updateUserLogin(User user, String username, String password) {
+        //Find the row in the UserLogin table and update accordingly
+        //Update user entry
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserLogin")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
 
-    // Update password
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i < sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                if ((int) row.getCell(0).getNumericCellValue() == user.getUid()) {
+                    row.getCell(0).setCellValue(user.getUid());
+                    row.getCell(1).setCellValue(username);
+                    row.getCell(2).setCellValue(password);
+                }
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserLogin"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+
+    }
 
     //Read Operations
-    public static int findMaxId(){
-        int maxId=0;
-        try(
+    public static int findMaxId() {
+        int maxId = 0;
+        try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            for(int i = 1; i <= sheet.getLastRowNum(); i++){
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
-                if((int) row.getCell(0).getNumericCellValue() > maxId) {
+                if ((int) row.getCell(0).getNumericCellValue() > maxId) {
                     maxId = (int) row.getCell(0).getNumericCellValue();
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error");
             e.printStackTrace();
         }
@@ -115,19 +147,19 @@ public class UserRepository {
         return maxId;
     }
 
-    public static User findUserById(int uid){
+    public static User findUserById(int uid) {
 
         User user = null;
 
-        try(
+        try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserInfo")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
             Sheet sheet = workbook.getSheetAt(0);
 
             // Go through row in the Excel sheet
-            for(int i = 1; i <= sheet.getLastRowNum(); i++) {
-                Row row = sheet.getRow(1);
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
 
                 //Get uid
                 Cell cell = row.getCell(0);
@@ -139,10 +171,10 @@ public class UserRepository {
                     int age = (int) row.getCell(2).getNumericCellValue();
                     boolean maritalStatus = row.getCell(3).getBooleanCellValue();
 
-                    user = new User(uid,name,age,maritalStatus);
+                    user = new User(uid, name, age, maritalStatus);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error: ");
             e.printStackTrace();
             return null;
@@ -151,17 +183,16 @@ public class UserRepository {
         return user;
     }
 
-    public static User findUserByLogin(String username, String password){
+    public static User findUserByLogin(String username, String password) {
         User user = null;
 
-        try(
+        try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserLogin")));
                 Workbook workbook = WorkbookFactory.create(file)
-        )
-        {
+        ) {
             Sheet sheet = workbook.getSheetAt(0);
             // Go through row in the Excel sheet
-            for(int i = 1; i <= sheet.getLastRowNum(); i++) {
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
                 //Get username
@@ -177,7 +208,7 @@ public class UserRepository {
                     }
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error: ");
             e.printStackTrace();
         }

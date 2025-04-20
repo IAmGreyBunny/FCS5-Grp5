@@ -215,4 +215,43 @@ public class UserRepository {
 
         return user;
     }
+
+    public static UserRole getUserRole(int uid){
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserRole")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                //Get uid
+                Cell cell = row.getCell(0);
+
+                // Compare uid
+                if (cell.getNumericCellValue() == uid) {
+                    int roleNumber = (int) row.getCell(1).getNumericCellValue();
+
+                    switch(roleNumber){
+                        case 0:
+                            return UserRole.HDBMANAGER;
+                        case 1:
+                            return UserRole.HDBOFFICER;
+                        case 2:
+                            return UserRole.APPLICANT;
+                        default:
+                            return null;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

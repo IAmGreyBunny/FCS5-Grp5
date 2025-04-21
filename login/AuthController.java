@@ -44,10 +44,13 @@ public class AuthController {
         String username = userInput.get("username");
         String password = userInput.get("password");
 
-        //Update username
-
-        //Update password
-
+        if(!username.trim().isEmpty())
+        {
+            //username = old username
+        }
+        if(password.trim().isEmpty()){
+            //password = old password
+        }
         Session.getSession().setCurrentUser(null);
         Session.getSession().setCurrentView(new StartUpView());
         return true;

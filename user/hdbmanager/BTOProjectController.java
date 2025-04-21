@@ -1,13 +1,15 @@
 package user.hdbmanager;
 
-import btoproject.*;
+import project.Project;
+import project.UnitType;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class BTOProjectController {
-    private List<BTOProject> btoProjects = new ArrayList<>();
+    private List<Project> btoProjects = new ArrayList<>();
 
 
     /* public boolean createListing() {
@@ -15,7 +17,7 @@ public class BTOProjectController {
         return false;
     } */
 
-    public boolean editName(BTOProject project, String name) {
+    public boolean editName(Project project, String name) {
         if (name != null && !name.trim().isEmpty()) {
             project.setProjectName(name);
             return true;
@@ -23,26 +25,26 @@ public class BTOProjectController {
         return false;
     }
 
-    public boolean editNeighbourhood(BTOProject project, String neighbourhood) {
+    public boolean editNeighbourhood(Project project, String neighbourhood) {
         if (neighbourhood != null && !neighbourhood.trim().isEmpty()) {
             project.setNeighbourhood(neighbourhood);
             return true;
         }
         return false;
     }
-    public boolean addUnit(BTOProject project, String flat, int available, int total, double price) {
+    public boolean addUnit(Project project, String flat, int available, int total, double price) {
         project.addUnitType(flat, available, total, price);
         return true;
     }
 
-    public boolean deleteUnit(BTOProject project, String name) {
+    public boolean deleteUnit(Project project, String name) {
         if (name != null && !name.trim().isEmpty()) {
             return project.deleteUnitType(name);
         }
         return false;
     }
 
-    public boolean editTotalUnits(BTOUnitType units, String total) {
+    public boolean editTotalUnits(UnitType units, String total) {
         try {
             if (total!=null && !total.trim().isEmpty()) {
                 int iTotal = Integer.parseInt(total);
@@ -55,7 +57,7 @@ public class BTOProjectController {
         return false;
     }
 
-    public boolean editAvailUnits(BTOUnitType unit, String avail) {
+    public boolean editAvailUnits(UnitType unit, String avail) {
         try {
             if (avail != null && !avail.trim().isEmpty()) {
                 int availInt = Integer.parseInt(avail);
@@ -68,7 +70,7 @@ public class BTOProjectController {
         return false;
     }
 
-    public boolean editOpeningDate(BTOProject project, String date) {
+    public boolean editOpeningDate(Project project, String date) {
         try {
             if (date != null && !date.trim().isEmpty()) {
                 LocalDate newDate = LocalDate.parse(date);
@@ -81,7 +83,7 @@ public class BTOProjectController {
         return false;
     }
 
-    public boolean editClosingDate(BTOProject project, String date) {
+    public boolean editClosingDate(Project project, String date) {
         try {
             if (date != null && !date.trim().isEmpty()) {
                 LocalDate newDate = LocalDate.parse(date);
@@ -94,7 +96,7 @@ public class BTOProjectController {
         return false;
     }
 
-    public boolean editOSlots (BTOProject project, String num) {
+    public boolean editOSlots (Project project, String num) {
         try {
             if (num != null && !num.trim().isEmpty()) {
                 int iNum = Integer.parseInt(num);
@@ -111,16 +113,16 @@ public class BTOProjectController {
         return btoProjects.removeIf(p -> p.getProjectName().equals(projectName));
     }
 
-    public boolean toggleVisibility(BTOProject project, boolean visible) {
+    public boolean toggleVisibility(Project project, boolean visible) {
         project.setVisibility(visible);
         return true;
     }
 
-    public List<BTOProject> getAllProjects() {
+    public List<Project> getAllProjects() {
         return new ArrayList<>(btoProjects);
     }
 
-    public List<BTOProject> getMyProjects(String managerId) {
+    public List<Project> getMyProjects(int managerId) {
         return btoProjects.stream()
                 .filter(p -> p.getManager().equals(managerId))
                 .collect(Collectors.toList());

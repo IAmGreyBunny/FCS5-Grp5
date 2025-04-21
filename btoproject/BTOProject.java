@@ -50,6 +50,14 @@ public class BTOProject {
         this.listOfUnits.add(btoUnitType);
     }
 
+    public boolean deleteUnitType(String name) {
+        if (listOfUnits == null) {
+            return false;
+        }
+
+        return listOfUnits.removeIf(unit -> unit.getName().equalsIgnoreCase(name));
+    }
+
     public LocalDate getApplicationOpeningDate() {
         return applicationOpeningDate;
     }

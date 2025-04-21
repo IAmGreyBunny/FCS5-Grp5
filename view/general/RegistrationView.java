@@ -59,8 +59,8 @@ public class RegistrationView extends FormView {
     }
 
     @Override
-    public <T> T getUserInput() {
-        return null;
+    public HashMap<String, Object> getUserInput() {
+        return userInput;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class RegistrationController {
             User user = new User(maxId+1, (String) userInput.get("name"), (int) userInput.get("age"), (boolean) userInput.get("maritalStatus"));
             UserRepository.createUserInfo(user);
             UserRepository.createUserLogin(user, (String) userInput.get("username"), (String) userInput.get("password"));
-            //UserRepository.createUserRole(user, UserRole.APPLICANT);
+            UserRepository.setUserRole(user.getUid(), UserRole.APPLICANT);
             System.out.println("Successfully Registered User");
             Session.getSession().setCurrentView(new LoginView());
         }else {

@@ -6,6 +6,7 @@ import user.UserFactory;
 import user.UserRepository;
 import user.UserRole;
 import validator.InputValidator;
+import view.general.StartUpView;
 
 import java.util.HashMap;
 
@@ -36,5 +37,19 @@ public class AuthController {
 
         return false;
 
+    }
+
+    public static boolean changeLoginInformation(HashMap<String,String> userInput)
+    {
+        String username = userInput.get("username");
+        String password = userInput.get("password");
+
+        //Update username
+
+        //Update password
+
+        Session.getSession().setCurrentUser(null);
+        Session.getSession().setCurrentView(new StartUpView());
+        return true;
     }
 }

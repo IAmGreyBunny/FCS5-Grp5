@@ -2,6 +2,8 @@ package project;
 
 import config.Config;
 import org.apache.poi.ss.usermodel.*;
+import user.User;
+import user.UserFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,8 +13,7 @@ import java.util.ArrayList;
 
 public class ProjectRepository {
 
-    public ArrayList<Project> getAllProjects()
-    {
+    public ArrayList<Project> getAllProjects() {
         ArrayList<Project> listOfProjects = new ArrayList<>();
 
         try (
@@ -96,5 +97,29 @@ public class ProjectRepository {
         }
 
         return managerId;
+    }
+
+    public void assignProjectOfficer(int projectId, User user){
+        ArrayList<Integer> projectOfficersId = new ArrayList<>();
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectOfficer")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                if ((int) row.getCell(0).getNumericCellValue() == projectId){
+                    row.getCell(1).setCellValue(user.getUid());
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
     }
 }

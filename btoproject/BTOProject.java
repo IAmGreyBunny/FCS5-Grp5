@@ -6,21 +6,33 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BTOProject {
+    private int projectId;
     private String projectName;
     private String neighbourhood;
     private ArrayList<BTOUnitType> listOfUnits;
     private LocalDate applicationOpeningDate;
     private LocalDate applicationClosingDate;
     private int officerSlots;
+    private boolean visibility;   // false represents "off" and true represents "on"
 
     private HDBManager manager;
 
-    public BTOProject(String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots) {
+    public BTOProject(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots) {
+        this.projectId = projectId;
         this.projectName = projectName;
         this.neighbourhood = neighbourhood;
         this.applicationOpeningDate = applicationOpeningDate;
         this.applicationClosingDate = applicationClosingDate;
         this.officerSlots = officerSlots;
+        this.visibility = false;            // default is false - "off"
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectName() {
@@ -46,6 +58,13 @@ public class BTOProject {
     public void addUnitType(String name, int available, int total, double pricePerUnit) {
         BTOUnitType btoUnitType = new BTOUnitType(name, available, total, pricePerUnit);
         this.listOfUnits.add(btoUnitType);
+    }
+    public boolean deleteUnitType(String name) {
+        if (listOfUnits == null) {
+            return false;
+        }
+
+        return listOfUnits.removeIf(unit -> unit.getName().equalsIgnoreCase(name));
     }
 
     public LocalDate getApplicationOpeningDate() {
@@ -78,6 +97,14 @@ public class BTOProject {
 
     public void setManager(HDBManager manager) {
         this.manager = manager;
+    }
+
+    public boolean getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(boolean visibility) {
+        this.visibility = visibility;
     }
 
     /*

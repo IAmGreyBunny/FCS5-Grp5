@@ -92,7 +92,7 @@ public class UserRepository {
     }
 
     // Updates in UserLogin
-    public static void updateUserLogin(User user, String username, String password) {
+    public static void updateUserLogin(int uid, String username, String password) {
         //Find the row in the UserLogin table and update accordingly
         //Update user entry
         try (
@@ -105,8 +105,8 @@ public class UserRepository {
             for (int i = 1; i < sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
-                if ((int) row.getCell(0).getNumericCellValue() == user.getUid()) {
-                    row.getCell(0).setCellValue(user.getUid());
+                if ((int) row.getCell(0).getNumericCellValue() == uid) {
+                    row.getCell(0).setCellValue(uid);
                     row.getCell(1).setCellValue(username);
                     row.getCell(2).setCellValue(password);
                 }

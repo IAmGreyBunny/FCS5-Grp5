@@ -6,6 +6,6 @@ public class HDBManager extends User {
     }
 
     public HDBManager(User user) {
-
+        super(user.getUid(), user.getName(), user.getAge(), user.getMaritalStatus());
     }
 }

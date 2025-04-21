@@ -1,7 +1,14 @@
 package view.general;
 
-import login.LoginController;
+import login.AuthController;
+import session.Session;
+import user.applicant.Applicant;
+import user.hdbofficer.HDBOfficer;
 import view.FormView;
+import view.hdbmanager.ApplicationView;
+import view.hdbmanager.HDBManagerHomeView;
+import view.hdbmanager.applications.BTOProjectApplicationView;
+import view.hdbofficer.HDBOfficerHomeView;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -26,7 +33,20 @@ public class LoginView extends FormView {
         userInput.put("password",password);
 
         System.out.println("Logging in... ");
-        LoginController.login(this.getUserInput());
+        if(AuthController.authenticate(this.getUserInput()))
+        {
+            if (Session.getSession().getCurrentUser() instanceof Applicant)
+            {
+                Session.getSession().setCurrentView(new DefaultHomeView());
+            }
+            else if (Session.getSession().getCurrentUser() instanceof HDBOfficer)
+            {
+                Session.getSession().setCurrentView(new HDBOfficerHomeView());
+            }
+            else {
+                Session.getSession().setCurrentView(new HDBManagerHomeView());
+            }
+        }
     }
 
     @Override

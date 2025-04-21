@@ -17,7 +17,7 @@ public class BTOProject {
 
     private HDBManager manager;
 
-    public BTOProject(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots) {
+    public BTOProject(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots, boolean visibility) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.neighbourhood = neighbourhood;

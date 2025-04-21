@@ -2,12 +2,18 @@ package view.hdbmanager;
 
 import session.Session;
 import view.MenuView;
+import btoproject.BTOProject;
+import view.HDBManager.controller.ProjectViewController;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.List;
+import java.time.LocalDate;
 
 public class ProjectView extends MenuView {
     private int userInput;
+    private Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+    private ProjectViewController controller = new ProjectViewController(scanner);
 
     @Override
     public void show() {
@@ -19,25 +25,24 @@ public class ProjectView extends MenuView {
         System.out.println("5. View Project Listings");
         System.out.println("6. Return");
 
-        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         try {
             userInput = scanner.nextInt();
 
             switch (userInput) {
                 case 1:
-                    // code to create new listing (CreateListingForm)
+                    controller.createNewProject();
                     break;
                 case 2:
-                    // code to edit existing listing
+                    controller.handleEditing();
                     break;
                 case 3:
-                    // code to delete listing
+                    controller.handleDeletion();
                     break;
                 case 4:
-                    // code to toggle visibility of a project listing
+                    controller.toggleVisibility();
                     break;
                 case 5:
-                    // code to view project listings (can filter to view all or those managed by self)
+                    controller.viewProjects();
                     break;
                 case 6:
                     Session.getSession().setCurrentView(new HDBManagerHomeView());
@@ -48,5 +53,6 @@ public class ProjectView extends MenuView {
             System.out.println("Invalid Input");
         }
     }
+
     
 }

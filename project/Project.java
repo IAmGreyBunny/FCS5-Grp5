@@ -1,28 +1,38 @@
-package btoproject;
+package project;
 
 import user.HDBManager;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class BTOProject {
+public class Project {
+    private int projectId;
     private String projectName;
     private String neighbourhood;
-    private ArrayList<BTOUnitType> listOfUnits;
+    private ArrayList<UnitType> listOfUnits;
     private LocalDate applicationOpeningDate;
     private LocalDate applicationClosingDate;
     private int officerSlots;
-    private boolean visibility;
+    private boolean visibility;   // false represents "off" and true represents "on"
 
     private HDBManager manager;
 
-    public BTOProject(String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots) {
+    public Project(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots, boolean visibility) {
+        this.projectId = projectId;
         this.projectName = projectName;
         this.neighbourhood = neighbourhood;
         this.applicationOpeningDate = applicationOpeningDate;
         this.applicationClosingDate = applicationClosingDate;
         this.officerSlots = officerSlots;
-        this.visibility = false;            // default is "off"
+        this.visibility = false;            // default is false - "off"
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectName() {
@@ -41,15 +51,14 @@ public class BTOProject {
         this.neighbourhood = neighbourhood;
     }
 
-    public ArrayList<BTOUnitType> getListOfUnits() {
+    public ArrayList<UnitType> getListOfUnits() {
         return listOfUnits;
     }
 
     public void addUnitType(String name, int available, int total, double pricePerUnit) {
-        BTOUnitType btoUnitType = new BTOUnitType(name, available, total, pricePerUnit);
-        this.listOfUnits.add(btoUnitType);
+        UnitType unitType = new UnitType(name, available, total, pricePerUnit);
+        this.listOfUnits.add(unitType);
     }
-
     public boolean deleteUnitType(String name) {
         if (listOfUnits == null) {
             return false;

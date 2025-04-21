@@ -1,12 +1,14 @@
 package view.general;
 
+import registration.RegistrationController;
 import view.FormView;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class RegistrationView extends FormView {
-    HashMap<String,String> userInput = new HashMap<>();
+    HashMap<String, Object> userInput = new HashMap<>();
 
     @Override
     public void prompt() {
@@ -17,7 +19,7 @@ public class RegistrationView extends FormView {
         String password = "";
         String confirmPassword = "";
         int age = 0;
-        boolean maritalStatus;
+        boolean maritalStatus = false;
 
         // Validation and Sanity Check - TBD
         System.out.print("Enter name: ");
@@ -34,14 +36,26 @@ public class RegistrationView extends FormView {
         System.out.print("Enter age: ");
         age = scanner.nextInt();
         System.out.print("Marital Status (y/n) : ");
-        if(scanner.next().charAt(0) == 'y')
-        {
-            maritalStatus = true;
-        }
-        else if (scanner.next().charAt(0) == 'n'){
-            maritalStatus = false;
-        }
+        char ch;
+        do{
+            ch = scanner.next().trim().toLowerCase().charAt(0);
+            if(ch == 'y')
+            {
+                maritalStatus = true;
+            }
+            else if (ch == 'n'){
+                maritalStatus = false;
+            }
+        }while(ch != 'y' && ch!='n');
 
+        userInput.put("name",name);
+        userInput.put("nric",nric);
+        userInput.put("password",password);
+        userInput.put("age",age);
+        userInput.put("maritalStatus",maritalStatus);
+
+        RegistrationController registrationController = new RegistrationController(userInput);
+        registrationController.register();
     }
 
     @Override

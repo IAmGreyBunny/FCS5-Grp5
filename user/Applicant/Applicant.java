@@ -18,7 +18,7 @@ public class Applicant extends User {
 
     public Applicant(User user)
     {
-
+        super(user.getUid(),user.getName(),user.getAge(),user.getMaritalStatus());
     }
 //
 //    public Project getAppliedProject() {

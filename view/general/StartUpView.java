@@ -25,7 +25,7 @@ public class StartUpView extends MenuView {
                     Session.getSession().setCurrentView(new LoginView());
                     break;
                 case 2:
-                    // Code to set up register view
+                    Session.getSession().setCurrentView(new RegistrationView());
                     break;
                 default:
                     System.out.println("Invalid Input");

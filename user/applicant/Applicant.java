@@ -1,10 +1,7 @@
-package user.Applicant;
+package user.applicant;
 
-import btoproject.BTOProject;
 import user.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Applicant extends User {

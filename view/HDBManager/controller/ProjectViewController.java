@@ -1,14 +1,16 @@
-package view.HDBManager.controller;
+package view.hdbmanager.controller;
 
 import btoproject.BTOProject;
+import btoproject.BTOUnitType;
 import session.Session;
-import user.hdbmanager.HDBProjectController;
+import user.hdbmanager.BTOProjectController;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProjectViewController {
-    private HDBProjectController controller = new HDBProjectController();
+    private BTOProjectController controller = new BTOProjectController();
     private Scanner scanner;
 
     public ProjectViewController(Scanner scanner){
@@ -23,63 +25,114 @@ public class ProjectViewController {
         System.out.println("=== Edit Listing ===");
         printProject();
         System.out.println("Enter project name to be edited: ");
+        scanner.nextLine();
         String projectName = scanner.next();
         List<BTOProject> projects = controller.getAllProjects();
         BTOProject target = projects.stream().filter(p -> p.getProjectName().equalsIgnoreCase(projectName)).findFirst().orElse(null);
         if (target != null) {
-            System.out.println("-- Current Details --");
-            System.out.println("1. Project Name: " + target.getProjectName());
-            System.out.println("2. Neighbourhood: " + target.getNeighbourhood());
-            /*  TODO option to print the types of flats available
-            System.out.println("3. Types of Flats: ");
-                TODO portion to specify which flat to edit
-            System.out.println("4. Choose the type of flats to edit");
-            */
-            System.out.println("5. Opening Date: " + target.getApplicationOpeningDate());
-            System.out.println("6. Closing Date " + target.getApplicationClosingDate());
-            System.out.println("7. Officer Slots: " + target.getOfficerSlots());
-            System.out.println("\nEnter portion to edit: ");
-            int portion = scanner.nextInt();
-            Object newValue = null;
-            try {
-                switch (portion) {
-                    case 1 -> {
-                        System.out.println("Enter new project name: ");
-                        newValue = scanner.next();
-                    }
-                    case 2 -> {
-                        System.out.println("Enter new neighbourhood: ");
-                        newValue = scanner.next();
-                    }
-                    /* TODO case 3 and 4
-                    case 3 -> {
-                        
-                    }
-                    case 4 -> {
+            System.out.println("For each of the following, enter new information (if any).");
+            System.out.println("Leave empty if none.\n");
+            System.out.println("Current project name: " + target.getProjectName());
+            System.out.println("Enter new project name: ");
+            String name = scanner.next();
+            if (controller.editName(target, name)) {
+                System.out.println("Project name updated to '" + target.getProjectName() + "'.");
+            }
 
-                    } */
-                    case 5,6 -> {
-                        System.out.println("Enter new date (yyyy-mm-dd): ");
-                        newValue = LocalDate.parse(scanner.next());
-                    }
-                    case 7 -> {
-                        System.out.println("Enter new number of slots: ");
-                        newValue = scanner.nextInt();
-                    }
-                    default -> {
-                        System.out.println("Invalid selection.");
-                        return;
-                    }
+            System.out.println("Current neighbourhood: " + target.getNeighbourhood());
+            System.out.println("Enter new neighbourhood: ");
+            String neighbourhood = scanner.next();
+            if (controller.editNeighbourhood(target, neighbourhood)) {
+                System.out.println("Project neighbourhood updated to '" + target.getNeighbourhood() + "'.");
+            }
+
+            System.out.println("Current types of units: ");
+            ArrayList<BTOUnitType> unit = target.getListOfUnits();
+            for (BTOUnitType type : unit) {
+                System.out.println(type.getName());
+            }
+            System.out.println("Add or Delete unit type: ");
+            String unitType = scanner.next().toLowerCase();
+            while (!unitType.isEmpty() && (!unitType.equals("add") && !unitType.equals("delete"))) {
+                System.out.println("Invalid input! Enter either 'Add' or 'Delete' or leave empty!");
+                unitType = scanner.next().toLowerCase();
+            }
+            if (unitType.equals("add")) {
+                System.out.println("Enter new unit type: ");
+                String flat = scanner.next();
+                System.out.println("Enter number of available units: ");
+                int available = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Enter total number of units: ");
+                int total = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Enter price per unit: ");
+                double price = scanner.nextDouble();
+                scanner.nextLine();
+                if (controller.addUnit(target, flat, available, total, price)) {
+                    System.out.println("Unit type added!");
                 }
-                if (controller.editListing(target, portion, newValue)) {
-                    System.out.println("Successfully edited!");
+            }
+            else if (unitType.equals("delete")) {
+                System.out.println("Enter unit type to be deleted: ");
+                String delete = scanner.next();
+                if (controller.deleteUnit(target, delete)) {
+                    System.out.println("Unit type successfully deleted.");
                 }
-                else {System.out.println("Failed to update.");}
-            } catch (Exception e) {
-                System.out.println("Project not found.");
+                else {System.out.println("Deletion unsuccessful.");}
+            }
+            
+            for (BTOUnitType units : unit) {
+                System.out.println("Enter new total number of " + units.getName() + " units: ");
+                String total = scanner.next();
+                if (controller.editTotalUnits(units, total)) {
+                    System.out.println("New total number of units: " + units.getTotal());
+                }
+                
+                System.out.println("Enter new available number of " + units.getName() + " units: ");
+                String avail = scanner.next();
+                try {
+                    int availInt = Integer.parseInt(avail);
+                    int totalInt = Integer.parseInt(total);
+                
+                    if (availInt <= totalInt) {
+                        if (controller.editAvailUnits(units, avail)) {
+                            System.out.println("New number of available units: " + units.getAvailable());
+                        }
+                    } else {
+                        System.out.println("Invalid input! Available number of units cannot be greater than Total number of units!");
+                        System.out.println("Number of available units not updated!");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input! Not a valid number.");
+                }
+                
+
+            }
+
+            System.out.println("Current Application Opening Date: " + target.getApplicationOpeningDate());
+            System.out.println("Enter new opening date (yyyy-mm-dd): ");
+            String openingDate = scanner.next();
+            if (controller.editOpeningDate(target, openingDate)) {
+                System.out.println("New opening date: " + target.getApplicationOpeningDate());
+            }
+
+            System.out.println("Current Application Closing Date: " + target.getApplicationClosingDate());
+            System.out.println("Enter new closing date (yyyy-mm-dd): ");
+            String closingDate = scanner.next();
+            if (controller.editClosingDate(target, closingDate)) {
+                System.out.println("New closing date: " + target.getApplicationClosingDate());
+            }
+
+            System.out.println("Current number of officer slots: " + target.getOfficerSlots());
+            System.out.println("Enter new number of slots: ");
+            String slots = scanner.next();
+            if (controller.editOSlots(target, slots)) {
+                System.out.println("New number of officer slots: " + target.getOfficerSlots());
             }
         } else {System.out.println("Project not found.");}
     }
+
 
     public void handleDeletion() {
         System.out.println("=== Delete Listing ===");

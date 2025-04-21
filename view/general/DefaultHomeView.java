@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import btoproject.BTOProject;
-import session.Session;
 
-public class BTOApplicationMenuView extends MenuView {
+public class DefaultHomeView extends MenuView {
     private int userInput;
     private List<BTOProject> btoProject = new ArrayList<>();
 

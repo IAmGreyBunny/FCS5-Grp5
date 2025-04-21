@@ -4,7 +4,7 @@ import user.applicant.Applicant;
 import user.hdbofficer.HDBOfficer;
 
 public class UserFactory {
-    public User asTypedUser(User user, UserRole role)
+    public static User asTypedUser(User user, UserRole role)
     {
         switch(role)
         {

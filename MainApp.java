@@ -1,5 +1,4 @@
 import session.Session;
-import view.LoginView;
 
 public class MainApp {
     public static void main(String[] args){

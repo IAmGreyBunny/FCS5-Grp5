@@ -264,6 +264,7 @@ public class UserRepository {
             Sheet sheet = workbook.getSheetAt(0);
 
             // Go through row in the Excel sheet
+            boolean entryFound = false;
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
@@ -272,8 +273,19 @@ public class UserRepository {
 
                 // Compare uid and set cell
                 if ((int) cell.getNumericCellValue() == uid) {
-                   cell.setCellValue(userRole.getValue());
+                    entryFound = true;
+                    cell.setCellValue(userRole.getValue());
                 }
+            }
+            if(!entryFound)
+            {
+                Row newRow = sheet.createRow(sheet.getLastRowNum()+1);
+                newRow.createCell(0).setCellValue(uid);
+                newRow.createCell(1).setCellValue(userRole.getValue());
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserRole"))) {
+                workbook.write(outFile);
             }
         } catch (Exception e) {
             System.out.println("Error: ");

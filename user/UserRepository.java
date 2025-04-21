@@ -254,4 +254,30 @@ public class UserRepository {
 
         return null;
     }
+
+    public static void setUserRole(int uid, UserRole userRole)
+    {
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserRole")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                //Get uid
+                Cell cell = row.getCell(0);
+
+                // Compare uid and set cell
+                if ((int) cell.getNumericCellValue() == uid) {
+                   cell.setCellValue(userRole.getValue());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
+    }
 }

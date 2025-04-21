@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BTOProject {
+    private int projectId;
     private String projectName;
     private String neighbourhood;
     private ArrayList<BTOUnitType> listOfUnits;
@@ -16,13 +17,22 @@ public class BTOProject {
 
     private HDBManager manager;
 
-    public BTOProject(String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots) {
+    public BTOProject(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots) {
+        this.projectId = projectId;
         this.projectName = projectName;
         this.neighbourhood = neighbourhood;
         this.applicationOpeningDate = applicationOpeningDate;
         this.applicationClosingDate = applicationClosingDate;
         this.officerSlots = officerSlots;
         this.visibility = false;            // default is false - "off"
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectName() {

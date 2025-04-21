@@ -1,15 +1,15 @@
-package btoproject;
+package project;
 
 import user.HDBManager;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class BTOProject {
+public class Project {
     private int projectId;
     private String projectName;
     private String neighbourhood;
-    private ArrayList<BTOUnitType> listOfUnits;
+    private ArrayList<UnitType> listOfUnits;
     private LocalDate applicationOpeningDate;
     private LocalDate applicationClosingDate;
     private int officerSlots;
@@ -17,7 +17,7 @@ public class BTOProject {
 
     private HDBManager manager;
 
-    public BTOProject(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots, boolean visibility) {
+    public Project(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots, boolean visibility) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.neighbourhood = neighbourhood;
@@ -51,13 +51,13 @@ public class BTOProject {
         this.neighbourhood = neighbourhood;
     }
 
-    public ArrayList<BTOUnitType> getListOfUnits() {
+    public ArrayList<UnitType> getListOfUnits() {
         return listOfUnits;
     }
 
     public void addUnitType(String name, int available, int total, double pricePerUnit) {
-        BTOUnitType btoUnitType = new BTOUnitType(name, available, total, pricePerUnit);
-        this.listOfUnits.add(btoUnitType);
+        UnitType unitType = new UnitType(name, available, total, pricePerUnit);
+        this.listOfUnits.add(unitType);
     }
     public boolean deleteUnitType(String name) {
         if (listOfUnits == null) {

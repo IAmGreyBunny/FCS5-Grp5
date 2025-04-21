@@ -1,19 +1,14 @@
 package user;
 
-import btoproject.BTOProject;
+import project.Project;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class HDBManager extends User{
-    private BTOProject activeProject;
-    private List<BTOProject> btoProject = new ArrayList<>();
+    private Project activeProject;
+    private List<Project> project = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
 //    public HDBManager (String name, String nric, int age, boolean maritalStatus, String password) {

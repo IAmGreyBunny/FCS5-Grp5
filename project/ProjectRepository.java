@@ -1,8 +1,7 @@
-package btoproject;
+package project;
 
 import config.Config;
 import org.apache.poi.ss.usermodel.*;
-import user.UserRole;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,11 +9,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class BTOProjectRepository {
+public class ProjectRepository {
 
-    public ArrayList<BTOProject> getAllProjects()
+    public ArrayList<Project> getAllProjects()
     {
-        ArrayList<BTOProject> listOfProjects = new ArrayList<>();
+        ArrayList<Project> listOfProjects = new ArrayList<>();
 
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
@@ -35,8 +34,8 @@ public class BTOProjectRepository {
                 int officerSlots = (int) row.getCell(5).getNumericCellValue();
                 boolean visibility = row.getCell(6).getBooleanCellValue();
 
-                BTOProject btoProject = new BTOProject(projectId,projectName,neighbourhood,openingDate,closingDate,officerSlots,visibility);
-                listOfProjects.add(btoProject);
+                Project project = new Project(projectId,projectName,neighbourhood,openingDate,closingDate,officerSlots,visibility);
+                listOfProjects.add(project);
 
             }
         } catch (Exception e) {

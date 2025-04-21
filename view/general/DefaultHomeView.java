@@ -24,10 +24,8 @@ public class DefaultHomeView extends MenuView {
         System.out.println("3) View Applied BTO Projects");
         System.out.println("4) Book Flat");
         System.out.println("5) Request Withdrawal");
-        System.out.println("6) Submit Enquiry");
-        System.out.println("7) View Enquiry");
-        System.out.println("8) Edit Enquiry");
-        System.out.println("9) Delete Enquiry");
+        System.out.println("6) Enquiry");
+
 
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         try {
@@ -68,17 +66,9 @@ public class DefaultHomeView extends MenuView {
                     }
                     break;
                 case 6:
-                    // submit enquiry (waiting for enquiry class)
+                    // enquiry (waiting for enquiry class)
                     break;
-                case 7:
-                    // view enquiry (waiting for enquiry class)
-                    break;
-                case 8:
-                    // edit enquiry (must have submitted an enquiry) (waiting for enquiry class)
-                    break;
-                case 9:
-                    // delete enquiry (must have submitted an enquiry) (still waiting)
-                    break;
+                
                 default: System.out.println("Invalid Input");
             }
         } catch (InputMismatchException e) {

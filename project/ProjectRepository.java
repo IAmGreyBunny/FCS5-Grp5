@@ -45,4 +45,56 @@ public class ProjectRepository {
 
         return listOfProjects;
     }
+
+    public ArrayList<Integer> getProjectOfficersId(int projectId){
+        ArrayList<Integer> projectOfficersId = new ArrayList<>();
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectOfficer")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                if ((int) row.getCell(0).getNumericCellValue() == projectId){
+                    projectOfficersId.add((int) row.getCell(1).getNumericCellValue());
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
+
+        return projectOfficersId;
+    }
+
+    public int getProjectManagerId(int projectId){
+        int managerId = 0;
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectOfficer")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                if ((int) row.getCell(0).getNumericCellValue() == projectId){
+                    managerId = (int) row.getCell(1).getNumericCellValue();
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
+
+        return managerId;
+    }
 }

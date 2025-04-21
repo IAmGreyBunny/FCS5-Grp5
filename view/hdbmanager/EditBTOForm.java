@@ -1,14 +1,13 @@
 package view.hdbmanager;
 
 import view.FormView;
-import btoproject.*;
-import view.hdbmanager.controller;
 
 import java.util.Scanner;
 import java.util.HashMap;
 
 public class EditBTOForm extends FormView {
     private Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+    private HashMap<String,String> userInput;
 
     @Override
     public void prompt() {
@@ -48,7 +47,7 @@ public class EditBTOForm extends FormView {
         System.out.print("Price Per Unit: ");
         String newPrice = scanner.next();
 
-        ProjectViewController.handleEditing(this.getUserInput());
+        //ProjectViewController.handleEditing(this.getUserInput());
 
     }
 

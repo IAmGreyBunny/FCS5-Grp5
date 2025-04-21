@@ -2,8 +2,7 @@ package view.hdbmanager;
 
 import session.Session;
 import view.MenuView;
-import btoproject.BTOProject;
-import view.HDBManager.controller.ProjectViewController;
+import view.hdbmanager.controller.ProjectViewController;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 public class ProjectView extends MenuView {
     private int userInput;
     private Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-    private ProjectViewController controller = new ProjectViewController(scanner);
+    //private ProjectViewController controller = new ProjectViewController(scanner);
 
     @Override
     public void show() {
@@ -29,21 +28,21 @@ public class ProjectView extends MenuView {
             userInput = scanner.nextInt();
 
             switch (userInput) {
-                case 1:
-                    controller.createNewProject();
-                    break;
-                case 2:
-                    controller.handleEditing();
-                    break;
-                case 3:
-                    controller.handleDeletion();
-                    break;
-                case 4:
-                    controller.toggleVisibility();
-                    break;
-                case 5:
-                    controller.viewProjects();
-                    break;
+//                case 1:
+//                    controller.createNewProject();
+//                    break;
+//                case 2:
+//                    controller.handleEditing();
+//                    break;
+//                case 3:
+//                    controller.handleDeletion();
+//                    break;
+//                case 4:
+//                    controller.toggleVisibility();
+//                    break;
+//                case 5:
+//                    controller.viewProjects();
+//                    break;
                 case 6:
                     Session.getSession().setCurrentView(new HDBManagerHomeView());
                     break;

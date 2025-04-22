@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ProjectRepository {
 
-    public ArrayList<Project> getAllProjects()
+    public static ArrayList<Project> getAllProjects()
     {
         ArrayList<Project> listOfProjects = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class ProjectRepository {
                 int projectId = (int) row.getCell(0).getNumericCellValue();
                 String projectName = row.getCell(1).getStringCellValue();
                 String neighbourhood = row.getCell(2).getStringCellValue();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
                 LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(),formatter);
                 LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(),formatter);
                 int officerSlots = (int) row.getCell(5).getNumericCellValue();
@@ -72,7 +72,7 @@ public class ProjectRepository {
         return projectOfficersId;
     }
 
-    public int getProjectManagerId(int projectId){
+    public static int getProjectManagerId(int projectId){
         int managerId = 0;
 
         try (

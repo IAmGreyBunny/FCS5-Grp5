@@ -1,4 +1,6 @@
-package user;
+package user.hdbmanager;
+
+import user.User;
 
 public class HDBManager extends User {
     public HDBManager(int uid, String name, int age, boolean maritalStatus) {

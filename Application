@@ -1,0 +1,44 @@
+public class Application {
+    private String applicantNRIC;
+    private String projectName;
+    private String applicationStatus;
+
+    public Application(String applicantNRIC, String projectName) {
+        this.applicantNRIC = applicantNRIC;
+        this.projectName = projectName;
+        this.applicationStatus = "Pending";
+    }
+
+    public String getApplicantNRIC() {
+        return applicantNRIC;
+    }
+
+    public void setApplicantNRIC(String applicantNRIC) {
+        this.applicantNRIC = applicantNRIC;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getApplicationStatus() {
+        return applicationStatus;
+    }
+
+    public void setApplicationStatus(String applicationStatus) {
+        this.applicationStatus = applicationStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Application{" +
+                "applicantNRIC='" + applicantNRIC + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", applicationStatus='" + applicationStatus + '\'' +
+                '}';
+    }
+}

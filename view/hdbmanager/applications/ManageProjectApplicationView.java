@@ -7,7 +7,7 @@ import view.hdbmanager.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class BTOProjectApplicationView extends ApplicationView {
+public class ManageProjectApplicationView extends ManageApplicationView {
     private int userInput;
 
     @Override

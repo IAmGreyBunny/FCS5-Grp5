@@ -15,7 +15,6 @@ public class ProjectRepository {
     public static void createProject(Project project) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        int maxId = findMaxId() + 1;
 
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));

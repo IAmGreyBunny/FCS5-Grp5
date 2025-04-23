@@ -1,0 +1,23 @@
+package user;
+
+import user.applicant.Applicant;
+import user.hdbmanager.HDBManager;
+import user.hdbofficer.HDBOfficer;
+
+public class UserFactory {
+    public static User asTypedUser(User user, UserRole role)
+    {
+        switch(role)
+        {
+            case APPLICANT:
+                return new Applicant(user);
+            case HDBOFFICER:
+                return new HDBOfficer(user);
+            case HDBMANAGER:
+                return new HDBManager(user);
+            default:
+                System.out.println("Error creating a typed user");
+        }
+        return null;
+    }
+}

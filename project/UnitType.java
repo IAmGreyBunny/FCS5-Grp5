@@ -1,12 +1,12 @@
-package btoproject;
+package project;
 
-public class BTOUnitType {
+public class UnitType {
     private String name;
     private int available;
     private int total;
     private double pricePerUnit;
 
-    public BTOUnitType(String name, int available, int total, double pricePerUnit)
+    public UnitType(String name, int available, int total, double pricePerUnit)
     {
         this.name = name;
         this.available = available;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ProjectRepository {
 
-    public static void createProject(Project project){
+    public static void createProject(Project project) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         int maxId = findMaxId() + 1;
@@ -51,9 +51,51 @@ public class ProjectRepository {
         }
     }
 
-    public static void assignUnitType(UnitType unitType, int projectId)
-    {
+    public static void assignUnitType(UnitType unitType, int projectId) {
 
+    }
+
+    public static void updateProject(Project project) {
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            int projectId = project.getProjectId();
+            String name = project.getProjectName();
+            String neighbourhood = project.getNeighbourhood();
+            String openingDateString = project.getApplicationOpeningDate().format(formatter);
+            String closingDateString = project.getApplicationClosingDate().format(formatter);
+            int officerSlots = project.getOfficerSlots();
+            boolean visibility = project.getVisibility();
+
+            for (int i = 1; i < sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                if ((int) row.getCell(0).getNumericCellValue() == projectId) {
+                    row.getCell(0).setCellValue(projectId);
+                    row.getCell(1).setCellValue(name);
+                    row.getCell(2).setCellValue(neighbourhood);
+                    row.getCell(3).setCellValue(openingDateString);
+                    row.getCell(4).setCellValue(closingDateString);
+                    row.getCell(5).setCellValue(officerSlots);
+                    row.getCell(6).setCellValue(visibility);
+
+                }
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("ProjectDetails"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
     }
 
     public static ArrayList<Project> getAllProjects() {

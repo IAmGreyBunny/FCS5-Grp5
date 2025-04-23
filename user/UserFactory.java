@@ -1,6 +1,7 @@
 package user;
 
 import user.applicant.Applicant;
+import user.hdbmanager.HDBManager;
 import user.hdbofficer.HDBOfficer;
 
 public class UserFactory {

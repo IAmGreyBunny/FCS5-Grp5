@@ -1,6 +1,6 @@
 package project;
 
-import user.HDBManager;
+import user.hdbmanager.HDBManager;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class Project {
         this.applicationClosingDate = applicationClosingDate;
         this.officerSlots = officerSlots;
         this.visibility = false;            // default is false - "off"
+        this.manager = manager;
     }
 
     public int getProjectId() {

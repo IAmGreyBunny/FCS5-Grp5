@@ -1,6 +1,5 @@
 package session;
 
-import data.GlobalData;
 import user.User;
 import view.general.StartUpView;
 import view.View;
@@ -10,7 +9,6 @@ public class Session {
 
     private User currentUser = null;
     private View currentView = null;
-    private GlobalData globalData = GlobalData.getGlobalData();
 
     private Session() {
 

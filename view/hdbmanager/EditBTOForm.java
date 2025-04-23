@@ -3,14 +3,12 @@ package view.hdbmanager;
 import project.*;
 import project.ProjectRepository;
 import view.FormView;
-import view.hdbmanager.controller.EditBTOController;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ArrayList;
 
 public class EditBTOForm extends FormView {
@@ -237,7 +235,7 @@ public class EditBTOForm extends FormView {
         userInput.put("3-room availableUnits", available3Units);
         userInput.put("3-room price", price3);
 
-        EditBTOController projectController = new EditBTOController(userInput);
+        ProjectController projectController = new ProjectController(userInput);
         projectController.editListing();
 
     }

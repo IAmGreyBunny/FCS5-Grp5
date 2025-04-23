@@ -1,9 +1,9 @@
 package application;
 
-import project.*;
+import project.UnitType;
 import user.User;
-import java.util.*;
 import java.time.LocalDate;
+import java.util.List;
 
 public class BTOApplicationController extends ApplicationController {
 
@@ -14,9 +14,11 @@ public class BTOApplicationController extends ApplicationController {
                     LocalDate.now(),
                     applicant,
                     projectId,
-                    String.valueOf(applicant.getUid()), //check
+                    String.valueOf(applicant.getUid()),
                     unitType
             );
+
+            ApplicationRepository.createApplication(app);
             applications.add(app);
             return true;
         }
@@ -24,12 +26,28 @@ public class BTOApplicationController extends ApplicationController {
     }
 
     public List<BTOApplication> getBTOApplications() {
-        List<BTOApplication> result = new ArrayList<>();
+        List<BTOApplication> result = new java.util.ArrayList<>();
         for (Application app : applications) {
             if (app instanceof BTOApplication) {
                 result.add((BTOApplication) app);
             }
         }
         return result;
+    }
+
+    public boolean approveBTOApplication(BTOApplication application) {
+        boolean approved = approveApplication(application);
+        if (approved) {
+            ApplicationRepository.updateApplication(application);
+        }
+        return approved;
+    }
+
+    public boolean rejectBTOApplication(BTOApplication application) {
+        boolean rejected = rejectApplication(application);
+        if (rejected) {
+            ApplicationRepository.updateApplication(application);
+        }
+        return rejected;
     }
 }

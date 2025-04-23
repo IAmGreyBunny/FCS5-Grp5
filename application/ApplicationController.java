@@ -26,7 +26,7 @@ public class ApplicationController {
     }
 
     public List<Application> getAllApplications() {
-        return new ArrayList<>(applications);  // Fetching the list of applications from memory
+        return new ArrayList<>(applications);
     }
 
     //get application by id

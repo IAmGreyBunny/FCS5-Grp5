@@ -1,6 +1,7 @@
 package project;
 
 import config.Config;
+import data.DateHelper;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ProjectRepository {
 
@@ -29,8 +31,8 @@ public class ProjectRepository {
             int projectId = project.getProjectId();
             String name = project.getProjectName();
             String neighbourhood = project.getNeighbourhood();
-            String openingDateString = project.getApplicationOpeningDate().format(formatter);
-            String closingDateString = project.getApplicationClosingDate().format(formatter);
+            Date openingDate = DateHelper.convertLocalDateToDate(project.getApplicationOpeningDate());
+            Date closingDate = DateHelper.convertLocalDateToDate(project.getApplicationClosingDate());
             int officerSlots = project.getOfficerSlots();
             boolean visibility = project.getVisibility();
 
@@ -38,8 +40,8 @@ public class ProjectRepository {
             newRow.createCell(0).setCellValue(projectId);
             newRow.createCell(1).setCellValue(name);
             newRow.createCell(2).setCellValue(neighbourhood);
-            newRow.createCell(3).setCellValue(openingDateString);
-            newRow.createCell(4).setCellValue(closingDateString);
+            newRow.createCell(3).setCellValue(openingDate);
+            newRow.createCell(4).setCellValue(closingDate);
             newRow.createCell(5).setCellValue(officerSlots);
             newRow.createCell(6).setCellValue(visibility);
 
@@ -65,13 +67,11 @@ public class ProjectRepository {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
             int projectId = project.getProjectId();
             String name = project.getProjectName();
             String neighbourhood = project.getNeighbourhood();
-            String openingDateString = project.getApplicationOpeningDate().format(formatter);
-            String closingDateString = project.getApplicationClosingDate().format(formatter);
+            Date openingDateString = DateHelper.convertLocalDateToDate(project.getApplicationOpeningDate());
+            Date closingDateString = DateHelper.convertLocalDateToDate(project.getApplicationClosingDate());
             int officerSlots = project.getOfficerSlots();
             boolean visibility = project.getVisibility();
 
@@ -116,9 +116,8 @@ public class ProjectRepository {
                 int projectId = (int) row.getCell(0).getNumericCellValue();
                 String projectName = row.getCell(1).getStringCellValue();
                 String neighbourhood = row.getCell(2).getStringCellValue();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(), formatter);
-                LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(), formatter);
+                LocalDate openingDate = DateHelper.convertDateToLocalDate(row.getCell(3).getDateCellValue());
+                LocalDate closingDate = DateHelper.convertDateToLocalDate(row.getCell(4).getDateCellValue());
                 int officerSlots = (int) row.getCell(5).getNumericCellValue();
                 boolean visibility = row.getCell(6).getBooleanCellValue();
 
@@ -181,8 +180,8 @@ public class ProjectRepository {
                     int projectId = (int) row.getCell(0).getNumericCellValue();
                     String projectName = row.getCell(1).getStringCellValue();
                     String neighbourhood = row.getCell(2).getStringCellValue();
-                    LocalDate openingDate = row.getCell(3).getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    LocalDate closingDate = row.getCell(4).getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate openingDate = DateHelper.convertDateToLocalDate(row.getCell(3).getDateCellValue());
+                    LocalDate closingDate = DateHelper.convertDateToLocalDate(row.getCell(4).getDateCellValue());
                     int officerSlots = (int) row.getCell(5).getNumericCellValue();
                     boolean visibility = row.getCell(6).getBooleanCellValue();
 

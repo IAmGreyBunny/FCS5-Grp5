@@ -2,6 +2,7 @@
 package view.general;
 
 
+import project.Project;
 import view.MenuView;
 
 import java.util.InputMismatchException;
@@ -10,11 +11,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import btoproject.BTOProject;
 
 public class DefaultHomeView extends MenuView {
     private int userInput;
-    private List<BTOProject> btoProject = new ArrayList<>();
+    private List<Project> btoProject = new ArrayList<>();
 
     @Override
     public void show() {
@@ -40,7 +40,7 @@ public class DefaultHomeView extends MenuView {
                     break;
                 case 2:
                     System.out.println("== All Projects ==");
-                    List<BTOProject> visibleProject = printProjects();
+                    List<Project> visibleProject = printProjects();
                     int i=1;
                     visibleProject.forEach(project -> System.out.println((i+1) + ") " + project.getProjectName()
                             + "\n  Location: " + project.getNeighbourhood()
@@ -86,9 +86,9 @@ public class DefaultHomeView extends MenuView {
         }
     }
 
-    public List<BTOProject> printProjects() {
-        List<BTOProject> visibleProjects = btoProject.stream()
-            .filter(project -> project.getVisibility().equalsIgnoreCase("on"))
+    public List<Project> printProjects() {
+        List<Project> visibleProjects = btoProject.stream()
+            .filter(project -> project.getVisibility())
             .collect(Collectors.toList());
 
         return visibleProjects;

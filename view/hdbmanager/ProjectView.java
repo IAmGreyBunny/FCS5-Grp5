@@ -2,8 +2,6 @@ package view.hdbmanager;
 
 import session.Session;
 import view.MenuView;
-import btoproject.BTOProject;
-import view.HDBManager.controller.ProjectViewController;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +11,7 @@ import java.time.LocalDate;
 public class ProjectView extends MenuView {
     private int userInput;
     private Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-    private ProjectViewController controller = new ProjectViewController(scanner);
+    //private ProjectViewController controller = new ProjectViewController(scanner);
 
     @Override
     public void show() {
@@ -30,19 +28,19 @@ public class ProjectView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    controller.createNewProject();
+                    //controller.createNewProject();
                     break;
                 case 2:
-                    controller.handleEditing();
+                    //controller.handleEditing();
                     break;
                 case 3:
-                    controller.handleDeletion();
+                    //controller.handleDeletion();
                     break;
                 case 4:
-                    controller.toggleVisibility();
+                    //controller.toggleVisibility();
                     break;
                 case 5:
-                    controller.viewProjects();
+                    //controller.viewProjects();
                     break;
                 case 6:
                     Session.getSession().setCurrentView(new HDBManagerHomeView());

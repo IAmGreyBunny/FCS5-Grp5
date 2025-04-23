@@ -1,6 +1,6 @@
 package view;
 
-import project.ListingController;
+import project.ProjectController;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -190,7 +190,7 @@ public class CreateListingForm extends FormView {
         userInput.put("officerSlots", officer);
 
         System.out.println("Creating project...");
-        ListingController.create(this.getUserInput());
+        ProjectController.createListing(this.getUserInput());
 
     }
 

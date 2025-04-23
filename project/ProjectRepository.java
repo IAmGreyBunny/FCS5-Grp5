@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -131,6 +132,38 @@ public class ProjectRepository {
         return listOfProjects;
     }
 
+    public static ArrayList<UnitType> getAllUnitsType() {
+        ArrayList<UnitType> listOfUnits = new ArrayList<>();
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UnitType.xlsx")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                int unitTypeId = (int) row.getCell(0).getNumericCellValue();
+                int projectId = (int) row.getCell(1).getNumericCellValue();
+                String name = row.getCell(2).getStringCellValue();
+                int sellingPrice = (int) row.getCell(1).getNumericCellValue();
+                int available = (int) row.getCell(1).getNumericCellValue();
+                int total = (int) row.getCell(1).getNumericCellValue();
+
+                UnitType unitType = new UnitType(unitTypeId, projectId, name, sellingPrice, available, total);
+                listOfUnits.add(unitType);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
+
+        return listOfUnits;
+    }
+
     public static Project getProjectById(int id) {
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
@@ -189,7 +222,7 @@ public class ProjectRepository {
         return projectOfficersId;
     }
 
-    public static ArrayList<Integer> getOfficerProjectsId(int uid){
+    public static ArrayList<Integer> getOfficerProjectsId(int uid) {
         ArrayList<Integer> listOfProjectId = new ArrayList<>();
 
         try (

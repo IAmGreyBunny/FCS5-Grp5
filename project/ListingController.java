@@ -1,31 +1,31 @@
 package project;
 
-//public class ListingController {
-//    public static void create(HashMap<String, Object> userInput) {
-//        String name = (String) userInput.get("name");
-//        String location = (String) userInput.get("location");
-//        LocalDate estimatedCompletionDate = (LocalDate) userInput.get("estimatedCompletionDate");
-//        /*LocalDate openingDate = userInput.get("openingDate");
-//        LocalDate closingDate = userInput.get("closingDate"); */
-//        int officerSlots = (int) userInput.get("officerSlots");
-//        BTOProject btoProject = new BTOProject(name, location, estimatedCompletionDate);
+import session.Session;
+import view.hdbmanager.ProjectView;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+
+public class ListingController {
+    HashMap<String, Object> userInput;
+
+    public ListingController(HashMap<String, Object> userInput) { this.userInput = userInput;}
+
+    public static void create(HashMap<String, Object> userInput) {
+//        // TODO -- function from projectRepository to find the max id for projectId
+//        boolean validateCreation = true;
 //
-//        HashMap<String, Object> twoRoom = (HashMap<String,Object>) userInput.get("2-room");
-//        if (twoRoom != null) {
-//            int total = (int) twoRoom.get("total");
-//            int available = (int) twoRoom.get("available");
-//            double pricePerUnit = (double) twoRoom.get("pricePerUnit");
-//            btoProject.addUnitType("2-room", available, total, pricePerUnit);
+//        if (validateCreation) {
+//            Project project = new Project(maxId + 1, (String) userInput.get("name"), (String) userInput.get("neighbourhood"), (LocalDate) userInput.get("openingDate"), (LocalDate) userInput.get("closingDate"), (int) userInput.get("officerSlots"), false);
+//            // TODO code to create project and its respective units in repository
+//
+//            System.out.println("Successfully created");
+//            Session.getSession().setCurrentView(new ProjectView());
+//        } else {
+//            System.out.println("Error creating listing");
 //        }
-//        HashMap<String,Object> threeRoom = (HashMap<String,Object>) userInput.get("3-room");
-//        if (threeRoom != null) {
-//            int total = (int) threeRoom.get("total");
-//            int available = (int) threeRoom.get("available");
-//            double pricePerUnit = (double) threeRoom.get("pricePerUnit");
-//            btoProject.addUnitType("3-room", available, total, pricePerUnit);
-//        }
-//
-//        System.out.println("Project successfully created!");
-//
-//    }
-//}
+
+
+
+    }
+}

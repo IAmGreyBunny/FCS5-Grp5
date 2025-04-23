@@ -92,7 +92,7 @@ public class UserRepository {
     }
 
     // Updates in UserLogin
-    public static void updateUserLogin(User user, String username, String password) {
+    public static void updateUserLogin(int uid, String username, String password) {
         //Find the row in the UserLogin table and update accordingly
         //Update user entry
         try (
@@ -105,8 +105,8 @@ public class UserRepository {
             for (int i = 1; i < sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
-                if ((int) row.getCell(0).getNumericCellValue() == user.getUid()) {
-                    row.getCell(0).setCellValue(user.getUid());
+                if ((int) row.getCell(0).getNumericCellValue() == uid) {
+                    row.getCell(0).setCellValue(uid);
                     row.getCell(1).setCellValue(username);
                     row.getCell(2).setCellValue(password);
                 }
@@ -253,5 +253,43 @@ public class UserRepository {
         }
 
         return null;
+    }
+
+    public static void setUserRole(int uid, UserRole userRole)
+    {
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UserRole")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            boolean entryFound = false;
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                //Get uid
+                Cell cell = row.getCell(0);
+
+                // Compare uid and set cell
+                if ((int) cell.getNumericCellValue() == uid) {
+                    entryFound = true;
+                    cell.setCellValue(userRole.getValue());
+                }
+            }
+            if(!entryFound)
+            {
+                Row newRow = sheet.createRow(sheet.getLastRowNum()+1);
+                newRow.createCell(0).setCellValue(uid);
+                newRow.createCell(1).setCellValue(userRole.getValue());
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UserRole"))) {
+                workbook.write(outFile);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
     }
 }

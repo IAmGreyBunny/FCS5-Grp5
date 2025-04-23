@@ -2,8 +2,6 @@ package project;
 
 import config.Config;
 import org.apache.poi.ss.usermodel.*;
-import user.User;
-import user.UserFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +11,8 @@ import java.util.ArrayList;
 
 public class ProjectRepository {
 
-    public ArrayList<Project> getAllProjects() {
+    public static ArrayList<Project> getAllProjects()
+    {
         ArrayList<Project> listOfProjects = new ArrayList<>();
 
         try (
@@ -29,7 +28,7 @@ public class ProjectRepository {
                 int projectId = (int) row.getCell(0).getNumericCellValue();
                 String projectName = row.getCell(1).getStringCellValue();
                 String neighbourhood = row.getCell(2).getStringCellValue();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
                 LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(),formatter);
                 LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(),formatter);
                 int officerSlots = (int) row.getCell(5).getNumericCellValue();
@@ -73,11 +72,11 @@ public class ProjectRepository {
         return projectOfficersId;
     }
 
-    public int getProjectManagerId(int projectId){
+    public static int getProjectManagerId(int projectId){
         int managerId = 0;
 
         try (
-                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectOfficer")));
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectManager")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
             Sheet sheet = workbook.getSheetAt(0);
@@ -97,29 +96,5 @@ public class ProjectRepository {
         }
 
         return managerId;
-    }
-
-    public void assignProjectOfficer(int projectId, User user){
-        ArrayList<Integer> projectOfficersId = new ArrayList<>();
-
-        try (
-                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectOfficer")));
-                Workbook workbook = WorkbookFactory.create(file)
-        ) {
-            Sheet sheet = workbook.getSheetAt(0);
-
-            // Go through row in the Excel sheet
-            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-                Row row = sheet.getRow(i);
-
-                if ((int) row.getCell(0).getNumericCellValue() == projectId){
-                    row.getCell(1).setCellValue(user.getUid());
-                }
-
-            }
-        } catch (Exception e) {
-            System.out.println("Error: ");
-            e.printStackTrace();
-        }
     }
 }

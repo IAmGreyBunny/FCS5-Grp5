@@ -163,7 +163,7 @@ public class ProjectRepository {
         return null;
     }
 
-    public ArrayList<Integer> getProjectOfficersId(int projectId) {
+    public static ArrayList<Integer> getProjectOfficersId(int projectId) {
         ArrayList<Integer> projectOfficersId = new ArrayList<>();
 
         try (
@@ -187,6 +187,32 @@ public class ProjectRepository {
         }
 
         return projectOfficersId;
+    }
+
+    public static ArrayList<Integer> getOfficerProjectsId(int uid){
+        ArrayList<Integer> listOfProjectId = new ArrayList<>();
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectOfficer")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Go through row in the Excel sheet
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                if ((int) row.getCell(1).getNumericCellValue() == uid) {
+                    listOfProjectId.add((int) row.getCell(0).getNumericCellValue());
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
+
+        return listOfProjectId;
     }
 
     public static int getProjectManagerId(int projectId) {

@@ -133,7 +133,6 @@ public class ProjectViewController {
         } else {System.out.println("Project not found.");}
     }
 
-
     public void handleDeletion() {
         System.out.println("=== Delete Listing ===");
         printProject();

@@ -11,8 +11,16 @@ import java.util.ArrayList;
 
 public class ProjectRepository {
 
-    public static ArrayList<Project> getAllProjects()
+    public static void createProject(Project project){
+
+    }
+
+    public static void assignUnitType(UnitType unitType, int projectId)
     {
+
+    }
+
+    public static ArrayList<Project> getAllProjects() {
         ArrayList<Project> listOfProjects = new ArrayList<>();
 
         try (
@@ -29,12 +37,12 @@ public class ProjectRepository {
                 String projectName = row.getCell(1).getStringCellValue();
                 String neighbourhood = row.getCell(2).getStringCellValue();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(),formatter);
-                LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(),formatter);
+                LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(), formatter);
+                LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(), formatter);
                 int officerSlots = (int) row.getCell(5).getNumericCellValue();
                 boolean visibility = row.getCell(6).getBooleanCellValue();
 
-                Project project = new Project(projectId,projectName,neighbourhood,openingDate,closingDate,officerSlots,visibility);
+                Project project = new Project(projectId, projectName, neighbourhood, openingDate, closingDate, officerSlots, visibility);
                 listOfProjects.add(project);
 
             }
@@ -46,7 +54,7 @@ public class ProjectRepository {
         return listOfProjects;
     }
 
-    public static Project getProjectById(int id){
+    public static Project getProjectById(int id) {
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
                 Workbook workbook = WorkbookFactory.create(file)
@@ -57,17 +65,17 @@ public class ProjectRepository {
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
-                if((int)row.getCell(0).getNumericCellValue() == id){
+                if ((int) row.getCell(0).getNumericCellValue() == id) {
                     int projectId = (int) row.getCell(0).getNumericCellValue();
                     String projectName = row.getCell(1).getStringCellValue();
                     String neighbourhood = row.getCell(2).getStringCellValue();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(),formatter);
-                    LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(),formatter);
+                    LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(), formatter);
+                    LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(), formatter);
                     int officerSlots = (int) row.getCell(5).getNumericCellValue();
                     boolean visibility = row.getCell(6).getBooleanCellValue();
 
-                    Project project = new Project(projectId,projectName,neighbourhood,openingDate,closingDate,officerSlots,visibility);
+                    Project project = new Project(projectId, projectName, neighbourhood, openingDate, closingDate, officerSlots, visibility);
                     return project;
                 }
             }
@@ -78,7 +86,7 @@ public class ProjectRepository {
         return null;
     }
 
-    public ArrayList<Integer> getProjectOfficersId(int projectId){
+    public ArrayList<Integer> getProjectOfficersId(int projectId) {
         ArrayList<Integer> projectOfficersId = new ArrayList<>();
 
         try (
@@ -91,7 +99,7 @@ public class ProjectRepository {
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
-                if ((int) row.getCell(0).getNumericCellValue() == projectId){
+                if ((int) row.getCell(0).getNumericCellValue() == projectId) {
                     projectOfficersId.add((int) row.getCell(1).getNumericCellValue());
                 }
 
@@ -104,7 +112,7 @@ public class ProjectRepository {
         return projectOfficersId;
     }
 
-    public static int getProjectManagerId(int projectId){
+    public static int getProjectManagerId(int projectId) {
         int managerId = 0;
 
         try (
@@ -117,7 +125,7 @@ public class ProjectRepository {
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
 
-                if ((int) row.getCell(0).getNumericCellValue() == projectId){
+                if ((int) row.getCell(0).getNumericCellValue() == projectId) {
                     managerId = (int) row.getCell(1).getNumericCellValue();
                 }
 

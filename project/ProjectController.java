@@ -1,15 +1,24 @@
 package project;
 
 import session.Session;
+import user.User;
+import user.applicant.Applicant;
+import user.hdbofficer.HDBOfficer;
+import view.general.ProjectListingView;
 import view.hdbmanager.ManagerProjectManagementView;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class ProjectController {
     HashMap<String, Object> userInput;
 
-    public ProjectController(HashMap<String, Object> userInput) { this.userInput = userInput;}
+    public ProjectController(HashMap<String, Object> userInput) {
+        this.userInput = userInput;
+    }
 
     public static void createListing(HashMap<String, Object> userInput) {
 //        // TODO -- function from projectRepository to find the max id for projectId
@@ -24,7 +33,6 @@ public class ProjectController {
 //        } else {
 //            System.out.println("Error creating listing");
 //        }
-
 
 
     }
@@ -111,5 +119,40 @@ public class ProjectController {
 
         System.out.println("Project edited");
         Session.getSession().setCurrentView(new ManagerProjectManagementView());
+    }
+
+    public static ArrayList<Project> getApplicableProject(User user) {
+        ArrayList<Project> listOfApplicableProjects = new ArrayList<>();
+
+        for (UnitType unitType : getApplicableUnitTypes(user)) {
+            listOfApplicableProjects.add(ProjectRepository.getProjectById(unitType.getProjectId()));
+        }
+
+        if (user instanceof HDBOfficer) {
+            ArrayList<Integer> excludeProjectId = ProjectRepository.getOfficerProjectsId(user.getUid());
+            listOfApplicableProjects = listOfApplicableProjects.stream()
+                    .filter(project -> project.getVisibility())
+                    .filter(project -> !excludeProjectId.contains(project.getProjectId()))
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
+
+        return listOfApplicableProjects;
+    }
+
+    public static ArrayList<UnitType> getApplicableUnitTypes(User user) {
+        ArrayList<UnitType> listOfApplicableUnits = ProjectRepository.getAllUnitsType();
+
+        if (user.getAge() < 21 && !user.getMaritalStatus()) {
+            listOfApplicableUnits = new ArrayList<>();
+            return listOfApplicableUnits;
+        } else if (user.getAge() > 35 && !user.getMaritalStatus()) {
+            listOfApplicableUnits = listOfApplicableUnits.stream()
+                    .filter(unitType -> unitType.getName().equals("2-Room"))
+                    .collect(Collectors.toCollection(ArrayList::new));
+            return listOfApplicableUnits;
+        } else {
+            return listOfApplicableUnits;
+        }
+
     }
 }

@@ -5,9 +5,7 @@ import session.Session;
 import user.applicant.Applicant;
 import user.hdbofficer.HDBOfficer;
 import view.FormView;
-import view.hdbmanager.ApplicationView;
 import view.hdbmanager.HDBManagerHomeView;
-import view.hdbmanager.applications.BTOProjectApplicationView;
 import view.hdbofficer.HDBOfficerHomeView;
 
 import java.util.HashMap;

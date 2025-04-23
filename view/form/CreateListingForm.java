@@ -1,6 +1,7 @@
-package view;
+package view.form;
 
 import project.ProjectController;
+import view.FormView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

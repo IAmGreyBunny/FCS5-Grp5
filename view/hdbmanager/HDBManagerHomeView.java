@@ -26,7 +26,7 @@ public class HDBManagerHomeView extends MenuView {
                     Session.getSession().setCurrentView(new ProjectView());
                     break;
                 case 2:
-                    Session.getSession().setCurrentView(new ApplicationView());
+                    Session.getSession().setCurrentView(new ManageApplicationView());
                     break;
                 case 3:
                     Session.getSession().setCurrentView(new EnquiriesView());

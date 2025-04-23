@@ -7,7 +7,7 @@ import view.MenuView;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ApplicationView extends MenuView {
+public class ManageApplicationView extends MenuView {
     private int userInput;
 
     @Override
@@ -23,10 +23,10 @@ public class ApplicationView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    Session.getSession().setCurrentView(new BTOProjectApplicationView());
+                    Session.getSession().setCurrentView(new ManageProjectApplicationView());
                     break;
                 case 2:
-                    Session.getSession().setCurrentView(new OfficerApplicationView());
+                    Session.getSession().setCurrentView(new ManageOfficerApplicationView());
                     break;
                 case 3:
                     Session.getSession().setCurrentView(new HDBManagerHomeView());

@@ -1,9 +1,9 @@
 package application;
 
 public enum ApplicationStatus {
-    Approved(2),
-    Pending(1),
-    Rejected(0);
+    APPROVED(2),
+    PENDING(1),
+    REJECTED(0);
 
     private final int value;
 

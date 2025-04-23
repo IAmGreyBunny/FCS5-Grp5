@@ -4,6 +4,7 @@ import project.Project;
 import project.ProjectRepository;
 import project.UnitType;
 import session.Session;
+import view.CreateListingForm;
 import view.hdbmanager.EditBTOForm;
 import view.hdbmanager.ProjectView;
 
@@ -20,10 +21,9 @@ public class BTOProjectController {
 
 
 
-    /* public boolean createListing() {
-        // TODO
-        return false;
-    } */
+     public void createListing() {
+        Session.getSession().setCurrentView(new CreateListingForm());
+    }
 
     public void editListing() {
         Session.getSession().setCurrentView(new EditBTOForm());

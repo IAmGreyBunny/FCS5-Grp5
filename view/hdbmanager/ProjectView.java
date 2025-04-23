@@ -33,9 +33,9 @@ public class ProjectView extends MenuView {
 
             switch (userInput) {
                 case 1:
-//                    System.out.println("=== Create Listing ===");
-//                    projectController.createListing();
-//                    break;
+                    System.out.println("=== Create Listing ===");
+                    projectController.createListing();
+                    break;
                 case 2:
                     System.out.println("=== Edit Listing ===");
                     List<Project> printProjects = projectController.getAllProjects();

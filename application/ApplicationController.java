@@ -6,33 +6,30 @@ public class ApplicationController {
     protected List<Application> applications = new ArrayList<>();
 
     public void addApplication(Application application) {
-        if (application != null) {
-            applications.add(application);
-        }
+        ApplicationRepository.createApplication(application);
     }
 
     public boolean approveApplication(Application application) {
-        return application.approveApplication();
+        boolean approved = application.approveApplication();
+        if (approved) {
+            ApplicationRepository.updateApplication(application);
+        }
+        return approved;
     }
 
     public boolean rejectApplication(Application application) {
-        return application.rejectApplication();
+        boolean rejected = application.rejectApplication();
+        if (rejected) {
+            ApplicationRepository.updateApplication(application);
+        }
+        return rejected;
     }
 
-    public boolean approveWithdrawal(Application application) {
-        return application.approveWithdrawal();
-    }
-
-    public boolean rejectWithdrawal(Application application) {
-        return application.rejectWithdrawal();
-    }
-
-    //get all applications
     public List<Application> getAllApplications() {
-        return new ArrayList<>(applications);
+        return new ArrayList<>(applications);  // Fetching the list of applications from memory
     }
 
-    //get application by id (helper method)
+    //get application by id
     public Application getApplicationByID(String applicationID) {
         for (Application app : applications) {
             if (app.getApplicationID().equals(applicationID)) {

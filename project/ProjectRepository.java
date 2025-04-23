@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -136,7 +138,7 @@ public class ProjectRepository {
         ArrayList<UnitType> listOfUnits = new ArrayList<>();
 
         try (
-                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UnitType.xlsx")));
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UnitType")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
             Sheet sheet = workbook.getSheetAt(0);
@@ -179,9 +181,8 @@ public class ProjectRepository {
                     int projectId = (int) row.getCell(0).getNumericCellValue();
                     String projectName = row.getCell(1).getStringCellValue();
                     String neighbourhood = row.getCell(2).getStringCellValue();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate openingDate = LocalDate.parse(row.getCell(3).getStringCellValue(), formatter);
-                    LocalDate closingDate = LocalDate.parse(row.getCell(4).getStringCellValue(), formatter);
+                    LocalDate openingDate = row.getCell(3).getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate closingDate = row.getCell(4).getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     int officerSlots = (int) row.getCell(5).getNumericCellValue();
                     boolean visibility = row.getCell(6).getBooleanCellValue();
 

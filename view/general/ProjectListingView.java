@@ -22,8 +22,15 @@ public class ProjectListingView extends MenuView {
         System.out.println("--- All Applicable Projects ---");
         for(Project project : listOfApplicableProjects)
         {
-            System.out.print(project.getProjectId() + " | " + project.getProjectName());
+            System.out.println(project.getProjectId() + " | " + project.getProjectName());
         }
-
+        userInput = scanner.nextInt();
+        switch (userInput)
+        {
+            case 1:
+                break;
+            default:
+                break;
+        }
     }
 }

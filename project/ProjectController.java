@@ -2,6 +2,7 @@ package project;
 
 import session.Session;
 import user.User;
+import user.UserRepository;
 import user.applicant.Applicant;
 import user.hdbofficer.HDBOfficer;
 import view.general.ProjectListingView;
@@ -11,6 +12,8 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ProjectController {
@@ -124,8 +127,13 @@ public class ProjectController {
     public static ArrayList<Project> getApplicableProject(User user) {
         ArrayList<Project> listOfApplicableProjects = new ArrayList<>();
 
+        Set<Integer> setOfProjectIds = new HashSet<Integer>();
         for (UnitType unitType : getApplicableUnitTypes(user)) {
-            listOfApplicableProjects.add(ProjectRepository.getProjectById(unitType.getProjectId()));
+            setOfProjectIds.add(unitType.getProjectId());
+        }
+        for(int id: setOfProjectIds)
+        {
+            listOfApplicableProjects.add(ProjectRepository.getProjectById(id));
         }
 
         if (user instanceof HDBOfficer) {

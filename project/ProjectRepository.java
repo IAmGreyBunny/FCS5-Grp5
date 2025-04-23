@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,6 +14,41 @@ public class ProjectRepository {
 
     public static void createProject(Project project){
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        int maxId = findMaxId() + 1;
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            int projectId = project.getProjectId();
+            String name = project.getProjectName();
+            String neighbourhood = project.getNeighbourhood();
+            String openingDateString = project.getApplicationOpeningDate().format(formatter);
+            String closingDateString = project.getApplicationClosingDate().format(formatter);
+            int officerSlots = project.getOfficerSlots();
+            boolean visibility = project.getVisibility();
+
+            Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
+            newRow.createCell(0).setCellValue(projectId);
+            newRow.createCell(1).setCellValue(name);
+            newRow.createCell(2).setCellValue(neighbourhood);
+            newRow.createCell(3).setCellValue(openingDateString);
+            newRow.createCell(4).setCellValue(closingDateString);
+            newRow.createCell(5).setCellValue(officerSlots);
+            newRow.createCell(6).setCellValue(visibility);
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("ProjectDetails"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
     }
 
     public static void assignUnitType(UnitType unitType, int projectId)
@@ -136,5 +172,28 @@ public class ProjectRepository {
         }
 
         return managerId;
+    }
+
+    public static int findMaxId() {
+        int maxId = 0;
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if ((int) row.getCell(0).getNumericCellValue() > maxId) {
+                    maxId = (int) row.getCell(0).getNumericCellValue();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+
+        return maxId;
     }
 }

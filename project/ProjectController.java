@@ -1,7 +1,7 @@
 package project;
 
 import session.Session;
-import view.hdbmanager.ProjectView;
+import view.hdbmanager.ManagerProjectManagementView;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -110,6 +110,6 @@ public class ProjectController {
 //        }
 
         System.out.println("Project edited");
-        Session.getSession().setCurrentView(new ProjectView());
+        Session.getSession().setCurrentView(new ManagerProjectManagementView());
     }
 }

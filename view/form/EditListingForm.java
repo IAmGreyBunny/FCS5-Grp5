@@ -1,4 +1,4 @@
-package view.hdbmanager;
+package view.form;
 
 import project.*;
 import project.ProjectRepository;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class EditBTOForm extends FormView {
+public class EditListingForm extends FormView {
     HashMap<String, Object> userInput = new HashMap<>();
 
     @Override

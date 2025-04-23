@@ -1,10 +1,12 @@
 package view.hdbofficer;
 
+import project.Project;
 import session.Session;
 import view.MenuView;
 import view.general.DefaultHomeView;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class HDBOfficerHomeView extends MenuView {
@@ -24,20 +26,28 @@ public class HDBOfficerHomeView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    Session.getSession().setCurrentView(new DefaultHomeView());
+                    // BTOApplicationView
                     break;
                 case 2:
-                    // code to apply to be an officer for a project
+                    // ProjectListingView
                     break;
                 case 3:
-                    // check if user is an officer for a project
-
-//                    if (/* if officer is handling a project */ ) {
-//                        Session.getSession().setCurrentView(new OfficerProjectView());
-//                    }
-//                    else {
-//                        System.out.println("Not handling any BTO Projects!");
-//                    }
+                    // MyApplicationView
+                    break;
+                case 4:
+                    // BookFlatView
+                    break;
+                case 5:
+                    // WithdrawalView
+                    break;
+                case 6:
+                    // EnquiriesView
+                    break;
+                case 7:
+                    // ProjectOfficerRegistrationView
+                    break;
+                case 8:
+                    // OfficerProjectManagementView
 
                 default: System.out.println("Invalid Input");
             }

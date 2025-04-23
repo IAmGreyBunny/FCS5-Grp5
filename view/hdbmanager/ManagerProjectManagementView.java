@@ -8,7 +8,7 @@ import user.hdbmanager.BTOProjectController;
 
 import java.util.*;
 
-public class ProjectView extends MenuView {
+public class ManagerProjectManagementView extends MenuView {
     private int userInput;
     private Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     private BTOProjectController projectController = new BTOProjectController();
@@ -120,7 +120,7 @@ public class ProjectView extends MenuView {
         } catch (InputMismatchException e) {
             System.out.println("Invalid Input");
         }
-        Session.getSession().setCurrentView(new ProjectView());
+        Session.getSession().setCurrentView(new ManagerProjectManagementView());
     }
 
     

@@ -2,16 +2,12 @@ package user.hdbmanager;
 
 import project.Project;
 import project.ProjectRepository;
-import project.UnitType;
 import session.Session;
-import view.CreateListingForm;
-import view.hdbmanager.EditBTOForm;
-import view.hdbmanager.ProjectView;
+import view.form.CreateListingForm;
+import view.form.EditListingForm;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class BTOProjectController {
     private List<Project> btoProjects = ProjectRepository.getAllProjects();
@@ -27,7 +23,7 @@ public class BTOProjectController {
     }
 
     public void editListing() {
-        Session.getSession().setCurrentView(new EditBTOForm());
+        Session.getSession().setCurrentView(new EditListingForm());
         Session.getSession().getCurrentView().show();
     }
 

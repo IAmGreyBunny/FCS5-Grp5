@@ -7,9 +7,16 @@ import java.time.LocalDate;
 
 public class BTOApplicationController extends ApplicationController {
 
-    public boolean createBTOApplication(String applicationID, User applicant, Project project) {
-        if (applicant != null && project != null) {
-            BTOApplication app = new BTOApplication(applicationID, LocalDate.now(), applicant, project);
+    public boolean createBTOApplication(String applicationID, User applicant, String projectId, UnitType unitType) {
+        if (applicant != null && projectId != null && unitType != null) {
+            BTOApplication app = new BTOApplication(
+                    applicationID,
+                    LocalDate.now(),
+                    applicant,
+                    projectId,
+                    String.valueOf(applicant.getUid()),
+                    unitType
+            );
             applications.add(app);
             return true;
         }

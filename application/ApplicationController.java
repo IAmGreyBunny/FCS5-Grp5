@@ -3,8 +3,6 @@ package application;
 import project.*;
 import java.util.*;
 
-//still working on this
-
 public class ApplicationController {
     protected List<Application> applications = new ArrayList<>();
 

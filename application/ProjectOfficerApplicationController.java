@@ -1,6 +1,5 @@
 package application;
 
-import project.*;
 import user.User;
 import java.util.*;
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ public class ProjectOfficerApplicationController extends ApplicationController {
         return false;
     }
 
-    public List<ProjectOfficerApplication> getOfficerApplications() {
+    public List<ProjectOfficerApplication> getOfficerApplication() {
         List<ProjectOfficerApplication> result = new ArrayList<>();
         for (Application app : applications) {
             if (app instanceof ProjectOfficerApplication) {

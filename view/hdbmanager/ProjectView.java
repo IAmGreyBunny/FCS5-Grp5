@@ -112,6 +112,7 @@ public class ProjectView extends MenuView {
                     break;
                 case 6:
                     Session.getSession().setCurrentView(new HDBManagerHomeView());
+                    Session.getSession().getCurrentView().show();
                     break;
                 default: System.out.println("Invalid Input");
             }

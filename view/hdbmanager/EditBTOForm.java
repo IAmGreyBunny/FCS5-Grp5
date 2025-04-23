@@ -116,109 +116,109 @@ public class EditBTOForm extends FormView {
         System.out.println("\n=== Editing Unit Types ===");
         System.out.println("Leave field empty to keep current values");
 
-        System.out.println("--- 2 Room Units ---");
-        System.out.println("Enter total number of units: ");
-        String s2Total;
-        boolean valid2Total = false;
-        do {
-            s2Total = scanner.next();
-            if (!s2Total.isEmpty()) {
-                try {
-                    total2Units = Integer.parseInt(s2Total);
-                    valid2Total = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number format");
-                }
-            } else {
-                valid2Total = true;
-            }
-        } while (!valid2Total);
-
-        System.out.println("Enter available number of units: ");
-        String s2Avail;
-        boolean valid2Avail = false;
-        do {
-            s2Avail = scanner.next();
-            if (!s2Avail.isEmpty()) {
-                try {
-                    available2Units = Integer.parseInt(s2Avail);
-                    valid2Avail = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number format");
-                }
-            } else {
-                valid2Avail = true;
-            }
-        } while (!valid2Avail);
-
-        System.out.println("Enter price per unit: ");
-        String sPrice2;
-        boolean validPrice2 = false;
-        do {
-            sPrice2 = scanner.next();
-            if (!sPrice2.isEmpty()) {
-                try {
-                    price2 = Integer.parseInt(sPrice2);
-                    validPrice2 = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number format");
-                }
-            } else {
-                validPrice2 = true;
-            }
-        } while (!validPrice2);
-
-        System.out.println("--- 3 Room Units ---");
-        System.out.println("Enter total number of units: ");
-        String s3Total;
-        boolean valid3Total = false;
-        do {
-            s3Total = scanner.next();
-            if (!s3Total.isEmpty()) {
-                try {
-                    total3Units = Integer.parseInt(s3Total);
-                    valid3Total = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number format");
-                }
-            } else {
-                valid3Total = true;
-            }
-        } while (!valid3Total);
-
-        System.out.println("Enter available number of units: ");
-        String s3Avail;
-        boolean valid3Avail = false;
-        do {
-            s3Avail = scanner.next();
-            if (!s3Avail.isEmpty()) {
-                try {
-                    available3Units = Integer.parseInt(s3Avail);
-                    valid3Avail = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number format");
-                }
-            } else {
-                valid3Avail = true;
-            }
-        } while (!valid3Avail);
-
-        System.out.println("Enter price per unit: ");
-        String sPrice3;
-        boolean validPrice3 = false;
-        do {
-            sPrice3 = scanner.next();
-            if (!sPrice3.isEmpty()) {
-                try {
-                    price3 = Integer.parseInt(sPrice3);
-                    validPrice3 = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number format");
-                }
-            } else {
-                validPrice3 = true;
-            }
-        } while (!validPrice3);
+//        System.out.println("--- 2 Room Units ---");
+//        System.out.println("Enter total number of units: ");
+//        String s2Total;
+//        boolean valid2Total = false;
+//        do {
+//            s2Total = scanner.next();
+//            if (!s2Total.isEmpty()) {
+//                try {
+//                    total2Units = Integer.parseInt(s2Total);
+//                    valid2Total = true;
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid number format");
+//                }
+//            } else {
+//                valid2Total = true;
+//            }
+//        } while (!valid2Total);
+//
+//        System.out.println("Enter available number of units: ");
+//        String s2Avail;
+//        boolean valid2Avail = false;
+//        do {
+//            s2Avail = scanner.next();
+//            if (!s2Avail.isEmpty()) {
+//                try {
+//                    available2Units = Integer.parseInt(s2Avail);
+//                    valid2Avail = true;
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid number format");
+//                }
+//            } else {
+//                valid2Avail = true;
+//            }
+//        } while (!valid2Avail);
+//
+//        System.out.println("Enter price per unit: ");
+//        String sPrice2;
+//        boolean validPrice2 = false;
+//        do {
+//            sPrice2 = scanner.next();
+//            if (!sPrice2.isEmpty()) {
+//                try {
+//                    price2 = Integer.parseInt(sPrice2);
+//                    validPrice2 = true;
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid number format");
+//                }
+//            } else {
+//                validPrice2 = true;
+//            }
+//        } while (!validPrice2);
+//
+//        System.out.println("--- 3 Room Units ---");
+//        System.out.println("Enter total number of units: ");
+//        String s3Total;
+//        boolean valid3Total = false;
+//        do {
+//            s3Total = scanner.next();
+//            if (!s3Total.isEmpty()) {
+//                try {
+//                    total3Units = Integer.parseInt(s3Total);
+//                    valid3Total = true;
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid number format");
+//                }
+//            } else {
+//                valid3Total = true;
+//            }
+//        } while (!valid3Total);
+//
+//        System.out.println("Enter available number of units: ");
+//        String s3Avail;
+//        boolean valid3Avail = false;
+//        do {
+//            s3Avail = scanner.next();
+//            if (!s3Avail.isEmpty()) {
+//                try {
+//                    available3Units = Integer.parseInt(s3Avail);
+//                    valid3Avail = true;
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid number format");
+//                }
+//            } else {
+//                valid3Avail = true;
+//            }
+//        } while (!valid3Avail);
+//
+//        System.out.println("Enter price per unit: ");
+//        String sPrice3;
+//        boolean validPrice3 = false;
+//        do {
+//            sPrice3 = scanner.next();
+//            if (!sPrice3.isEmpty()) {
+//                try {
+//                    price3 = Integer.parseInt(sPrice3);
+//                    validPrice3 = true;
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid number format");
+//                }
+//            } else {
+//                validPrice3 = true;
+//            }
+//        } while (!validPrice3);
     
 
 

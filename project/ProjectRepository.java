@@ -76,7 +76,7 @@ public class ProjectRepository {
         int managerId = 0;
 
         try (
-                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectOfficer")));
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectManager")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
             Sheet sheet = workbook.getSheetAt(0);

@@ -23,10 +23,12 @@ public class BTOProjectController {
 
      public void createListing() {
         Session.getSession().setCurrentView(new CreateListingForm());
+        Session.getSession().getCurrentView().show();
     }
 
     public void editListing() {
         Session.getSession().setCurrentView(new EditBTOForm());
+        Session.getSession().getCurrentView().show();
     }
 
     public void deleteProject(int projectId) {

@@ -26,24 +26,3 @@ public class BTOApplication extends Application {
     public UnitType getUnitType() { return unitType; }
     public void setUnitType(UnitType unitType) { this.unitType = unitType; }
 }
-
-
-/*
-public class BTOApplication extends Application {
-    private Project project;
-
-    public BTOApplication(String applicationID, LocalDate applicationDate, User applicant, Project project) {
-        super(applicationID, applicationDate, applicant);
-        this.project = project;
-    }
-
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-}
-*/

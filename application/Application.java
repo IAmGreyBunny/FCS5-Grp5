@@ -3,7 +3,7 @@ package application;
 import user.User;
 import java.time.LocalDate;
 
-//check with Applicant code
+//cross check with Applicant code
 
 public abstract class Application {
     protected String applicationID;

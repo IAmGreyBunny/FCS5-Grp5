@@ -14,7 +14,7 @@ public class BTOApplicationController extends ApplicationController {
                     LocalDate.now(),
                     applicant,
                     projectId,
-                    String.valueOf(applicant.getUid()),
+                    String.valueOf(applicant.getUid()), //check
                     unitType
             );
             applications.add(app);

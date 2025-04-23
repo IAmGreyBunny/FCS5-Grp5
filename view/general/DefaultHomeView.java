@@ -3,6 +3,7 @@ package view.general;
 
 
 import project.Project;
+import session.Session;
 import view.MenuView;
 
 import java.util.InputMismatchException;
@@ -37,6 +38,7 @@ public class DefaultHomeView extends MenuView {
                     break;
                 case 2:
                     // ProjectListingView
+                    Session.getSession().setCurrentView(new ProjectListingView());
                     break;
                 case 3:
                     // MyApplicationView

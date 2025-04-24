@@ -1,11 +1,27 @@
 package enquiries;
 
+
+/**
+ * Manages a sequence of Enquiry objects using a doubly linked list structure.
+ * <p>
+ * This controller allows the creation of new enquiries, threaded replies,
+ * and searching/displaying of enquiries.
+ * </p>
+ */
 public class EnquiryController {
     private Enquiry head;
     private Enquiry tail;
     private int nextID = 1;
 
     //doubly linked list
+    /**
+     * Creates a new Enquiry and appends it to the end of the list.
+     *
+     * @param messageText the content of the enquiry
+     * @param senderID    the sender's ID
+     * @param recipientID the recipient's ID
+     * @return the newly created Enquiry
+     */
     public Enquiry createNewEnquiry(String messageText, String senderID, String recipientID) {
         Enquiry enquiry = new Enquiry(nextID++, messageText, senderID, recipientID);
         if (head == null) {

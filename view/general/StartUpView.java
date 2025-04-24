@@ -2,6 +2,8 @@ package view.general;
 
 import session.Session;
 import view.MenuView;
+import view.form.LoginForm;
+import view.form.RegistrationForm;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,10 +24,10 @@ public class StartUpView extends MenuView {
 
             switch(userInput){
                 case 1:
-                    Session.getSession().setCurrentView(new LoginView());
+                    Session.getSession().setCurrentView(new LoginForm());
                     break;
                 case 2:
-                    Session.getSession().setCurrentView(new RegistrationView());
+                    Session.getSession().setCurrentView(new RegistrationForm());
                     break;
                 default:
                     System.out.println("Invalid Input");

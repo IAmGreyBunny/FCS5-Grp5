@@ -4,7 +4,7 @@ import session.Session;
 import user.User;
 import user.UserRepository;
 import user.UserRole;
-import view.general.LoginView;
+import view.form.LoginForm;
 
 import java.util.HashMap;
 
@@ -29,7 +29,7 @@ public class RegistrationController {
             UserRepository.createUserLogin(user, (String) userInput.get("nric"), (String) userInput.get("password"));
             UserRepository.setUserRole(user.getUid(), UserRole.APPLICANT);
             System.out.println("Successfully Registered User");
-            Session.getSession().setCurrentView(new LoginView());
+            Session.getSession().setCurrentView(new LoginForm());
         }else {
             System.out.println("Error creating user");
         }

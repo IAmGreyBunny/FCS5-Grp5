@@ -1,6 +1,6 @@
 package enquiries;
 
-class EnquiryController {
+public class EnquiryController {
     private Enquiry head;
     private Enquiry tail;
     private int nextID = 1;

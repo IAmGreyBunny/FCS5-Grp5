@@ -1,9 +1,5 @@
 package project;
 
-import session.Session;
-import view.hdbmanager.ProjectView;
-
-import java.time.LocalDate;
 import java.util.HashMap;
 
 public class ListingController {

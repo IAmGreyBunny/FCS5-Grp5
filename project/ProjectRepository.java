@@ -55,11 +55,40 @@ public class ProjectRepository {
         }
     }
 
-    public static void assignUnitType(UnitType unitType, int projectId) {
+    public static void createUnitType(UnitType unitType){
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UnitType")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
 
+            Sheet sheet = workbook.getSheetAt(0);
+
+            int unitTypeId = unitType.getUnitTypeId();
+            int projectId = unitType.getProjectId();
+            String name = unitType.getName();
+            double sellingPrice = unitType.getPricePerUnit();
+            int available = unitType.getAvailable();
+            int total = unitType.getTotal();
+
+            Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
+            newRow.createCell(0).setCellValue(unitTypeId);
+            newRow.createCell(1).setCellValue(projectId);
+            newRow.createCell(2).setCellValue(name);
+            newRow.createCell(3).setCellValue(sellingPrice);
+            newRow.createCell(4).setCellValue(available);
+            newRow.createCell(5).setCellValue(total);
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UnitType"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
     }
 
-    public static void updateProject(Project project) {
+    public static void updateProject(Project updatedProject) {
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
                 Workbook workbook = WorkbookFactory.create(file)
@@ -67,13 +96,13 @@ public class ProjectRepository {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            int projectId = project.getProjectId();
-            String name = project.getProjectName();
-            String neighbourhood = project.getNeighbourhood();
-            Date openingDateString = DateHelper.convertLocalDateToDate(project.getApplicationOpeningDate());
-            Date closingDateString = DateHelper.convertLocalDateToDate(project.getApplicationClosingDate());
-            int officerSlots = project.getOfficerSlots();
-            boolean visibility = project.getVisibility();
+            int projectId = updatedProject.getProjectId();
+            String name = updatedProject.getProjectName();
+            String neighbourhood = updatedProject.getNeighbourhood();
+            Date openingDateString = DateHelper.convertLocalDateToDate(updatedProject.getApplicationOpeningDate());
+            Date closingDateString = DateHelper.convertLocalDateToDate(updatedProject.getApplicationClosingDate());
+            int officerSlots = updatedProject.getOfficerSlots();
+            boolean visibility = updatedProject.getVisibility();
 
             for (int i = 1; i < sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
@@ -91,6 +120,45 @@ public class ProjectRepository {
             }
 
             try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("ProjectDetails"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateUnitType(UnitType updatedUnitType){
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UnitType")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            int unitTypeId = updatedUnitType.getUnitTypeId();
+            int projectId = updatedUnitType.getProjectId();
+            String name = updatedUnitType.getName();
+            double sellingPrice = updatedUnitType.getPricePerUnit();
+            int available = updatedUnitType.getAvailable();
+            int total = updatedUnitType.getTotal();
+
+            for (int i = 1; i < sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                if ((int) row.getCell(0).getNumericCellValue() == projectId) {
+                    row.getCell(0).setCellValue(unitTypeId);
+                    row.getCell(1).setCellValue(projectId);
+                    row.getCell(2).setCellValue(name);
+                    row.getCell(3).setCellValue(sellingPrice);
+                    row.getCell(4).setCellValue(available);
+                    row.getCell(5).setCellValue(total);
+
+                }
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UnitType"))) {
                 workbook.write(outFile);
             }
 
@@ -307,7 +375,30 @@ public class ProjectRepository {
         return managerId;
     }
 
-    public static int findMaxId() {
+    public static int findMaxProjectId() {
+        int maxId = 0;
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if ((int) row.getCell(0).getNumericCellValue() > maxId) {
+                    maxId = (int) row.getCell(0).getNumericCellValue();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+
+        return maxId;
+    }
+
+    public static int findMaxUnitTypeId() {
         int maxId = 0;
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));

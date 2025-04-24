@@ -14,7 +14,7 @@ public class CreateProjectListingForm extends FormView {
         // createListingWithUserInput(HashMap<String, Object> userInput)
         // update currentView with new CreateUnitTypeForm()
 
-        Session.getSession().setCurrentView(new CreateUnitTypeForm(projectId));
+        //Session.getSession().setCurrentView(new CreateUnitTypeForm(projectId));
     }
 
     @Override

@@ -23,7 +23,7 @@ public class ManageApplicationView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    Session.getSession().setCurrentView(new ManageProjectApplicationView());
+                    //Session.getSession().setCurrentView(new ManageProjectApplicationView());
                     break;
                 case 2:
                     Session.getSession().setCurrentView(new ManageOfficerApplicationView());

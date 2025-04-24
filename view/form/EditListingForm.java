@@ -236,7 +236,7 @@ public class EditListingForm extends FormView {
         userInput.put("3-room price", price3);
 
         ProjectController projectController = new ProjectController(userInput);
-        projectController.editListing();
+        //projectController.editListingWithUserInput(Project oldProject,userInput);
 
     }
 

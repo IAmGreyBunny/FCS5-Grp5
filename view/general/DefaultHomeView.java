@@ -2,14 +2,20 @@
 package view.general;
 
 
+import project.Project;
+import session.Session;
 import view.MenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
-public class BTOApplicationMenuView extends MenuView {
+
+public class DefaultHomeView extends MenuView {
     private int userInput;
-
+    private List<Project> btoProject = new ArrayList<>();
 
     @Override
     public void show() {
@@ -19,10 +25,8 @@ public class BTOApplicationMenuView extends MenuView {
         System.out.println("3) View Applied BTO Projects");
         System.out.println("4) Book Flat");
         System.out.println("5) Request Withdrawal");
-        System.out.println("6) Submit Enquiry");
-        System.out.println("7) View Enquiry");
-        System.out.println("8) Edit Enquiry");
-        System.out.println("9) Delete Enquiry");
+        System.out.println("6) Enquiry");
+
 
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         try {
@@ -30,33 +34,25 @@ public class BTOApplicationMenuView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    // code to print BTO projects that can be applied for
-                    // code to apply for BTO Project
+                    // BTOApplicationView
                     break;
                 case 2:
-                    // code to view all projects
+                    // ProjectListingView
+                    Session.getSession().setCurrentView(new ProjectListingView());
                     break;
                 case 3:
-                    // code to view projects that person has applied for
+                    // MyApplicationView
                     break;
                 case 4:
-                    // book flat (only when has a BTO that has been approved of)
+                    // BookFlatView
                     break;
                 case 5:
-                    // request withdrawal (only when there is a BTO that has been approved of)
+                    // WithdrawalView
                     break;
                 case 6:
-                    // submit enquiry
+                    // EnquiriesView
                     break;
-                case 7:
-                    // view enquiry
-                    break;
-                case 8:
-                    // edit enquiry (must have submitted an enquiry)
-                    break;
-                case 9:
-                    // delete enquiry (must have submitted an enquiry)
-                    break;
+                
                 default: System.out.println("Invalid Input");
             }
         } catch (InputMismatchException e) {

@@ -2,9 +2,11 @@ package view.general;
 
 import login.AuthController;
 import session.Session;
+import user.applicant.Applicant;
+import user.hdbofficer.HDBOfficer;
 import view.FormView;
-import view.hdbmanager.ApplicationView;
-import view.hdbmanager.applications.BTOProjectApplicationView;
+import view.hdbmanager.HDBManagerHomeView;
+import view.hdbofficer.HDBOfficerHomeView;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -31,7 +33,17 @@ public class LoginView extends FormView {
         System.out.println("Logging in... ");
         if(AuthController.authenticate(this.getUserInput()))
         {
-            Session.getSession().setCurrentView(new BTOApplicationMenuView()); //This is a placeholder
+            if (Session.getSession().getCurrentUser() instanceof Applicant)
+            {
+                Session.getSession().setCurrentView(new DefaultHomeView());
+            }
+            else if (Session.getSession().getCurrentUser() instanceof HDBOfficer)
+            {
+                Session.getSession().setCurrentView(new HDBOfficerHomeView());
+            }
+            else {
+                Session.getSession().setCurrentView(new HDBManagerHomeView());
+            }
         }
     }
 

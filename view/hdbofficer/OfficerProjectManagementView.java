@@ -1,13 +1,12 @@
-package view.hdbmanager;
+package view.hdbofficer;
 
 import session.Session;
-import view.hdbofficer.HDBOfficerHomeView;
 import view.MenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class OfficerProjectView extends MenuView {
+public class OfficerProjectManagementView extends MenuView {
     private int userInput;
 
     @Override
@@ -25,16 +24,16 @@ public class OfficerProjectView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    // code to print details of the project
+                    // code to print project details
                     break;
                 case 2:
-                    // code to view enquiries
+                    // ProjectEnquiryView
                     break;
                 case 3:
-                    // flat selection responsibilies
+                    // FlatSelectionView
                     break;
                 case 4:
-                    // generate flat selection receipt
+                    // code to generate receipt
                     break;
                 case 5:
                     Session.getSession().setCurrentView(new HDBOfficerHomeView());

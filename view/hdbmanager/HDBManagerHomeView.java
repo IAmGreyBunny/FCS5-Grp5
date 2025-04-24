@@ -23,10 +23,10 @@ public class HDBManagerHomeView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    Session.getSession().setCurrentView(new ProjectView());
+                    Session.getSession().setCurrentView(new ManagerProjectManagementView());
                     break;
                 case 2:
-                    Session.getSession().setCurrentView(new ApplicationView());
+                    Session.getSession().setCurrentView(new ManageApplicationView());
                     break;
                 case 3:
                     Session.getSession().setCurrentView(new EnquiriesView());

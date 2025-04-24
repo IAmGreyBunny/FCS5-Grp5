@@ -44,11 +44,11 @@ public class InputValidator {
     }
 
     // Validate positive double
-    public static boolean validatePositiveDouble(String input, Double min) {
+    public static boolean validatePositiveDouble(String input) {
         try {
             Double value = Double.parseDouble(input);
 
-            if (min != null && value < min) {
+            if (value < 0) {
                 return true;
             }
             else {

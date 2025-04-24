@@ -1,6 +1,8 @@
 package view.general;
 
+import session.Session;
 import view.MenuView;
+import view.form.ChangePasswordForm;
 
 import java.util.Scanner;
 
@@ -18,7 +20,7 @@ public class MyProfileView extends MenuView {
 
         switch (userInput){
             case 1:
-                // Change Password
+                Session.getSession().setCurrentView(new ChangePasswordForm());
                 break;
             default:
                 System.out.println("Invalid Option");

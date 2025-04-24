@@ -222,21 +222,21 @@ public class EditListingForm extends FormView {
 
 
 
-        userInput.put("project", project);
-        userInput.put("name", name);
-        userInput.put("neighbourhood", neighbourhood);
-        userInput.put("openingDate", openingDate);
-        userInput.put("closingDate", closingDate);
-        userInput.put("officerSlots", officerSlots);
-        userInput.put("2-room totalUnits", total2Units);
-        userInput.put("2-room availableUnits", available2Units);
-        userInput.put("2-room price", price2);
-        userInput.put("3-room totalUnits", total3Units);
-        userInput.put("3-room availableUnits", available3Units);
-        userInput.put("3-room price", price3);
-
-        ProjectController projectController = new ProjectController(userInput);
-        projectController.editListing();
+//        userInput.put("project", project);
+//        userInput.put("name", name);
+//        userInput.put("neighbourhood", neighbourhood);
+//        userInput.put("openingDate", openingDate);
+//        userInput.put("closingDate", closingDate);
+//        userInput.put("officerSlots", officerSlots);
+//        userInput.put("2-room totalUnits", total2Units);
+//        userInput.put("2-room availableUnits", available2Units);
+//        userInput.put("2-room price", price2);
+//        userInput.put("3-room totalUnits", total3Units);
+//        userInput.put("3-room availableUnits", available3Units);
+//        userInput.put("3-room price", price3);
+//
+//        ProjectController projectController = new ProjectController(userInput);
+//        projectController.editListing();
 
     }
 

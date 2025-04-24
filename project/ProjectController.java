@@ -163,4 +163,9 @@ public class ProjectController {
         }
 
     }
+
+    public static ArrayList<UnitType> getUnitTypesByProject(int projectId)
+    {
+        return ProjectRepository.getUnitTypesByProjectId(projectId);
+    }
 }

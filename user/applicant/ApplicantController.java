@@ -1,112 +1,118 @@
 package user.applicant;
 
-//
-//
+import project.Project;
+import enquiries.Enquiry;
+import enquiries.EnquiryController;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ApplicantController {
-//
-//    public ApplicantController(Applicant user) {
-//    }
-//
-//    public boolean changePassword(String currentEntry, String desiredPassword) {
-//        if (!user.getPassword().equals(currentEntry)) {
-//            return false;
-//        }
-//
-//        user.setPassword(desiredPassword);
-//        return true;
-//
-//    }
-//
-//    public boolean isEligibleFor(Project project) {
-//        if (user.hasApplied() || !project.isVisible()) {
-//            return false;
-//        }
-//
-//        String status = user.getMaritalStatus();
-//
-//        int age = user.getAge();
-//
-//        return ("Single".equalsIgnoreCase(status) && age >= 35 && project.hasFlatType("2-Room")) ||
-//
-//                ("Married".equalsIgnoreCase(status) && age >= 21 &&
-//
-//                        (project.hasFlatType("2-Room") || project.hasFlatType("3-Room")));
-//
-//    }
-//
-//    public boolean apply(Project project) {
-//
-//        if (!isEligibleFor(project)) {
-//            return false;
-//        }
-//        user.setAppliedProject(project);
-//        user.setApplicationStatus(Applicant.ApplicationStatus.PENDING);
-//
-//        return true;
-//
-//    }
-//
-//    public boolean withdrawApplication() {
-//        Applicant.ApplicationStatus status = user.getApplicationStatus();
-//        if (!(status == Applicant.ApplicationStatus.PENDING ||
-//                status == Applicant.ApplicationStatus.SUCCESSFUL)) {
-//            return false;
-//
-//        }
-//        user.setAppliedProject(null);
-//        user.setApplicationStatus(Applicant.ApplicationStatus.NONE);
-//        return true;
-//
-//    }
-//
-//    public String viewApplication() {
-//        Project project = user.getAppliedProject();
-//        if (project == null) {
-//            return "You have not applied for any project yet.";
-//        }
-//        return "You have applied for: " + project.getName()
-//                + ". Status: " + user.getApplicationStatus() + ".";
-//
-//    }
-//
-//    public List<Project> getEligibleProjects(List<Project> allProjects) {
-//        List<Project> eligible = new ArrayList<>();
-//        for (Project project : allProjects) {
-//            if (isEligibleFor(project)) {
-//                eligible.add(project);
-//            }
-//
-//        }
-//        return eligible;
-//
-//    }
-//
-//    public boolean canBookFlat() {
-//        return user.hasSuccessfulApplication() && !user.hasBookedFlat();
-//    }
-//
-//    public void submitEnquiry(String enquiry) {
-//        user.getEnquiries().add(enquiry);
-//
-//    }
-//
-//    public boolean editEnquiry(int index, String updatedEnquiry) {
-//        List<String> enquiries = user.getEnquiries();
-//        if (index < 0 || index >= enquiries.size()) {
-//            return false;
-//        }
-//        enquiries.set(index, updatedEnquiry);
-//        return true;
-//    }
-//
-//    public boolean deleteEnquiry(int index) {
-//        List<String> enquiries = user.getEnquiries();
-//        if (index < 0 || index >= enquiries.size()) {
-//            return false;
-//        }
-//        enquiries.remove(index);
-//        return true;
-//
-//    }
-//
+    private final Applicant applicant;
+    private final EnquiryController enquiryController;
+
+    public ApplicantController(Applicant applicant, EnquiryController enquiryController) {
+        this.applicant = applicant;
+        this.enquiryController = enquiryController;
+    }
+
+    public boolean changePassword(String currentPassword, String newPassword) {
+        if (!applicant.getPassword().equals(currentPassword)) {
+            return false;
+        }
+        applicant.setPassword(newPassword);
+        return true;
+    }
+
+    public boolean isEligibleFor(Project project) {
+        if (applicant.hasApplied() || !project.isVisible()) {
+            return false;
+        }
+        boolean married = applicant.getMaritalStatus(); // use getter from User
+        int age = applicant.getAge();
+        if (!married && age >= 35) {
+            return project.hasFlatType("2-Room");
+        }
+        if (married && age >= 21) {
+            return project.hasFlatType("2-Room") || project.hasFlatType("3-Room");
+        }
+        return false;
+    }
+
+    public boolean apply(Project project) {
+        if (!isEligibleFor(project)) {
+            return false;
+        }
+        applicant.setAppliedProject(project);
+        applicant.setApplicationStatus(Applicant.ApplicationStatus.PENDING);
+        return true;
+    }
+
+    public boolean withdrawApplication() {
+        Applicant.ApplicationStatus status = applicant.getApplicationStatus();
+        if (status != Applicant.ApplicationStatus.PENDING
+                && status != Applicant.ApplicationStatus.SUCCESSFUL
+                && status != Applicant.ApplicationStatus.BOOKED) {
+            return false;
+        }
+        applicant.setAppliedProject(null);
+        applicant.setApplicationStatus(Applicant.ApplicationStatus.NONE);
+        return true;
+    }
+
+    public String viewApplication() {
+        Project project = applicant.getAppliedProject();
+        if (project == null) {
+            return "No application found.";
+        }
+        return String.format("Applied to: %s, Status: %s",
+                project.getProjectName(),
+                applicant.getApplicationStatus());
+    }
+
+    public List<Project> getEligibleProjects(List<Project> allProjects) {
+        List<Project> list = new ArrayList<>();
+        for (Project project : allProjects) {
+            if (isEligibleFor(project)) {
+                list.add(project);
+            }
+        }
+        return list;
+    }
+
+    public boolean canBookFlat() {
+        return applicant.hasSuccessfulApplication() && !applicant.hasBookedFlat();
+    }
+
+    public Enquiry submitEnquiry(String messageText, String recipientID) {
+        Enquiry enquiry = enquiryController.createNewEnquiry(
+                messageText,
+                String.valueOf(applicant.getUid()),
+                recipientID
+        );
+        applicant.getEnquiries().add(enquiry);
+        return enquiry;
+    }
+
+    public boolean editEnquiry(int enquiryID, String updatedMessage) {
+        Enquiry enquiry = enquiryController.findEnquiryByID(enquiryID);
+        if (enquiry == null || !String.valueOf(applicant.getUid()).equals(enquiry.getSenderID())) {
+            return false;
+        }
+        enquiry.setMessageText(updatedMessage);
+        return true;
+    }
+
+    public boolean deleteEnquiry(int enquiryID) {
+        Enquiry enquiry = enquiryController.findEnquiryByID(enquiryID);
+        if (enquiry == null || !String.valueOf(applicant.getUid()).equals(enquiry.getSenderID())) {
+            return false;
+        }
+        applicant.getEnquiries().remove(enquiry);
+        return true;
+    }
+
+    public void viewEnquiryThread(int enquiryID) {
+        enquiryController.displayThreadFrom(enquiryID);
+    }
 }

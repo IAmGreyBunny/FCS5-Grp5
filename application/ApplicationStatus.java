@@ -1,6 +1,7 @@
 package application;
 
 public enum ApplicationStatus {
+    BOOKED(3),
     APPROVED(2),
     PENDING(1),
     REJECTED(0);

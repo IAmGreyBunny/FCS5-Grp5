@@ -33,6 +33,8 @@ public class ProjectListingView extends MenuView {
                 // Returns home
             }else {
                 // Move to ProjectDetailView
+                int projectId = Integer.parseInt(userInput);
+                Session.getSession().setCurrentView(new ProjectDetailView(this,ProjectController.getProjectById(projectId)));
             }
         }catch (Exception e)
         {

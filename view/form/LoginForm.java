@@ -1,17 +1,18 @@
-package view.general;
+package view.form;
 
 import login.AuthController;
 import session.Session;
 import user.applicant.Applicant;
 import user.hdbofficer.HDBOfficer;
 import view.FormView;
+import view.general.DefaultHomeView;
 import view.hdbmanager.HDBManagerHomeView;
 import view.hdbofficer.HDBOfficerHomeView;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class LoginView extends FormView {
+public class LoginForm extends FormView {
 
     HashMap<String,String> userInput = new HashMap<>();
 

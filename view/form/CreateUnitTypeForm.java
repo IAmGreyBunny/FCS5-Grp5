@@ -96,7 +96,7 @@ public class CreateUnitTypeForm extends FormView {
 
         } while(newUnit);
 
-        Session.getSession().setCurrentView(new ManagerProjectManagementView());
+        //Session.getSession().setCurrentView(new ManagerProjectManagementView());
     }
 
     @Override

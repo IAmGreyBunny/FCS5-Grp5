@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class Application {
     private String applicationID;
     private LocalDate applicationDate;
-    private ApplicationStatus applicationStatus; //changed to fit with enum
+    private ApplicationStatus applicationStatus; // changed to fit with enum
     private User applicant;
 
     public Application(String applicationID, LocalDate applicationDate, User applicant) {

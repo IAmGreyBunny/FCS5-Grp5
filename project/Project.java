@@ -3,6 +3,7 @@ package project;
 import user.hdbmanager.HDBManager;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Project {
@@ -108,16 +109,18 @@ public class Project {
         this.visibility = visibility;
     }
 
-    /*
+
     @Override
     public String toString() {
-        return "BTOProject{" +
-                "projectName='" + projectName + '\'' +
-                ", location='" + location + '\'' +
-                ", totalUnits=" + totalUnits +
-                ", pricePerUnit=" + pricePerUnit +
-                ", estimatedCompletionDate=" + estimatedCompletionDate +
-                '}';
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return String.format(
+                "[%d] %s (%s)\n\tApplication Open: %s  Application Closed: %s",
+                projectId,
+                projectName,
+                neighbourhood,
+                applicationOpeningDate.format(formatter),
+                applicationClosingDate.format(formatter)
+        );
     }
-    */
+
 }

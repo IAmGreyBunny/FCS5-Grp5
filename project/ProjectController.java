@@ -131,8 +131,7 @@ public class ProjectController {
         for (UnitType unitType : getApplicableUnitTypes(user)) {
             setOfProjectIds.add(unitType.getProjectId());
         }
-        for(int id: setOfProjectIds)
-        {
+        for (int id : setOfProjectIds) {
             listOfApplicableProjects.add(ProjectRepository.getProjectById(id));
         }
 
@@ -162,5 +161,13 @@ public class ProjectController {
             return listOfApplicableUnits;
         }
 
+    }
+
+    public static ArrayList<UnitType> getUnitTypesByProject(int projectId) {
+        return ProjectRepository.getUnitTypesByProjectId(projectId);
+    }
+
+    public static Project getProjectById(int projectId) {
+        return ProjectRepository.getProjectById(projectId);
     }
 }

@@ -149,9 +149,9 @@ public class ProjectRepository {
                 int unitTypeId = (int) row.getCell(0).getNumericCellValue();
                 int projectId = (int) row.getCell(1).getNumericCellValue();
                 String name = row.getCell(2).getStringCellValue();
-                int sellingPrice = (int) row.getCell(1).getNumericCellValue();
-                int available = (int) row.getCell(1).getNumericCellValue();
-                int total = (int) row.getCell(1).getNumericCellValue();
+                int sellingPrice = (int) row.getCell(3).getNumericCellValue();
+                int available = (int) row.getCell(4).getNumericCellValue();
+                int total = (int) row.getCell(5).getNumericCellValue();
 
                 UnitType unitType = new UnitType(unitTypeId, projectId, name, sellingPrice, available, total);
                 listOfUnits.add(unitType);
@@ -163,6 +163,39 @@ public class ProjectRepository {
         }
 
         return listOfUnits;
+    }
+
+    public static ArrayList<UnitType> getUnitTypesByProjectId(int projectId) {
+        ArrayList<UnitType> unitsByProject = new ArrayList<>();
+
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UnitType")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+
+                int currentProjectId = (int) row.getCell(1).getNumericCellValue();
+                if (currentProjectId == projectId) {
+                    int unitTypeId = (int) row.getCell(0).getNumericCellValue();
+                    String name = row.getCell(2).getStringCellValue();
+                    double pricePerUnit = row.getCell(3).getNumericCellValue(); // Assuming correct column index
+                    int available = (int) row.getCell(4).getNumericCellValue(); // Assuming correct column index
+                    int total = (int) row.getCell(5).getNumericCellValue(); // Assuming correct column index
+
+                    UnitType unitType = new UnitType(unitTypeId, currentProjectId, name, available, total, pricePerUnit);
+                    unitsByProject.add(unitType);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in getUnitTypesByProjectId:");
+            e.printStackTrace();
+        }
+
+        return unitsByProject;
     }
 
     public static Project getProjectById(int id) {

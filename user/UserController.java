@@ -1,7 +1,7 @@
 package user;
 
 import session.Session;
-import view.general.LoginView;
+import view.form.LoginForm;
 
 import java.util.HashMap;
 
@@ -16,6 +16,6 @@ public class UserController {
     public static void logoutCurrentUser()
     {
         Session.getSession().setCurrentUser(null); //Logs user out
-        Session.getSession().setCurrentView(new LoginView());
+        Session.getSession().setCurrentView(new LoginForm());
     }
 }

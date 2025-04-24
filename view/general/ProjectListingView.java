@@ -3,6 +3,7 @@ package view.general;
 import project.Project;
 import project.ProjectController;
 import session.Session;
+import view.HomeViewFactory;
 import view.MenuView;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class ProjectListingView extends MenuView {
             if(userInput.isEmpty())
             {
                 // Returns home
+                Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
             }else {
                 // Move to ProjectDetailView
                 int projectId = Integer.parseInt(userInput);

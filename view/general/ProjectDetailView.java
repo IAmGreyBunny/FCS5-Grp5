@@ -14,6 +14,7 @@ public class ProjectDetailView extends MenuView {
 
     ProjectDetailView(View prevView,Project project)
     {
+        this.prevView = prevView;
         if(project != null)
         {
             this.project = project;

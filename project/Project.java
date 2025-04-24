@@ -56,8 +56,8 @@ public class Project {
         return listOfUnits;
     }
 
-    public void addUnitType(String name, int available, int total, double pricePerUnit) {
-        UnitType unitType = new UnitType(name, available, total, pricePerUnit);
+    public void addUnitType(int unitTypeId,int projectId,String name, int available, int total, double pricePerUnit) {
+        UnitType unitType = new UnitType(unitTypeId,projectId,name, available, total, pricePerUnit);
         this.listOfUnits.add(unitType);
     }
     public boolean deleteUnitType(String name) {

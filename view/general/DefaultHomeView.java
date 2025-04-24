@@ -42,6 +42,7 @@ public class DefaultHomeView extends MenuView {
                     break;
                 case 3:
                     // ProjectListingView
+                    Session.getSession().setCurrentView(new ProjectListingView());
                     break;
                 case 4:
                     // MyApplicationView

@@ -2,9 +2,12 @@ package view.form;
 
 import login.AuthController;
 import session.Session;
+import user.User;
 import user.applicant.Applicant;
 import user.hdbofficer.HDBOfficer;
 import view.FormView;
+import view.HomeViewFactory;
+import view.View;
 import view.general.DefaultHomeView;
 import view.hdbmanager.HDBManagerHomeView;
 import view.hdbofficer.HDBOfficerHomeView;
@@ -34,17 +37,9 @@ public class LoginForm extends FormView {
         System.out.println("Logging in... ");
         if(AuthController.authenticate(this.getUserInput()))
         {
-            if (Session.getSession().getCurrentUser() instanceof Applicant)
-            {
-                Session.getSession().setCurrentView(new DefaultHomeView());
-            }
-            else if (Session.getSession().getCurrentUser() instanceof HDBOfficer)
-            {
-                Session.getSession().setCurrentView(new HDBOfficerHomeView());
-            }
-            else {
-                Session.getSession().setCurrentView(new HDBManagerHomeView());
-            }
+            User user = Session.getSession().getCurrentUser();
+            View view = HomeViewFactory.getHomeViewForUser(user);
+            Session.getSession().setCurrentView(view);
         }
     }
 

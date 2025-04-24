@@ -5,6 +5,8 @@ import session.Session;
 import view.MenuView;
 import view.general.DefaultHomeView;
 import view.general.MyProfileView;
+import view.general.ProjectListingView;
+import view.hdbmanager.EnquiriesView;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -40,6 +42,7 @@ public class HDBOfficerHomeView extends MenuView {
                     break;
                 case 3:
                     // ProjectListingView
+                    Session.getSession().setCurrentView(new ProjectListingView());
                     break;
                 case 4:
                     // MyApplicationView
@@ -52,12 +55,14 @@ public class HDBOfficerHomeView extends MenuView {
                     break;
                 case 7:
                     // EnquiriesView
+                    Session.getSession().setCurrentView(new EnquiriesView());
                     break;
                 case 8:
                     // ProjectOfficerRegistrationView
                     break;
                 case 9:
                     // OfficerProjectManagementView
+                    Session.getSession().setCurrentView(new OfficerProjectManagementView());
 
                 default: System.out.println("Invalid Input");
             }

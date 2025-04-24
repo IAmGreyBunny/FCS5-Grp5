@@ -12,48 +12,38 @@ public class InputValidator {
     public static boolean validateNric(String nric) {
         Pattern pattern = Pattern.compile("^[STFG]\\d{7}[A-Z]$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(nric);
-        if (!matcher.find()) {
-            return false;
-        }
-        return true;
+        return matcher.find();
     }
 
     // Validate date string against a specific format
     public static boolean validateDate(String dateStr, String format) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            LocalDate.parse(dateStr, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
-    // Validate integer input range
+    // Validate integer input within range
     public static boolean validateIntRange(String input, Integer min, Integer max) {
         try {
             Integer value = Integer.parseInt(input);
             if ((min != null && value < min) || (max != null && value > max)) {
-                return true;
-            }
-            else{
                 return false;
             }
+            return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    // Validate positive double
+    // Validate double input is positive
     public static boolean validatePositiveDouble(String input) {
         try {
             Double value = Double.parseDouble(input);
-
-            if (value < 0) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return value > 0;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -73,5 +63,4 @@ public class InputValidator {
     public static boolean validateDateRange(LocalDate startDate, LocalDate endDate) {
         return endDate.isAfter(startDate);
     }
-
 }

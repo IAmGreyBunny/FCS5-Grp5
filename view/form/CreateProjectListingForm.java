@@ -1,22 +1,20 @@
 package view.form;
 
+import session.Session;
 import view.FormView;
 
 import java.util.HashMap;
 
-public class CreateUnitTypeForm extends FormView {
-
-    CreateUnitTypeForm(int projectId){
-
-    }
-
+public class CreateProjectListingForm extends FormView {
     @Override
     public void prompt() {
         // get all the user input into variables(use the InputValidator functions to validate)
-        // except projectId, ProjectRepo.findMaxUnitTypeId
+        // except projectId, ProjectRepo.findMax
         // put all the user inputs into userInput based on the keys found in controller(exact string match)
-        // createUnitTypeWithUserInput(HashMap<String, Object> userInput)
+        // createListingWithUserInput(HashMap<String, Object> userInput)
         // update currentView with new CreateUnitTypeForm()
+
+        Session.getSession().setCurrentView(new CreateUnitTypeForm(projectId));
     }
 
     @Override

@@ -9,12 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CreateListingForm extends FormView {
+public class OldCreateListingForm extends FormView {
 
     HashMap<String, Object> userInput = new HashMap<>();
 
     @Override
     public void prompt() {
+
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -76,7 +77,7 @@ public class CreateListingForm extends FormView {
         userInput.put("officerSlots", officer);
 
         System.out.println("Creating project...");
-        ProjectController.createListing(this.getUserInput());
+        ProjectController.createListingWithUserInput(this.getUserInput());
     }
 
     @Override

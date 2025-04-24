@@ -163,6 +163,15 @@ public class ProjectController {
 
     }
 
+    public static ArrayList<UnitType> getApplicableUnitTypes(int projectId) {
+        ArrayList<UnitType> listOfApplicableUnits = getApplicableUnitTypes(Session.getSession().getCurrentUser());
+        listOfApplicableUnits = listOfApplicableUnits.stream()
+                .filter(unitType -> unitType.getProjectId() == projectId)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return listOfApplicableUnits;
+    }
+
     public static ArrayList<UnitType> getUnitTypesByProject(int projectId) {
         return ProjectRepository.getUnitTypesByProjectId(projectId);
     }

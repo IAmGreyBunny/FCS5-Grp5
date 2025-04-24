@@ -32,7 +32,7 @@ public class ProjectDetailView extends MenuView {
 
     @Override
     public void show() {
-        for(UnitType unitType : ProjectController.getUnitTypesByProject(project.getProjectId()))
+        for(UnitType unitType : ProjectController.getApplicableUnitTypes(project.getProjectId()))
         {
             System.out.println(unitType.toString());
         }

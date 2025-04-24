@@ -7,11 +7,12 @@ import view.MenuView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ProjectListingView extends MenuView {
 
-    int userInput;
+    String userInput;
 
     Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
@@ -24,13 +25,19 @@ public class ProjectListingView extends MenuView {
         {
             System.out.println(project.toString());
         }
-        userInput = scanner.nextInt();
-        switch (userInput)
+        System.out.println("Enter Project Id to view details (Empty to return to home)");
+        try{
+            userInput = scanner.nextLine();
+            if(userInput.isEmpty())
+            {
+                // Returns home
+            }else {
+                // Move to ProjectDetailView
+            }
+        }catch (Exception e)
         {
-            case 1:
-                break;
-            default:
-                break;
+            System.out.println("Invalid Input");
         }
+
     }
 }

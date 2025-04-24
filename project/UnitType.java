@@ -65,4 +65,16 @@ public class UnitType {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "[%d] %s | Available: %d / %d | Price: $%.2f",
+                unitTypeId,
+                name,
+                available,
+                total,
+                pricePerUnit
+        );
+    }
 }

@@ -1,6 +1,7 @@
 package view.form;
 
 import login.AuthController;
+import user.UserController;
 import view.FormView;
 
 import java.util.HashMap;
@@ -31,7 +32,8 @@ public class ChangePasswordForm extends FormView {
 
             if(AuthController.authenticate(userInput))
             {
-                //Change password
+                userInput.put("password",newPassword);
+                UserController.changePassword(userInput);
             }
             else
             {
@@ -44,8 +46,8 @@ public class ChangePasswordForm extends FormView {
     }
 
     @Override
-    public <T> T getUserInput() {
-        return null;
+    public HashMap<String, String> getUserInput() {
+        return userInput;
     }
 
     @Override

@@ -1,7 +1,8 @@
 package application;
 
-import user.User;
 import project.UnitType;
+import user.User;
+
 import java.time.LocalDate;
 
 public class BTOApplication extends Application {

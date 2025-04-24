@@ -38,7 +38,7 @@ public class ProjectOfficerApplicationController extends ApplicationController {
     public boolean rejectOfficerApplication(ProjectOfficerApplication application) {
         boolean rejected = rejectApplication(application);
         if (rejected) {
-            ApplicationRepository.updateApplication(application); 
+            ApplicationRepository.updateApplication(application);
         }
         return rejected;
     }

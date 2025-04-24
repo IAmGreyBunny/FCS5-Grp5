@@ -1,7 +1,7 @@
 package application;
 
 import user.User;
-import project.UnitType;
+
 import java.time.LocalDate;
 
 public class Application {

@@ -2,6 +2,7 @@ package application;
 
 import project.UnitType;
 import user.User;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -49,5 +50,21 @@ public class BTOApplicationController extends ApplicationController {
             ApplicationRepository.updateApplication(application);
         }
         return rejected;
+    }
+
+    public boolean approveWithdrawal(BTOApplication application) {
+        boolean result = application.approveWithdrawal();
+        if (result) {
+            ApplicationRepository.updateApplication(application);
+        }
+        return result;
+    }
+
+    public boolean rejectWithdrawal(BTOApplication application) {
+        boolean result = application.rejectWithdrawal();
+        if (result) {
+            ApplicationRepository.updateApplication(application);
+        }
+        return result;
     }
 }

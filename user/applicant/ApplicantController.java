@@ -1,6 +1,7 @@
 package user.applicant;
 
 import project.Project;
+import project.ProjectRepository;
 import enquiries.Enquiry;
 import enquiries.EnquiryController;
 
@@ -16,25 +17,20 @@ public class ApplicantController {
         this.enquiryController = enquiryController;
     }
 
-    public boolean changePassword(String currentPassword, String newPassword) {
-        if (!applicant.getPassword().equals(currentPassword)) {
-            return false;
-        }
-        applicant.setPassword(newPassword);
-        return true;
-    }
-
     public boolean isEligibleFor(Project project) {
-        if (applicant.hasApplied() || !project.isVisible()) {
+        if (applicant.hasApplied() || !project.getVisibility()) {
             return false;
         }
-        boolean married = applicant.getMaritalStatus(); // use getter from User
+        boolean married = applicant.getMaritalStatus();
         int age = applicant.getAge();
+        ArrayList<String> flatTypes = new ArrayList<>();
+        project.getListOfUnits().forEach(unit -> flatTypes.add(unit.getName()));
+
         if (!married && age >= 35) {
-            return project.hasFlatType("2-Room");
+            return flatTypes.contains("2-Room");
         }
         if (married && age >= 21) {
-            return project.hasFlatType("2-Room") || project.hasFlatType("3-Room");
+            return flatTypes.contains("2-Room") || flatTypes.contains("3-Room");
         }
         return false;
     }
@@ -116,3 +112,4 @@ public class ApplicantController {
         enquiryController.displayThreadFrom(enquiryID);
     }
 }
+

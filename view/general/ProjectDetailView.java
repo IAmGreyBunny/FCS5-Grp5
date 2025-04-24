@@ -8,6 +8,7 @@ import view.MenuView;
 import view.View;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ProjectDetailView extends MenuView {
@@ -32,10 +33,17 @@ public class ProjectDetailView extends MenuView {
 
     @Override
     public void show() {
-        for(UnitType unitType : ProjectController.getUnitTypesByProject(project.getProjectId()))
-        {
-            System.out.println(unitType.toString());
+        ArrayList<UnitType> listOfUnitType = ProjectController.getApplicableUnitTypes(project.getProjectId());
+
+        if(!listOfUnitType.isEmpty()){
+            for(UnitType unitType : listOfUnitType)
+            {
+                System.out.println(unitType.toString());
+            }
+        }else{
+            System.out.println("No available units");
         }
+
 
         System.out.println("Enter anything to return");
         scanner.next();

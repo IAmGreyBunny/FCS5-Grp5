@@ -23,105 +23,92 @@ public class ProjectController {
         this.userInput = userInput;
     }
 
-    public static void createListing(HashMap<String, Object> userInput) {
-//        // TODO -- function from projectRepository to find the max id for projectId
-//        boolean validateCreation = true;
-//
-//        if (validateCreation) {
-//            Project project = new Project(maxId + 1, (String) userInput.get("name"), (String) userInput.get("neighbourhood"), (LocalDate) userInput.get("openingDate"), (LocalDate) userInput.get("closingDate"), (int) userInput.get("officerSlots"), false);
-//            // TODO code to create project and its respective units in repository
-//
-//            System.out.println("Successfully created");
-//            Session.getSession().setCurrentView(new ProjectView());
-//        } else {
-//            System.out.println("Error creating listing");
-//        }
+    public static void createListingWithUserInput(HashMap<String, Object> userInput) {
 
-
-    }
-
-    public void editListing() {
-
-        Project project = (Project) userInput.get("project");
-        int projectId = project.getProjectId();
+        int projectId = ProjectRepository.findMaxProjectId() + 1;
         String name = (String) userInput.get("name");
         String neighbourhood = (String) userInput.get("neighbourhood");
         LocalDate openingDate = (LocalDate) userInput.get("openingDate");
         LocalDate closingDate = (LocalDate) userInput.get("closingDate");
         int officerSlots = (int) userInput.get("officerSlots");
-        boolean visibility = project.getVisibility();
+        boolean visibility = true;
+
+        Project project = new Project(projectId, name, neighbourhood, openingDate, closingDate, officerSlots, visibility);
+        ProjectRepository.createProject(project);
+
+    }
+
+    public static void editListingWithUserInput(Project oldProject, HashMap<String, Object> userInput) {
+
+        int projectId = oldProject.getProjectId();
+        String name = (String) userInput.get("name");
+        String neighbourhood = (String) userInput.get("neighbourhood");
+        LocalDate openingDate = (LocalDate) userInput.get("openingDate");
+        LocalDate closingDate = (LocalDate) userInput.get("closingDate");
+        int officerSlots = (int) userInput.get("officerSlots");
+        boolean visibility = (boolean) userInput.get("visibility");
 
         if (name.isEmpty()) {
-            name = project.getProjectName();
+            name = oldProject.getProjectName();
         }
         if (neighbourhood.isEmpty()) {
-            neighbourhood = project.getNeighbourhood();
+            neighbourhood = oldProject.getNeighbourhood();
         }
         if (openingDate == null) {
-            openingDate = project.getApplicationOpeningDate();
+            openingDate = oldProject.getApplicationOpeningDate();
         }
         if (closingDate == null) {
-            closingDate = project.getApplicationClosingDate();
+            closingDate = oldProject.getApplicationClosingDate();
         }
-        if (officerSlots == 0) {
-            officerSlots = project.getOfficerSlots();
+        if (officerSlots == -1) {
+            officerSlots = oldProject.getOfficerSlots();
         }
 
         Project updatedProject = new Project(projectId, name, neighbourhood, openingDate, closingDate, officerSlots, visibility);
-        //TODO code to edit the project
 
-//        List<UnitType> units = project.getListOfUnits();
-//        for (UnitType unit : units) {
-//            if (unit.getName().equalsIgnoreCase("2-Room")) {
-//                int totalUnits = (int) userInput.get("2-room totalUnits");
-//                int availUnits = (int) userInput.get("2-room availableUnits");
-//                double price = (double) userInput.get("2-room price");
-//
-//                if (availUnits == 0) {
-//                    availUnits = unit.getAvailable();
-//                }
-//                if (totalUnits == 0) {
-//                    totalUnits = unit.getTotal();
-//                }
-//                if (totalUnits <= availUnits) {
-//                    System.out.println("Invalid total or available number of units.");
-//                    System.out.println("Units not updated!");
-//                    break;
-//                }
-//                if (price == 0) {
-//                    price = unit.getPricePerUnit();
-//                }
-//
-//                UnitType updated2Room = new UnitType("2-Room", availUnits, totalUnits, price);
-//                // TODO code to edit the unit type in project
-//            }
-//            else if (unit.getName().equalsIgnoreCase("3-Room")) {
-//                int totalUnits = (int) userInput.get("3-room totalUnits");
-//                int availUnits = (int) userInput.get("3-room availableUnits");
-//                double price = (double) userInput.get("3-room price");
-//
-//                if (availUnits == 0) {
-//                    availUnits = unit.getAvailable();
-//                }
-//                if (totalUnits == 0) {
-//                    totalUnits = unit.getTotal();
-//                }
-//                if (totalUnits <= availUnits) {
-//                    System.out.println("Invalid total or available number of units.");
-//                    System.out.println("Units not updated!");
-//                    break;
-//                }
-//                if (price == 0) {
-//                    price = unit.getPricePerUnit();
-//                }
-//
-//                UnitType updated2Room = new UnitType("3-Room", availUnits, totalUnits, price);
-//                // TODO code to edit the unit type in project
-//            }
-//        }
+        ProjectRepository.updateProject(updatedProject);
 
-        System.out.println("Project edited");
-        Session.getSession().setCurrentView(new ManagerProjectManagementView());
+
+    }
+
+    public static void createUnitTypeWithUserInput(int projectId, HashMap<String, Object> userInput){
+        int unitTypeId = ProjectRepository.findMaxUnitTypeId() + 1;
+        String name = (String) userInput.get("name");
+        int available = (int) userInput.get("available");
+        int total = (int) userInput.get("total");
+        double pricePerUnit = (double) userInput.get("pricePerUnit");
+
+        UnitType unitType = new UnitType(unitTypeId, projectId, name, available, total, pricePerUnit);
+        ProjectRepository.createUnitType(unitType);
+
+    }
+
+    public static void editUnitTypeWithUserInput(UnitType oldUnitType, HashMap<String, Object> userInput) {
+
+        int unitTypeId = ProjectRepository.findMaxUnitTypeId() + 1;
+        String name = (String) userInput.get("name");
+        int available = (int) userInput.get("available");
+        int total = (int) userInput.get("total");
+        double pricePerUnit = (double) userInput.get("pricePerUnit");
+
+        if (name.isEmpty()) {
+            name = oldUnitType.getName();
+        }
+        if (available == -1) {
+            available = oldUnitType.getAvailable();
+        }
+        if (total == -1) {
+            total = oldUnitType.getTotal();
+        }
+        if (pricePerUnit == -1) {
+            pricePerUnit = oldUnitType.getPricePerUnit();
+        }
+
+        UnitType updatedUnitType = new UnitType(unitTypeId, oldUnitType.getProjectId(), name, available,total,pricePerUnit);
+
+        ProjectRepository.updateUnitType(updatedUnitType);
+
+
     }
 
     public static ArrayList<Project> getApplicableProject(User user) {

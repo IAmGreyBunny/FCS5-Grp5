@@ -191,7 +191,7 @@ public class CreateListingForm extends FormView {
         userInput.put("officerSlots", officer);
 
         System.out.println("Creating project...");
-        ProjectController.createListing(this.getUserInput());
+        ProjectController.createListingWithUserInput(this.getUserInput());
 
     }
 

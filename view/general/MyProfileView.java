@@ -8,11 +8,22 @@ import view.form.ChangePasswordForm;
 
 import java.util.Scanner;
 
-public class MyProfileView implements IMenuView {
+/**
+ * A menu view that displays the user's profile options.
+ * This class implements IMenuView and provides options for the user to change password, logout, or return to the home view.
+ */
 
+public class MyProfileView implements IMenuView {
+    /**
+     * @param userInput userInput is the user's input for selecting an option from the profile menu.
+     */
     int userInput;
     Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
+    /**
+     * This method displays the profile menu and prompts the user to select an option.
+     * It handles the user's input and navigates to the corresponding view based on the selected option.
+     */
     @Override
     public void show() {
         System.out.println("--- My Profile ---");
@@ -22,6 +33,9 @@ public class MyProfileView implements IMenuView {
 
         userInput = scanner.nextInt();
 
+        /**
+         * @param userInput userInput is the user's input for selecting an option from the profile menu.
+         */
         switch (userInput){
             case 1:
                 Session.getSession().setCurrentView(new ChangePasswordForm());

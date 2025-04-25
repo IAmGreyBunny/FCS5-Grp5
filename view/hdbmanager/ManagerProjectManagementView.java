@@ -4,6 +4,7 @@ import project.Project;
 import project.ProjectController;
 import project.ProjectRepository;
 import session.Session;
+import view.HomeViewFactory;
 import view.IMenuView;
 import view.form.CreateProjectListingForm;
 import view.form.EditListingForm;
@@ -55,7 +56,10 @@ public class ManagerProjectManagementView implements IMenuView {
                 case 3 -> deleteListing();
                 case 4 -> toggleVisibility();
                 case 5 -> viewListings();
-                case 6 -> Session.getSession().setCurrentView(new HDBManagerHomeView());
+                case 6 -> {
+                    // Returns Home
+                    Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
+                }
                 default -> System.out.println("Invalid Input");
             }
 

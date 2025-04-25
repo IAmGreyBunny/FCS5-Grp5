@@ -1,6 +1,7 @@
 package view.hdbmanager.applications;
 
 import session.Session;
+import view.HomeViewFactory;
 import view.hdbmanager.HDBManagerHomeView;
 import view.hdbmanager.*;
 
@@ -29,7 +30,8 @@ public class ManageOfficerApplicationView extends ManageApplicationView {
                     // code to print officers (approved and pending)
                     break;
                 case 3:
-                    Session.getSession().setCurrentView(new HDBManagerHomeView());
+                    // Returns Home
+                    Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
                     break;
                 default: System.out.println("Invalid Input");
             }

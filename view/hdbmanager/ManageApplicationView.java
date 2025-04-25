@@ -1,6 +1,7 @@
 package view.hdbmanager;
 
 import session.Session;
+import view.HomeViewFactory;
 import view.hdbmanager.applications.*;
 import view.IMenuView;
 
@@ -29,7 +30,8 @@ public class ManageApplicationView implements IMenuView {
                     Session.getSession().setCurrentView(new ManageOfficerApplicationView());
                     break;
                 case 3:
-                    Session.getSession().setCurrentView(new HDBManagerHomeView());
+                    // Returns Home
+                    Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
                     break;
                 default: System.out.println("Invalid Input");
             }

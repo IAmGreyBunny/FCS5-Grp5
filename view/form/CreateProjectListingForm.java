@@ -91,11 +91,11 @@ public class CreateProjectListingForm extends FormView {
 
     @Override
     public HashMap<String,Object> getUserInput() {
-        return null;
+        return userInput;
     }
 
     @Override
     public void show() {
-
+        prompt();
     }
 }

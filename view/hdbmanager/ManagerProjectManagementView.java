@@ -5,6 +5,8 @@ import project.ProjectController;
 import project.ProjectRepository;
 import session.Session;
 import view.MenuView;
+import view.form.CreateProjectListingForm;
+import view.form.EditListingForm;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -28,8 +30,8 @@ public class ManagerProjectManagementView extends MenuView {
             userInput = Integer.parseInt(scanner.nextLine());
 
             switch (userInput) {
-                case 1 -> createListing();
-                case 2 -> editListing();
+                case 1 -> Session.getSession().setCurrentView(new CreateProjectListingForm());
+                case 2 -> Session.getSession().setCurrentView(new EditListingForm());
                 case 3 -> deleteListing();
                 case 4 -> toggleVisibility();
                 case 5 -> viewListings();
@@ -40,8 +42,6 @@ public class ManagerProjectManagementView extends MenuView {
         } catch (NumberFormatException e) {
             System.out.println("Invalid Input");
         }
-
-        Session.getSession().setCurrentView(new ManagerProjectManagementView());
     }
 
     private void createListing() {

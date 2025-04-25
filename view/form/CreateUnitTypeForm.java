@@ -4,6 +4,7 @@ import project.ProjectController;
 import session.Session;
 import view.FormView;
 import validator.InputValidator;
+import view.hdbmanager.ManagerProjectManagementView;
 //import view.hdbmanager.ManagerProjectManagementView;
 
 import java.util.HashMap;
@@ -96,16 +97,16 @@ public class CreateUnitTypeForm extends FormView {
 
         } while(newUnit);
 
-        //Session.getSession().setCurrentView(new ManagerProjectManagementView());
+        Session.getSession().setCurrentView(new ManagerProjectManagementView());
     }
 
     @Override
     public HashMap<String,Object> getUserInput() {
-        return null;
+        return userInput;
     }
 
     @Override
     public void show() {
-
+        prompt();
     }
 }

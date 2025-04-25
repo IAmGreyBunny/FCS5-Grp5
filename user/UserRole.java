@@ -1,5 +1,13 @@
 package user;
 
+/**
+ * Enum representing different user roles in the system.
+ * Each role corresponds to a specific user type with a unique integer value.
+ * The roles available are:
+ * - Applicant: Represents the applicant
+ * - HBDOfficer: Represents the HDB officer
+ * - HDBManager: Represents the HDB manager
+ */
 public enum UserRole {
     APPLICANT(2),
     HDBOFFICER(1),

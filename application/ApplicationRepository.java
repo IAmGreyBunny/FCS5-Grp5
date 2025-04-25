@@ -15,6 +15,31 @@ import java.util.List;
 
 public class ApplicationRepository {
 
+    public static int findMaxApplicationID() {
+        int maxId = 0;
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("Applications")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if (row != null) {
+                    String appIdStr = row.getCell(0).getStringCellValue();
+                    int appId = Integer.parseInt(appIdStr);
+                    if (appId > maxId) {
+                        maxId = appId;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+        return maxId;
+    }
+
     public static void createApplication(Application app) {
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("Applications")));

@@ -1,5 +1,6 @@
 package view.form;
 
+import project.Project;
 import project.ProjectController;
 import project.ProjectRepository;
 import session.Session;
@@ -83,12 +84,9 @@ public class CreateProjectListingForm extends FormView {
         userInput.put("closingDate", closingDate);
         userInput.put("officerSlots", officerSlots);
 
-        ProjectController.createListingWithUserInput(this.getUserInput());
+        Project project = ProjectController.createListingWithUserInput(this.getUserInput());
 
-        // to get the new project's id to create the units -- this is current the only way I can think of to get the id :(
-        int projectId = ProjectRepository.findMaxProjectId();
-
-        Session.getSession().setCurrentView(new CreateUnitTypeForm(projectId));
+        Session.getSession().setCurrentView(new CreateUnitTypeForm(project.getProjectId()));
     }
 
     @Override

@@ -2,28 +2,45 @@ package application;
 
 import project.UnitType;
 import user.User;
+import user.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class BTOApplicationController extends ApplicationController {
 
-    public boolean createBTOApplication(String applicationID, User applicant, String projectId, UnitType unitType) {
-        if (applicant != null && projectId != null && unitType != null) {
-            BTOApplication app = new BTOApplication(
-                    applicationID,
-                    LocalDate.now(),
-                    applicant,
-                    projectId,
-                    String.valueOf(applicant.getUid()),
-                    unitType
-            );
+    public boolean applyToBTO(String applicantId, String projectId, UnitType unitType) {
+        //find applicant
+        User applicant = UserRepository.findUserById(Integer.parseInt(applicantId));
+        if (applicant == null) return false;
 
-            ApplicationRepository.createApplication(app);
-            applications.add(app);
-            return true;
+        //to check if applicant has already applied to project
+        for (Application app : applications) {
+            if (app instanceof BTOApplication) {
+                BTOApplication existingApplication = (BTOApplication) app;
+                if (existingApplication.getApplicantId().equals(applicantId) && existingApplication.getProjectId().equals(projectId)) {
+                    System.out.println("You have already applied for this project");
+                    return false;
+                }
+            }
         }
-        return false;
+
+        //to generate new application id
+        String applicationID = String.valueOf(ApplicationRepository.findMaxApplicationID() + 1);  // Generate new ID
+
+        BTOApplication application = new BTOApplication(
+                applicationID,
+                LocalDate.now(),
+                applicant,
+                projectId,
+                applicantId,
+                unitType
+        );
+
+        // update to repo
+        ApplicationRepository.createApplication(application);
+        applications.add(application);
+        return true;
     }
 
     public List<BTOApplication> getBTOApplications() {

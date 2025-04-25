@@ -119,4 +119,24 @@ public class EnquiryController {
             current = current.next;
         }
     }
+
+    public boolean deleteEnquiry(int enquiryID) {
+        Enquiry enquiry = findEnquiryByID(enquiryID);
+        if (enquiry != null) {
+            if (enquiry.prev != null) {
+                enquiry.prev.next = enquiry.next;
+            }
+            if (enquiry.next != null) {
+                enquiry.next.prev = enquiry.prev;
+            }
+            if (enquiry == head) {
+                head = enquiry.next;
+            }
+            if (enquiry == tail) {
+                tail = enquiry.prev;
+            }
+            return true;
+        }
+        return false;
+    }
 }

@@ -2,6 +2,8 @@ package view.hdbofficer;
 
 import session.Session;
 import view.IMenuView;
+import view.general.BTOApplicationView;
+import view.general.MyApplicationView;
 import view.general.MyProfileView;
 import view.general.ProjectListingView;
 import view.hdbmanager.EnquiriesView;
@@ -36,6 +38,7 @@ public class HDBOfficerHomeView implements IMenuView {
                     Session.getSession().setCurrentView(new MyProfileView());
                 case 2:
                     // BTOApplicationView
+                    Session.getSession().setCurrentView(new BTOApplicationView());
                     break;
                 case 3:
                     // ProjectListingView
@@ -43,6 +46,7 @@ public class HDBOfficerHomeView implements IMenuView {
                     break;
                 case 4:
                     // MyApplicationView
+                    Session.getSession().setCurrentView(new MyApplicationView());
                     break;
                 case 5:
                     // BookFlatView

@@ -124,4 +124,12 @@ public class BTOApplicationController extends ApplicationController {
         }
         return result;
     }
+
+    /**
+     * Updates the status of a given BTO application.
+     * @param application The BTO application to update.
+     */
+    public void updateApplicationStatus(BTOApplication application) {
+        ApplicationRepository.updateApplication(application);
+    }
 }

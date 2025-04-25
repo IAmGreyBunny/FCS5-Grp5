@@ -1,7 +1,9 @@
 package view.general;
 
+import application.BTOApplicationController;
 import project.Project;
 import project.ProjectController;
+import project.UnitType;
 import session.Session;
 import view.IMenuView;
 
@@ -40,6 +42,29 @@ public class BTOApplicationView implements IMenuView {
          */
         System.out.print("Enter Id to apply:");
         userInput = scanner.nextInt();
-        //Controller to apply
+
+        ArrayList<UnitType> applicableUnitTypes = ProjectController.getApplicableUnitTypes(userInput);
+        System.out.println("--- Applicable Unit Types ---");
+        for (UnitType unitType : applicableUnitTypes) {
+            System.out.println(unitType.getUnitTypeId() + " | " + unitType.getName() + " | Available: " + unitType.getAvailable() + " | Price per unit: " + unitType.getPricePerUnit());
+        }
+        System.out.print("Enter Unit Type Id to apply:");
+        int unitTypeId = scanner.nextInt();
+        UnitType target = null;
+        for (UnitType unitType : applicableUnitTypes) {
+            if (unitType.getUnitTypeId() == unitTypeId) {
+                target = unitType;
+            }
+        }
+
+        BTOApplicationController controller = new BTOApplicationController();
+        boolean success = controller.applyToBTO(String.valueOf(Session.getSession().getCurrentUser().getUid()), String.valueOf(userInput), target);
+
+
+        if (success) {
+            System.out.println("Application submitted successfully.");
+        } else {
+            System.out.println("Failed to submit application.");
+        }
     }
 }

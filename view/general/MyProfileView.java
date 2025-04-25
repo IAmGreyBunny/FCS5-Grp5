@@ -44,6 +44,7 @@ public class MyProfileView implements IMenuView {
                 UserController.logoutCurrentUser();
                 break;
             case 3:
+                // Returns Home
                 Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
                 break;
             default:

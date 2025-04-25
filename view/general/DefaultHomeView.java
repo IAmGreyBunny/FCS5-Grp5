@@ -54,6 +54,7 @@ public class DefaultHomeView implements IMenuView {
                     Session.getSession().setCurrentView(new MyProfileView());
                 case 2:
                     // BTOApplicationView
+                    Session.getSession().setCurrentView(new BTOApplicationView());
                     break;
                 case 3:
                     // ProjectListingView
@@ -61,15 +62,19 @@ public class DefaultHomeView implements IMenuView {
                     break;
                 case 4:
                     // MyApplicationView
+                    Session.getSession().setCurrentView(new MyApplicationView());
                     break;
                 case 5:
                     // BookFlatView
+                    Session.getSession().setCurrentView(new BookFlatView());
                     break;
                 case 6:
-                    // WithdrawalView
+                    // WithdrawalView TODO not sure how the withdrawal works
+                    //Session.getSession().setCurrentView(new WithdrawalView());
                     break;
                 case 7:
-                    // EnquiriesView
+                    // ApplicationEnquiryView
+                    Session.getSession().setCurrentView(new ApplicantEnquiryView());
                     break;
                 
                 default: System.out.println("Invalid Input");

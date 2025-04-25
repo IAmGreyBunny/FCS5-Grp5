@@ -19,14 +19,15 @@ public class ProjectRepository {
 
     public static void createProject(Project project) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         try (
                 FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
                 Workbook workbook = WorkbookFactory.create(file)
         ) {
 
             Sheet sheet = workbook.getSheetAt(0);
+            CreationHelper createHelper = workbook.getCreationHelper();
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy"));
 
             int projectId = project.getProjectId();
             String name = project.getProjectName();
@@ -37,11 +38,16 @@ public class ProjectRepository {
             boolean visibility = project.getVisibility();
 
             Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
+
             newRow.createCell(0).setCellValue(projectId);
             newRow.createCell(1).setCellValue(name);
             newRow.createCell(2).setCellValue(neighbourhood);
-            newRow.createCell(3).setCellValue(openingDate);
-            newRow.createCell(4).setCellValue(closingDate);
+            Cell openingDateCell = newRow.createCell(3);
+            openingDateCell.setCellStyle(dateCellStyle);
+            openingDateCell.setCellValue(openingDate);
+            Cell closingDateCell = newRow.createCell(4);
+            closingDateCell.setCellStyle(dateCellStyle);
+            closingDateCell.setCellValue(closingDate);
             newRow.createCell(5).setCellValue(officerSlots);
             newRow.createCell(6).setCellValue(visibility);
 
@@ -448,9 +454,14 @@ public class ProjectRepository {
 
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
-                if ((int) row.getCell(0).getNumericCellValue() > maxId) {
-                    maxId = (int) row.getCell(0).getNumericCellValue();
+                Cell cell = row.getCell(0);
+                if(cell != null)
+                {
+                    if ((int) cell.getNumericCellValue() > maxId) {
+                        maxId = (int) row.getCell(0).getNumericCellValue();
+                    }
                 }
+
             }
         } catch (Exception e) {
             System.out.println("Error");

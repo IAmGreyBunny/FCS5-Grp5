@@ -236,8 +236,26 @@ public class ProjectRepository {
         }
     }
 
-    public static void assignProjectOfficer(int userId, int projectId){
+    public static void assignManager(int projectId, int uid)
+    {
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectManager")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
 
+            Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
+            newRow.createCell(0).setCellValue(projectId);
+            newRow.createCell(1).setCellValue(uid);
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("ProjectManager"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error while assigning project manager: ");
+            e.printStackTrace();
+        }
     }
 
     public static ArrayList<Project> getAllProjects() {

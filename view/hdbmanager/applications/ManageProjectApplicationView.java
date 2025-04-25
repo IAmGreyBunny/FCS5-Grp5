@@ -5,6 +5,7 @@ import application.BTOApplication;
 import application.BTOApplicationController;
 import session.Session;
 import user.User;
+import view.HomeViewFactory;
 import view.hdbmanager.HDBManagerHomeView;
 import view.hdbmanager.ManageApplicationView;
 
@@ -31,7 +32,10 @@ public class ManageProjectApplicationView extends ManageApplicationView {
                 case 1 -> managePendingApplications();
                 case 2 -> manageWithdrawals();
                 case 3 -> generateReport();
-                case 4 -> Session.getSession().setCurrentView(new HDBManagerHomeView());
+                case 4 -> {
+                    // Returns Home
+                    Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
+                }
                 default -> System.out.println("Invalid Input");
             }
         } catch (NumberFormatException e) {

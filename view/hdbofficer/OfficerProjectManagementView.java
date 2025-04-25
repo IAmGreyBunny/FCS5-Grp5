@@ -1,6 +1,7 @@
 package view.hdbofficer;
 
 import session.Session;
+import view.HomeViewFactory;
 import view.IMenuView;
 
 import java.util.InputMismatchException;
@@ -36,7 +37,8 @@ public class OfficerProjectManagementView implements IMenuView {
                     // code to generate receipt
                     break;
                 case 5:
-                    Session.getSession().setCurrentView(new HDBOfficerHomeView());
+                    // Returns Home
+                    Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
                     break;
                 default: System.out.println("Invalid Input");
             }

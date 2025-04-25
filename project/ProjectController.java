@@ -36,6 +36,8 @@ public class ProjectController {
         Project project = new Project(projectId, name, neighbourhood, openingDate, closingDate, officerSlots, visibility);
         ProjectRepository.createProject(project);
 
+        ProjectRepository.assignManager(projectId,Session.getSession().getCurrentUser().getUid());
+
         return ProjectRepository.getProjectById(projectId);
     }
 
@@ -119,6 +121,10 @@ public class ProjectController {
 
     public static void deleteUnitType(int unitTypeId){
         ProjectRepository.deleteUnitType(unitTypeId);
+    }
+
+    public static void assignManager(int uid,int projectId){
+
     }
 
     public static ArrayList<Project> getApplicableProject(User user) {

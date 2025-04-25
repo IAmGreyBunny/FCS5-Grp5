@@ -1,6 +1,7 @@
 package view.hdbmanager;
 
 import session.Session;
+import view.HomeViewFactory;
 import view.IMenuView;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -37,8 +38,8 @@ public class EnquiriesView implements IMenuView {
                     replyToEnquiry();
                     break;
                 case 3:
-                    // return to HDBManagerHomeView
-                    Session.getSession().setCurrentView(new HDBManagerHomeView());
+                    // Returns Home
+                    Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
                     break;
                 default:
                     System.out.println("Invalid Input. Please try again.");

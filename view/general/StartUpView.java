@@ -8,10 +8,21 @@ import view.form.RegistrationForm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * A menu view that displays the startup options for the user.
+ * This class implements IMenuView and provides options for the user to login or register.
+ */
 public class StartUpView implements IMenuView {
 
+    /**
+     * @param userInput userInput is the user's input for selecting an option from the startup menu.
+     */
     private int userInput;
 
+    /**
+     * This method displays the startup menu and prompts the user to select an option.
+     * It handles the user's input and navigates to the corresponding view based on the selected option.
+     */
     @Override
     public void show() {
         System.out.println("Welcome to BTO Management System");
@@ -22,7 +33,10 @@ public class StartUpView implements IMenuView {
         try {
             userInput = scanner.nextInt();
 
-            switch(userInput){
+            /**
+             * @param userInput userInput is the user's input for selecting an option from the startup menu.
+             */
+            switch(userInput) {
                 case 1:
                     Session.getSession().setCurrentView(new LoginForm());
                     break;
@@ -31,7 +45,6 @@ public class StartUpView implements IMenuView {
                     break;
                 default:
                     System.out.println("Invalid Input");
-
             }
 
         } catch (InputMismatchException e) {
@@ -39,3 +52,5 @@ public class StartUpView implements IMenuView {
         }
     }
 }
+
+

@@ -11,17 +11,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * A form view that handles the process of creating a new project listing.
+ * This class implements IFormView and interacts with ProjectController to validate and create the project listing.
+ */
+
 public class CreateProjectListingForm implements IFormView {
 
+    /**
+     * @param userInput userInput is a HashMap that contains user inputs for creating a new project listing.
+     */
     HashMap<String, Object> userInput = new HashMap<>();
 
+    /**
+     * This method prompts the user to input details for the new project listing.
+     * It validates the inputs using InputValidator functions and updates the current view with CreateUnitTypeForm.
+     */
     @Override
     public void prompt() {
-        // get all the user input into variables(use the InputValidator functions to validate)
-        // except projectId, ProjectRepo.findMax
-        // put all the user inputs into userInput based on the keys found in controller(exact string match)
-        // createListingWithUserInput(HashMap<String, Object> userInput)
-        // update currentView with new CreateUnitTypeForm()
 
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -34,12 +41,23 @@ public class CreateProjectListingForm implements IFormView {
 
         System.out.println("--- Create BTO Project ---");
 
+        /**
+         * @param name name is the name of the new project
+         */
         System.out.println("Enter name of new project: ");
         name = scanner.next();
 
+        /**
+         * @param neighbourhood neighbourhood is the neighbourhood of the new project
+         */
         System.out.println("Enter neighbourhood of this project: ");
         neighbourhood = scanner.next();
 
+        /**
+         * @param openingDate openingDate is the application opening date of the new project
+         * @param sOpeningDate sOpeningDate gets the user's opening date input in String  to check its validity before converting to LocalDate format
+         * @param validOpening validOpening checks if the format of date input is correct.
+         */
         System.out.println("Enter application opening date: ");
         boolean validOpening;
         String sOpeningDate;
@@ -52,6 +70,11 @@ public class CreateProjectListingForm implements IFormView {
         } while (!validOpening);
         openingDate = LocalDate.parse(sOpeningDate, formatter);
 
+        /**
+         * @param closingDate closingDate is the application closing date of the new project
+         * @param sClosingDate sClosingDate gets the user's closing date input in String  to check its validity before converting to LocalDate format
+         * @param validClosing validOpening checks if the format of date input is correct.
+         */
         System.out.println("Enter application closing date: ");
         boolean validClosing;
         String sClosingDate;
@@ -64,6 +87,11 @@ public class CreateProjectListingForm implements IFormView {
         } while (!validClosing);
         closingDate = LocalDate.parse(sClosingDate, formatter);
 
+        /**
+         * @param officerSlots officerSlots is the number of officer slots for the new project
+         * @param sSlots sSlots gets the user's integer input in String  to check its validity before converting to Integer format
+         * @param validSlots validSlots checks if the format of integer input is correct.
+         */
         System.out.println("Enter number of officer slots: ");
         boolean validSlots;
         String sSlots;
@@ -77,6 +105,10 @@ public class CreateProjectListingForm implements IFormView {
         officerSlots = Integer.parseInt(sSlots);
 
 
+        /**
+         * puts the respective value and key of the user's inputs into the UserInput
+         * creates the new listing and add it to the database
+         */
         userInput.put("name", name);
         userInput.put("neighbourhood", neighbourhood);
         userInput.put("openingDate", openingDate);
@@ -88,6 +120,10 @@ public class CreateProjectListingForm implements IFormView {
         Session.getSession().setCurrentView(new CreateUnitTypeForm(project.getProjectId()));
     }
 
+    /**
+     * Retrieves the user input map containing details for the new project listing.
+     * @return userInput which is a HashMap with keys "name", "neighbourhood", "openingDate", "closingDate", and "officerSlots" representing the user's inputs.
+     */
     @Override
     public HashMap<String,Object> getUserInput() {
         return userInput;

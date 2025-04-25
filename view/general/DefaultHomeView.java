@@ -11,11 +11,23 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * A menu view that displays the default home view for the user.
+ * This class implements IMenuView and provides options for the user to navigate to different views.
+ */
 
 public class DefaultHomeView implements IMenuView {
+    /**
+     * @param userInput userInput is the user's input for selecting an option from the menu.
+     * @param btoProject btoProject creates a new list containing the projects:Project
+     */
     private int userInput;
     private List<Project> btoProject = new ArrayList<>();
 
+    /**
+     * This method displays the default home view menu and prompts the user to select an option.
+     * It handles the user's input and navigates to the corresponding view based on the selected option.
+     */
     @Override
     public void show() {
         System.out.println("Welcome!");
@@ -30,6 +42,10 @@ public class DefaultHomeView implements IMenuView {
 
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         try {
+            /**
+             * @param userInput userInput is the user's input for selecting an option from the menu.
+             */
+
             userInput = scanner.nextInt();
 
             switch (userInput) {

@@ -31,7 +31,28 @@ public class ManagerProjectManagementView extends MenuView {
 
             switch (userInput) {
                 case 1 -> Session.getSession().setCurrentView(new CreateProjectListingForm());
-                case 2 -> Session.getSession().setCurrentView(new EditListingForm());
+
+                case 2 -> {
+                    List<Project> allProjects = ProjectRepository.getAllProjects();
+
+                    if (allProjects.isEmpty()) {
+                        System.out.println("No projects created.");
+                        break;
+                    }
+
+                    allProjects.forEach(p -> System.out.println("ID: " + p.getProjectId() + "   Name: " + p.getProjectName()));
+                    System.out.print("Enter project ID to edit: ");
+                    int id = Integer.parseInt(scanner.nextLine());
+
+                    Project oldProject = ProjectRepository.getProjectById(id);
+                    if (oldProject == null) {
+                        System.out.println("Invalid project ID.");
+                        break;
+                    }
+
+                    Session.getSession().setCurrentView(new EditListingForm(oldProject));
+                }
+
                 case 3 -> deleteListing();
                 case 4 -> toggleVisibility();
                 case 5 -> viewListings();
@@ -42,75 +63,6 @@ public class ManagerProjectManagementView extends MenuView {
         } catch (NumberFormatException e) {
             System.out.println("Invalid Input");
         }
-    }
-
-    private void createListing() {
-        System.out.println("=== Create Listing ===");
-        System.out.print("Enter project name: ");
-        input.put("name", scanner.nextLine());
-
-        System.out.print("Enter neighbourhood: ");
-        input.put("neighbourhood", scanner.nextLine());
-
-        System.out.print("Enter opening date (yyyy-MM-dd): ");
-        input.put("openingDate", LocalDate.parse(scanner.nextLine()));
-
-        System.out.print("Enter closing date (yyyy-MM-dd): ");
-        input.put("closingDate", LocalDate.parse(scanner.nextLine()));
-
-        System.out.print("Enter officer slots: ");
-        input.put("officerSlots", Integer.parseInt(scanner.nextLine()));
-
-        input.put("visibility", true); // default to visible
-
-        ProjectController.createListingWithUserInput(input);
-        System.out.println("Project created successfully!");
-    }
-
-    private void editListing() {
-        System.out.println("=== Edit Listing ===");
-        List<Project> allProjects = ProjectRepository.getAllProjects();
-
-        if (allProjects.isEmpty()) {
-            System.out.println("No projects created.");
-            return;
-        }
-
-        allProjects.forEach(p -> System.out.println("ID: " + p.getProjectId() + "   Name: " + p.getProjectName()));
-        System.out.print("Enter project ID to edit: ");
-        int id = Integer.parseInt(scanner.nextLine());
-
-        Project oldProject = ProjectRepository.getProjectById(id);
-        if (oldProject == null) {
-            System.out.println("Invalid project ID.");
-            return;
-        }
-
-        System.out.print("Enter new name (leave blank to skip): ");
-        String name = scanner.nextLine();
-        input.put("name", name);
-
-        System.out.print("Enter new neighbourhood (leave blank to skip): ");
-        String neighbourhood = scanner.nextLine();
-        input.put("neighbourhood", neighbourhood);
-
-        System.out.print("Enter new opening date (yyyy-MM-dd, leave blank to skip): ");
-        String openStr = scanner.nextLine();
-        input.put("openingDate", openStr.isEmpty() ? null : LocalDate.parse(openStr));
-
-        System.out.print("Enter new closing date (yyyy-MM-dd, leave blank to skip): ");
-        String closeStr = scanner.nextLine();
-        input.put("closingDate", closeStr.isEmpty() ? null : LocalDate.parse(closeStr));
-
-        System.out.print("Enter officer slots (-1 to keep current): ");
-        int slots = Integer.parseInt(scanner.nextLine());
-        input.put("officerSlots", slots);
-
-        System.out.print("Visibility (true/false): ");
-        input.put("visibility", Boolean.parseBoolean(scanner.nextLine()));
-
-        ProjectController.editListingWithUserInput(oldProject, input);
-        System.out.println("Project updated.");
     }
 
     private void deleteListing() {

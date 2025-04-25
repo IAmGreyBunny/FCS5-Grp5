@@ -168,6 +168,68 @@ public class ProjectRepository {
         }
     }
 
+    public static void deleteProject(int projectId){
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("ProjectDetails")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if (row != null && (int) row.getCell(0).getNumericCellValue() == projectId) {
+                    int lastRow = sheet.getLastRowNum();
+                    if (i >= 0 && i < lastRow) {
+                        sheet.shiftRows(i + 1, lastRow, -1); // Shift rows up
+                    } else if (i == lastRow) {
+                        Row removingRow = sheet.getRow(i);
+                        if (removingRow != null) {
+                            sheet.removeRow(removingRow); // Just remove last row
+                        }
+                    }
+                    break;
+                }
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("ProjectDetails"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error while deleting project:");
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteUnitType(int unitTypeId) {
+        try (
+                FileInputStream file = new FileInputStream(new File(Config.filepath.get("UnitType")));
+                Workbook workbook = WorkbookFactory.create(file)
+        ) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if (row != null && (int) row.getCell(0).getNumericCellValue() == unitTypeId) {
+                    sheet.removeRow(row);
+                    // Shift rows up after deletion
+                    if (i < sheet.getLastRowNum()) {
+                        sheet.shiftRows(i + 1, sheet.getLastRowNum(), -1);
+                    }
+                    break;
+                }
+            }
+
+            try (FileOutputStream outFile = new FileOutputStream(Config.filepath.get("UnitType"))) {
+                workbook.write(outFile);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error while deleting unit type:");
+            e.printStackTrace();
+        }
+    }
+
     public static ArrayList<Project> getAllProjects() {
         ArrayList<Project> listOfProjects = new ArrayList<>();
 

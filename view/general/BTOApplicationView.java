@@ -2,14 +2,13 @@ package view.general;
 
 import project.Project;
 import project.ProjectController;
-import project.ProjectRepository;
 import session.Session;
-import view.MenuView;
+import view.IMenuView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BTOApplicationView extends MenuView {
+public class BTOApplicationView implements IMenuView {
 
     int userInput;
 

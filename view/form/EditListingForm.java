@@ -2,16 +2,15 @@ package view.form;
 
 import project.Project;
 import project.ProjectController;
-import session.Session;
 import validator.InputValidator;
-import view.FormView;
+import view.IFormView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class EditListingForm extends FormView {
+public class EditListingForm implements IFormView {
     HashMap<String, Object> userInput = new HashMap<>();
     private Project oldProject;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

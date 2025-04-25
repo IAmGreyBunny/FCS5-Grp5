@@ -1,14 +1,14 @@
 package view.general;
 
 import session.Session;
-import view.MenuView;
+import view.IMenuView;
 import view.form.LoginForm;
 import view.form.RegistrationForm;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class StartUpView extends MenuView {
+public class StartUpView implements IMenuView {
 
     private int userInput;
 

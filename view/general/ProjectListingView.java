@@ -4,14 +4,12 @@ import project.Project;
 import project.ProjectController;
 import session.Session;
 import view.HomeViewFactory;
-import view.MenuView;
+import view.IMenuView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ProjectListingView extends MenuView {
+public class ProjectListingView implements IMenuView {
 
     String userInput;
 

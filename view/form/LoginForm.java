@@ -3,14 +3,14 @@ package view.form;
 import login.AuthController;
 import session.Session;
 import user.User;
-import view.FormView;
+import view.IFormView;
 import view.HomeViewFactory;
 import view.IView;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class LoginForm extends FormView {
+public class LoginForm implements IFormView {
 
     HashMap<String,String> userInput = new HashMap<>();
 

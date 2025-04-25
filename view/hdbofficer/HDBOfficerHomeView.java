@@ -1,18 +1,15 @@
 package view.hdbofficer;
 
-import project.Project;
 import session.Session;
-import view.MenuView;
-import view.general.DefaultHomeView;
+import view.IMenuView;
 import view.general.MyProfileView;
 import view.general.ProjectListingView;
 import view.hdbmanager.EnquiriesView;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-public class HDBOfficerHomeView extends MenuView {
+public class HDBOfficerHomeView implements IMenuView {
     private int userInput;
 
 

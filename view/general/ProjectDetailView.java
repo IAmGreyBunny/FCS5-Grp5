@@ -4,13 +4,13 @@ import project.Project;
 import project.ProjectController;
 import project.UnitType;
 import session.Session;
-import view.MenuView;
+import view.IMenuView;
 import view.IView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProjectDetailView extends MenuView {
+public class ProjectDetailView implements IMenuView {
 
     IView prevView;
     Project project;

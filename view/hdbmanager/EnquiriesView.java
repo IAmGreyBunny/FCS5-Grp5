@@ -1,14 +1,14 @@
 package view.hdbmanager;
 
 import session.Session;
-import view.MenuView;
+import view.IMenuView;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import enquiries.Enquiry;
 import enquiries.EnquiryController;
 
 
-public class EnquiriesView extends MenuView {
+public class EnquiriesView implements IMenuView {
     private final Scanner scanner;
     private final EnquiryController enquiryController;
 

@@ -1,3 +1,5 @@
+package view.hdbmanager.applications;
+
 import application.ApplicationStatus;
 import application.BTOApplication;
 import application.BTOApplicationController;

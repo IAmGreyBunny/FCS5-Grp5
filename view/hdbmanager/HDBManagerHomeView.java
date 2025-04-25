@@ -2,6 +2,7 @@ package view.hdbmanager;
 
 import session.Session;
 import view.MenuView;
+import view.hdbmanager.applications.ManageProjectApplicationView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class HDBManagerHomeView extends MenuView {
 
             switch (userInput) {
                 case 1:
-                    //Session.getSession().setCurrentView(new ManagerProjectManagementView());
+                    Session.getSession().setCurrentView(new ManagerProjectManagementView());
                     break;
                 case 2:
                     Session.getSession().setCurrentView(new ManageApplicationView());

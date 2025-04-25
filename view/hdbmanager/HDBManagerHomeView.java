@@ -7,10 +7,22 @@ import view.general.MyProfileView;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class represents the home view for HDB Manager.
+ * It provides a menu with options for the manager to navigate to different functionalities such as:
+ * - Viewing their profile
+ * - Managing projects
+ * - Managing applications
+ * - Managing enquiries
+ * The user interacts with the menu through input selection and based on the user's choice, the corresponding view is set.
+ */
 public class HDBManagerHomeView implements IMenuView {
     private int userInput;
 
-
+    /**
+     * Displays the main menu for the HDB Manager, offering options to view profile, manage projects, manage applications
+     * or manage enquiries. Based on the user input the respective view is displayed.
+     */
     @Override
     public void show() {
         System.out.println("Welcome!");

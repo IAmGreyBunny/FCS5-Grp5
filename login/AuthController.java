@@ -9,7 +9,17 @@ import validator.InputValidator;
 
 import java.util.HashMap;
 
+/**
+ * Handles the authentication process during login.
+ * Validates user credentials and manages session setup after successful authentication.
+ */
 public class AuthController {
+
+    /**
+     * Authenticates the user using the provided login credentials.
+     * @param userInput A HashMap containing the login credentials
+     * @return true if authentication is successful and the user session is established, false otherwise.
+     */
     public static boolean authenticate(HashMap<String,String> userInput){
         //Checks userInput
         if(!InputValidator.validateNric(userInput.get("username")))

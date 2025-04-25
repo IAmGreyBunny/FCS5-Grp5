@@ -16,13 +16,27 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Handles operations related to BTO project and managaing units like creating,
+ * editing, deleting projects and unit types, and filtering based on eligibility.
+ */
 public class ProjectController {
     HashMap<String, Object> userInput;
 
+    /**
+     * Constructs a ProjectController using user input.
+     * @param userInput A map of user provided values used for project operations.
+     */
     public ProjectController(HashMap<String, Object> userInput) {
         this.userInput = userInput;
     }
 
+    /**
+     * Creates a new BTO project using the given user input.
+     * Automatically assigns the current logged in manager to the project.
+     * @param userInput A map of project attributes entered by the user.
+     * @return The created Project object.
+     */
     public static Project createListingWithUserInput(HashMap<String, Object> userInput) {
 
         int projectId = ProjectRepository.findMaxProjectId() + 1;
@@ -41,6 +55,11 @@ public class ProjectController {
         return ProjectRepository.getProjectById(projectId);
     }
 
+    /**
+     * Updates an existing project with the values provided.
+     * @param oldProject The original project to be edited.
+     * @param userInput  A map of updated values for the project.
+     */
     public static void editListingWithUserInput(Project oldProject, HashMap<String, Object> userInput) {
 
         int projectId = oldProject.getProjectId();
@@ -74,11 +93,20 @@ public class ProjectController {
 
     }
 
+    /**
+     * Deletes a project from the system.
+     * @param projectId The ID of the project to delete.
+     */
     public static void deleteListing(int projectId)
     {
         ProjectRepository.deleteProject(projectId);
     }
 
+    /**
+     * Creates a new unit type under the given project.
+     * @param projectId  ID of the project the unit belongs to.
+     * @param userInput  A map of unit attributes entered by the user.
+     */
     public static void createUnitTypeWithUserInput(int projectId, HashMap<String, Object> userInput){
         int unitTypeId = ProjectRepository.findMaxUnitTypeId() + 1;
         String name = (String) userInput.get("name");
@@ -91,6 +119,11 @@ public class ProjectController {
 
     }
 
+    /**
+     * Updates an existing unit type.
+     * @param oldUnitType The original unit type to be edited.
+     * @param userInput   A map of updated values for the unit.
+     */
     public static void editUnitTypeWithUserInput(UnitType oldUnitType, HashMap<String, Object> userInput) {
 
         int unitTypeId = ProjectRepository.findMaxUnitTypeId() + 1;
@@ -119,6 +152,10 @@ public class ProjectController {
 
     }
 
+    /**
+     * Deletes a unit type from a project.
+     * @param unitTypeId ID of the unit type to delete.
+     */
     public static void deleteUnitType(int unitTypeId){
         ProjectRepository.deleteUnitType(unitTypeId);
     }
@@ -127,6 +164,11 @@ public class ProjectController {
 
     }
 
+    /**
+     * Returns a list of projects that are applicable for a given user based on their role and status.
+     * @param user The user to evaluate eligibility for.
+     * @return A list of applicable Project objects.
+     */
     public static ArrayList<Project> getApplicableProject(User user) {
         ArrayList<Project> listOfApplicableProjects = new ArrayList<>();
 
@@ -149,6 +191,11 @@ public class ProjectController {
         return listOfApplicableProjects;
     }
 
+    /**
+     * Returns a list of unit types the given user is eligible to apply for.
+     * @param user The user to check eligibility against.
+     * @return A list of applicable unit types.
+     */
     public static ArrayList<UnitType> getApplicableUnitTypes(User user) {
         ArrayList<UnitType> listOfApplicableUnits = ProjectRepository.getAllUnitsType();
 
@@ -166,6 +213,11 @@ public class ProjectController {
 
     }
 
+    /**
+     * Filters unit types for a specific project that are also applicable to the current user.
+     * @param projectId The project to filter unit types for.
+     * @return A list of applicable unit types for that project.
+     */
     public static ArrayList<UnitType> getApplicableUnitTypes(int projectId) {
         ArrayList<UnitType> listOfApplicableUnits = getApplicableUnitTypes(Session.getSession().getCurrentUser());
         listOfApplicableUnits = listOfApplicableUnits.stream()
@@ -175,10 +227,20 @@ public class ProjectController {
         return listOfApplicableUnits;
     }
 
+    /**
+     * Returns all unit types associated with a specific project.
+     * @param projectId The ID of the project.
+     * @return A list of unit types in the project.
+     */
     public static ArrayList<UnitType> getUnitTypesByProject(int projectId) {
         return ProjectRepository.getUnitTypesByProjectId(projectId);
     }
 
+    /**
+     * Retrieves a project by its ID.
+     * @param projectId The ID of the project to retrieve.
+     * @return The corresponding Project object.
+     */
     public static Project getProjectById(int projectId) {
         return ProjectRepository.getProjectById(projectId);
     }

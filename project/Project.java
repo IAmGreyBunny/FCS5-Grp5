@@ -6,6 +6,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Represents the Build To Order housing project.
+ * Contains key attributes including project details, unit types, application dates,
+ * number of officer slots, and visibility status.
+ */
 public class Project {
     private int projectId;
     private String projectName;
@@ -18,6 +23,16 @@ public class Project {
 
     private HDBManager manager;
 
+    /**
+     * Constructs a new Project with the specified attributes.
+     * @param projectId              Unique ID for the project.
+     * @param projectName            Name of the project.
+     * @param neighbourhood          Location of the project.
+     * @param applicationOpeningDate Start date for applications.
+     * @param applicationClosingDate End date for applications.
+     * @param officerSlots           Number of officer slots available.
+     * @param visibility             Whether the project is visible to users.
+     */
     public Project(int projectId, String projectName, String neighbourhood, LocalDate applicationOpeningDate, LocalDate applicationClosingDate, int officerSlots, boolean visibility) {
         this.projectId = projectId;
         this.projectName = projectName;
@@ -57,10 +72,25 @@ public class Project {
         return listOfUnits;
     }
 
+    /**
+     * Adds a new UnitType to the project.
+     * @param unitTypeId   ID of the unit type.
+     * @param projectId    ID of the associated project.
+     * @param name         Name of the unit type.
+     * @param available    Number of available units.
+     * @param total        Total number of units.
+     * @param pricePerUnit Price per unit.
+     */
     public void addUnitType(int unitTypeId,int projectId,String name, int available, int total, double pricePerUnit) {
         UnitType unitType = new UnitType(unitTypeId,projectId,name, available, total, pricePerUnit);
         this.listOfUnits.add(unitType);
     }
+
+    /**
+     * Deletes a unit type from the project by name.
+     * @param name The name of the unit type to remove.
+     * @return true if the unit was found and removed, false otherwise.
+     */
     public boolean deleteUnitType(String name) {
         if (listOfUnits == null) {
             return false;
@@ -109,7 +139,10 @@ public class Project {
         this.visibility = visibility;
     }
 
-
+    /**
+     * Returns string representation of the project which is formatted for display.
+     * @return A string describing the project details.
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

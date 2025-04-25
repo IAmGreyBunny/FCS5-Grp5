@@ -8,9 +8,17 @@ import view.IMenuView;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class represents the view for managing all BTO Project and Officer applications.
+ * The user can also choose to return to the home view.
+ */
 public class ManageApplicationView implements IMenuView {
     private int userInput;
 
+    /**
+     * Displays the manage applications menu to the HDB Manager.
+     * Based on the user's choice, the current view is set to the respective functionality.
+     */
     @Override
     public void show() {
         System.out.println("==== Manage Applications ====");

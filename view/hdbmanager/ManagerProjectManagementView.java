@@ -11,11 +11,19 @@ import view.form.EditListingForm;
 
 import java.util.*;
 
+/**
+ * Represents the view for HDB Managers to manage BTO projects.
+ * It allows managers to create, edit, delete, view, and toggle the visibility of projects.
+ */
 public class ManagerProjectManagementView implements IMenuView {
     private int userInput;
     private final Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     private final HashMap<String, Object> input = new HashMap<>();
 
+    /**
+     * Displays the menu for managing BTO projects.
+     * Returns to the manager's home view on exit.
+     */
     @Override
     public void show() {
         System.out.println("==== Manage BTO Project ====");
@@ -68,6 +76,10 @@ public class ManagerProjectManagementView implements IMenuView {
         }
     }
 
+    /**
+     * Handles deletion of a project listing by prompting for the project ID.
+     * Deletes the project using ProjectController.
+     */
     private void deleteListing() {
         System.out.println("=== Delete Project ===");
         System.out.print("Enter ID of project to delete: ");
@@ -77,6 +89,10 @@ public class ManagerProjectManagementView implements IMenuView {
         System.out.println("Project deleted.");
     }
 
+    /**
+     * Toggles the visibility status of a specific project.
+     * Allows managers to hide or show projects from applicants.
+     */
     private void toggleVisibility() {
         System.out.println("=== Toggle Visibility ===");
         List<Project> projects = ProjectRepository.getAllProjects();
@@ -100,6 +116,10 @@ public class ManagerProjectManagementView implements IMenuView {
         }
     }
 
+    /**
+     * Displays a list of project listings.
+     * Managers can choose to view all projects or only those assigned to them.
+     */
     private void viewListings() {
         System.out.println("=== View Project Listings ===");
         System.out.println("1. View All Projects");

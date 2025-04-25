@@ -12,11 +12,18 @@ import view.hdbmanager.ManageApplicationView;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This view class is responsible for managing all BTO project applications.
+ * It allows HDB managers to manage pending applications, approve/reject withdrawals and generate application reports.
+ */
 public class ManageProjectApplicationView extends ManageApplicationView {
     private int userInput;
     private final Scanner scanner = new Scanner(System.in);
     private final BTOApplicationController controller = new BTOApplicationController();
 
+    /**
+     * Displays the main menu for managing BTO project applications.
+     */
     @Override
     public void show() {
         System.out.println("==== BTO Project Applications ====");
@@ -43,6 +50,10 @@ public class ManageProjectApplicationView extends ManageApplicationView {
         }
     }
 
+    /**
+     * Displays and manages pending applications.
+     * Allows the user to approve/reject pending applications.
+     */
     private void managePendingApplications() {
         List<BTOApplication> applications = controller.getBTOApplications();
         List<BTOApplication> pendingApps = applications.stream()
@@ -92,6 +103,10 @@ public class ManageProjectApplicationView extends ManageApplicationView {
         }
     }
 
+    /**
+     * Displays and manages withdrawal requests for approved applications.
+     * Allows the user to approve/cancel withdrawal requests.
+     */
     private void manageWithdrawals() {
         List<BTOApplication> applications = controller.getBTOApplications();
         List<BTOApplication> approvedApps = applications.stream()
@@ -141,6 +156,9 @@ public class ManageProjectApplicationView extends ManageApplicationView {
         }
     }
 
+    /**
+     * Generates and displays a report of all BTO applications.
+     */
     private void generateReport() {
         List<BTOApplication> applications = controller.getBTOApplications();
 

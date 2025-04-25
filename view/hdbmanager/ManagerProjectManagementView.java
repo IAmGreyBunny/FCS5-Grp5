@@ -4,14 +4,13 @@ import project.Project;
 import project.ProjectController;
 import project.ProjectRepository;
 import session.Session;
-import view.MenuView;
+import view.IMenuView;
 import view.form.CreateProjectListingForm;
 import view.form.EditListingForm;
 
-import java.time.LocalDate;
 import java.util.*;
 
-public class ManagerProjectManagementView extends MenuView {
+public class ManagerProjectManagementView implements IMenuView {
     private int userInput;
     private final Scanner scanner = new Scanner(System.in).useDelimiter("\n");
     private final HashMap<String, Object> input = new HashMap<>();

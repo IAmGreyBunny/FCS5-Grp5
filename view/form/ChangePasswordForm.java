@@ -2,7 +2,7 @@ package view.form;
 
 import login.AuthController;
 import user.UserController;
-import view.FormView;
+import view.IFormView;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ import java.util.Scanner;
  * This class extends FormView and interacts with AuthController and UserController to validate and update the password.
  */
 
-public class ChangePasswordForm extends FormView {
+public class ChangePasswordForm implements IFormView {
 
     /**
      * @param userInput userInput is a HashMap that contains "username":String and "password":String

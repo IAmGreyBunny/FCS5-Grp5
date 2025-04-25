@@ -1,12 +1,12 @@
 package view.form;
 
 import registration.RegistrationController;
-import view.FormView;
+import view.IFormView;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class RegistrationForm extends FormView {
+public class RegistrationForm implements IFormView {
     HashMap<String, Object> userInput = new HashMap<>();
 
     @Override

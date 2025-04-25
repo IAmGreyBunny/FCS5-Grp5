@@ -1,12 +1,12 @@
 package view.hdbofficer;
 
 import session.Session;
-import view.MenuView;
+import view.IMenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class OfficerProjectManagementView extends MenuView {
+public class OfficerProjectManagementView implements IMenuView {
     private int userInput;
 
     @Override

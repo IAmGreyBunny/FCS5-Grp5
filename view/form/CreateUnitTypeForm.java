@@ -2,7 +2,7 @@ package view.form;
 
 import project.ProjectController;
 import session.Session;
-import view.FormView;
+import view.IFormView;
 import validator.InputValidator;
 import view.hdbmanager.ManagerProjectManagementView;
 //import view.hdbmanager.ManagerProjectManagementView;
@@ -10,7 +10,7 @@ import view.hdbmanager.ManagerProjectManagementView;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CreateUnitTypeForm extends FormView {
+public class CreateUnitTypeForm implements IFormView {
 
     int projectId;
 

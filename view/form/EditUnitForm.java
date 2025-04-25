@@ -4,12 +4,12 @@ import project.Project;
 import project.UnitType;
 import project.ProjectController;
 import validator.InputValidator;
-import view.FormView;
+import view.IFormView;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class EditUnitForm extends FormView {
+public class EditUnitForm implements IFormView {
     HashMap userInput = new HashMap<>();
     private UnitType oldUnitType;
     public EditUnitForm(Project oldProject) {

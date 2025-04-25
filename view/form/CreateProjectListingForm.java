@@ -2,9 +2,8 @@ package view.form;
 
 import project.Project;
 import project.ProjectController;
-import project.ProjectRepository;
 import session.Session;
-import view.FormView;
+import view.IFormView;
 import validator.InputValidator;
 
 import java.time.LocalDate;
@@ -12,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CreateProjectListingForm extends FormView {
+public class CreateProjectListingForm implements IFormView {
 
     HashMap<String, Object> userInput = new HashMap<>();
 

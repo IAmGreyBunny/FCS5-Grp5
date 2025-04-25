@@ -4,16 +4,15 @@ package view.general;
 
 import project.Project;
 import session.Session;
-import view.MenuView;
+import view.IMenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 
-public class DefaultHomeView extends MenuView {
+public class DefaultHomeView implements IMenuView {
     private int userInput;
     private List<Project> btoProject = new ArrayList<>();
 

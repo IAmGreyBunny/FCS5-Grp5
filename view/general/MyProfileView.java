@@ -1,14 +1,13 @@
 package view.general;
 
-import login.AuthController;
 import session.Session;
 import user.UserController;
-import view.MenuView;
+import view.IMenuView;
 import view.form.ChangePasswordForm;
 
 import java.util.Scanner;
 
-public class MyProfileView extends MenuView {
+public class MyProfileView implements IMenuView {
 
     int userInput;
     Scanner scanner = new Scanner(System.in).useDelimiter("\n");

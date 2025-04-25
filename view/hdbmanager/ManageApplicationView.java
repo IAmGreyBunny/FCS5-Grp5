@@ -2,12 +2,12 @@ package view.hdbmanager;
 
 import session.Session;
 import view.hdbmanager.applications.*;
-import view.MenuView;
+import view.IMenuView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ManageApplicationView extends MenuView {
+public class ManageApplicationView implements IMenuView {
     private int userInput;
 
     @Override

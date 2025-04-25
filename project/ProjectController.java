@@ -23,7 +23,7 @@ public class ProjectController {
         this.userInput = userInput;
     }
 
-    public static void createListingWithUserInput(HashMap<String, Object> userInput) {
+    public static Project createListingWithUserInput(HashMap<String, Object> userInput) {
 
         int projectId = ProjectRepository.findMaxProjectId() + 1;
         String name = (String) userInput.get("name");
@@ -36,6 +36,7 @@ public class ProjectController {
         Project project = new Project(projectId, name, neighbourhood, openingDate, closingDate, officerSlots, visibility);
         ProjectRepository.createProject(project);
 
+        return ProjectRepository.getProjectById(projectId);
     }
 
     public static void editListingWithUserInput(Project oldProject, HashMap<String, Object> userInput) {

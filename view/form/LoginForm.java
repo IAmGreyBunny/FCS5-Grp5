@@ -3,14 +3,9 @@ package view.form;
 import login.AuthController;
 import session.Session;
 import user.User;
-import user.applicant.Applicant;
-import user.hdbofficer.HDBOfficer;
 import view.FormView;
 import view.HomeViewFactory;
-import view.View;
-import view.general.DefaultHomeView;
-import view.hdbmanager.HDBManagerHomeView;
-import view.hdbofficer.HDBOfficerHomeView;
+import view.IView;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -38,7 +33,7 @@ public class LoginForm extends FormView {
         if(AuthController.authenticate(this.getUserInput()))
         {
             User user = Session.getSession().getCurrentUser();
-            View view = HomeViewFactory.getHomeViewForUser(user);
+            IView view = HomeViewFactory.getHomeViewForUser(user);
             Session.getSession().setCurrentView(view);
         }
     }

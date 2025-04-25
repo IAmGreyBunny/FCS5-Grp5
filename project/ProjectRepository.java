@@ -236,6 +236,10 @@ public class ProjectRepository {
         }
     }
 
+    public static void assignProjectOfficer(int userId, int projectId){
+
+    }
+
     public static ArrayList<Project> getAllProjects() {
         ArrayList<Project> listOfProjects = new ArrayList<>();
 

@@ -71,6 +71,11 @@ public class ProjectController {
 
     }
 
+    public static void deleteListing(int projectId)
+    {
+        ProjectRepository.deleteProject(projectId);
+    }
+
     public static void createUnitTypeWithUserInput(int projectId, HashMap<String, Object> userInput){
         int unitTypeId = ProjectRepository.findMaxUnitTypeId() + 1;
         String name = (String) userInput.get("name");
@@ -109,6 +114,10 @@ public class ProjectController {
         ProjectRepository.updateUnitType(updatedUnitType);
 
 
+    }
+
+    public static void deleteUnitType(int unitTypeId){
+        ProjectRepository.deleteUnitType(unitTypeId);
     }
 
     public static ArrayList<Project> getApplicableProject(User user) {

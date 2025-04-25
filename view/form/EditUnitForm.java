@@ -3,8 +3,10 @@ package view.form;
 import project.Project;
 import project.UnitType;
 import project.ProjectController;
+import session.Session;
 import validator.InputValidator;
 import view.IFormView;
+import view.HomeViewFactory;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -12,8 +14,9 @@ import java.util.Scanner;
 public class EditUnitForm implements IFormView {
     HashMap userInput = new HashMap<>();
     private UnitType oldUnitType;
-    public EditUnitForm(Project oldProject) {
+    public EditUnitForm(UnitType oldUnitType, HashMap<String, Object> userInput) {
         this.oldUnitType = oldUnitType;
+        this.userInput = userInput;
     }
     @Override
     public void prompt() {
@@ -48,20 +51,20 @@ public class EditUnitForm implements IFormView {
             }
         } while (!sTotalUnits.isEmpty() && !InputValidator.validateIntRange(sTotalUnits, 0, null));
 
-        // TODO not sure about this part cause we need to ensure that available Units < total units
-//        System.out.println("Current available number of units - " + oldUnitType.getAvailable());
-//        System.out.println("Available Units: ");
-//        String sAvailableUnits;
-//        do {
-//            sAvailableUnits = scanner.next();
-//            if (!sAvailableUnits.isEmpty()) {
-//                if (InputValidator.validateIntRange(sAvailableUnits, 0, )) {
-//                    availableUnits = Integer.parseInt(sAvailableUnits);
-//                } else {
-//                    System.out.println("Invalid number format! Enter an integer.");
-//                }
-//            }
-//        } while (!sAvailableUnits.isEmpty() && !InputValidator.validateIntRange(sAvailableUnits));
+        //TODO not sure about this part cause we need to ensure that available Units < total units
+        System.out.println("Current available number of units - " + oldUnitType.getAvailable());
+        System.out.println("Available Units: ");
+        String sAvailableUnits;
+        do {
+            sAvailableUnits = scanner.next();
+            if (!sAvailableUnits.isEmpty()) {
+                if (InputValidator.validateIntRange(sAvailableUnits, 0, null)) {
+                    availableUnits = Integer.parseInt(sAvailableUnits);
+                } else {
+                    System.out.println("Invalid number format! Enter an integer.");
+                }
+            }
+        } while (!sAvailableUnits.isEmpty() && !InputValidator.validateIntRange(sAvailableUnits, 0, null));
 
         System.out.println("Current price per unit - " + oldUnitType.getPricePerUnit());
         System.out.println("Price Per Unit: ");
@@ -82,6 +85,8 @@ public class EditUnitForm implements IFormView {
         userInput.put("available", availableUnits);
         userInput.put("pricePerUnit", pricePerUnit);
         ProjectController.editUnitTypeWithUserInput(oldUnitType, this.getUserInput());
+
+        Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
     }
     @Override
     public HashMap getUserInput() {

@@ -2,11 +2,16 @@ package view.form;
 
 import project.Project;
 import project.ProjectController;
+import project.ProjectRepository;
+import project.UnitType;
+import session.Session;
 import validator.InputValidator;
 import view.IFormView;
+import view.HomeViewFactory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -105,7 +110,44 @@ public class EditListingForm implements IFormView {
         userInput.put("visibility", visibility);
 
         ProjectController.editListingWithUserInput(oldProject, this.getUserInput());
-        //Session.getSession().setCurrentView(new EditUnitForm(oldProject));
+
+
+        ArrayList<UnitType> unitTypes = ProjectRepository.getUnitTypesByProjectId(oldProject.getProjectId());
+        System.out.println("List of units: ");
+        unitTypes.stream()
+                .map(unit -> "ID: " + unit.getUnitTypeId() + " | Name: " + unit.getName())
+                .forEach(System.out::println);
+        System.out.println("Enter unit ID: ");
+        String input;
+        boolean validUnit = false;
+        int unitId=-1;
+        UnitType target = null;
+        do {
+            input = scanner.next();
+            if (!input.isEmpty()) {
+                if (InputValidator.validateIntRange(input, 0, null)) {
+                    unitId = Integer.parseInt(input);
+                    for (UnitType unit : unitTypes) {
+                        if (unit.getUnitTypeId() == unitId) {
+                            target = unit;
+                            validUnit = true;
+                        }
+                    }
+                } else {
+                    System.out.println("Invalid input!");
+                }
+            }
+            else {
+                validUnit = true;
+            }
+        } while (!input.isEmpty() && !validUnit);
+
+        if (target != null) {
+            Session.getSession().setCurrentView(new EditUnitForm(target, this.getUserInput()));
+        }
+        else {
+            Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
+        }
 
     }
 

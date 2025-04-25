@@ -2,13 +2,13 @@ package session;
 
 import user.User;
 import view.general.StartUpView;
-import view.View;
+import view.IView;
 
 public class Session {
     private static Session session = null;
 
     private User currentUser = null;
-    private View currentView = null;
+    private IView currentView = null;
 
     private Session() {
 
@@ -33,11 +33,11 @@ public class Session {
         this.currentUser = currentUser;
     }
 
-    public View getCurrentView() {
+    public IView getCurrentView() {
         return currentView;
     }
 
-    public void setCurrentView(View currentView) {
+    public void setCurrentView(IView currentView) {
         this.currentView = currentView;
     }
 }

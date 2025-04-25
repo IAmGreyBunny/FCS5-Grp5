@@ -5,19 +5,18 @@ import project.ProjectController;
 import project.UnitType;
 import session.Session;
 import view.MenuView;
-import view.View;
+import view.IView;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ProjectDetailView extends MenuView {
 
-    View prevView;
+    IView prevView;
     Project project;
     Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
-    ProjectDetailView(View prevView,Project project)
+    ProjectDetailView(IView prevView, Project project)
     {
         this.prevView = prevView;
         if(project != null)

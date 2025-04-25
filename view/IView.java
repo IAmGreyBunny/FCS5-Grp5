@@ -1,5 +1,5 @@
 package view;
 
-public abstract class View {
+public interface IView {
     public abstract void show();
 }

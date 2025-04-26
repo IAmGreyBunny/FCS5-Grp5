@@ -25,7 +25,7 @@ public class ApplicantEnquiryView implements IMenuView {
         do {
             System.out.println("Enter choice: ");
             input = scanner.nextInt();
-        } while(1<input || input>5);
+        } while(1>input || input>5);
 
         switch (input) {
             case 1 -> {

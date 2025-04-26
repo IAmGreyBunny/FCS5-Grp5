@@ -6,6 +6,7 @@ import project.ProjectController;
 import project.UnitType;
 import session.Session;
 import view.IMenuView;
+import view.HomeViewFactory;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -66,5 +67,7 @@ public class BTOApplicationView implements IMenuView {
         } else {
             System.out.println("Failed to submit application.");
         }
+        // Returns Home
+        Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));
     }
 }

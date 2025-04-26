@@ -1,4 +1,4 @@
-package view.general;
+package view.general.applicants;
 
 import application.BTOApplicationController;
 import project.Project;

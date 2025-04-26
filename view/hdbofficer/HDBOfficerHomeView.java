@@ -2,10 +2,11 @@ package view.hdbofficer;
 
 import session.Session;
 import view.IMenuView;
-import view.general.BTOApplicationView;
+import view.general.applicants.BTOApplicationView;
 import view.general.MyApplicationView;
 import view.general.MyProfileView;
 import view.general.ProjectListingView;
+import view.general.applicants.BookFlatView;
 import view.hdbmanager.EnquiriesView;
 
 import java.util.InputMismatchException;
@@ -50,9 +51,10 @@ public class HDBOfficerHomeView implements IMenuView {
                     break;
                 case 5:
                     // BookFlatView
+                    Session.getSession().setCurrentView(new BookFlatView());
                     break;
                 case 6:
-                    // WithdrawalView
+                    // WithdrawalView TODO
                     break;
                 case 7:
                     // EnquiriesView

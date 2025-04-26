@@ -1,4 +1,4 @@
-package view.general;
+package view.general.applicants;
 
 import enquiries.Enquiry;
 import enquiries.EnquiryController;

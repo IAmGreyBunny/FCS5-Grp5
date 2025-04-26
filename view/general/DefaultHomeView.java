@@ -5,6 +5,9 @@ package view.general;
 import project.Project;
 import session.Session;
 import view.IMenuView;
+import view.general.applicants.ApplicantEnquiryView;
+import view.general.applicants.BTOApplicationView;
+import view.general.applicants.BookFlatView;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

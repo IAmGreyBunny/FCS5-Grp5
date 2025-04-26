@@ -1,4 +1,4 @@
-package view.general;
+package view.general.applicants;
 
 
 import application.BTOApplicationController;
@@ -63,11 +63,10 @@ public class BookFlatView implements IMenuView {
 
 
         if (selectedApplication != null && selectedApplication.getApplicationStatus() == ApplicationStatus.APPROVED) {
-            selectedApplication.setApplicationStatus(ApplicationStatus.BOOKED);
-            controller.updateApplicationStatus(selectedApplication);
-            System.out.println("Flat booked successfully. Application status updated to BOOKED.");
+            selectedApplication.setBooking(true);
+            System.out.println("Request to book flat successful");
         } else {
-            System.out.println("Failed to book flat. Either the application ID is invalid or the application status is not APPROVED.");
+            System.out.println("Request failed. Either the application ID is invalid or the application status is not APPROVED.");
         }
         // Returns Home
         Session.getSession().setCurrentView(HomeViewFactory.getHomeViewForUser(Session.getSession().getCurrentUser()));

@@ -1,12 +1,16 @@
-package user.applicant;
-
+//package user.applicant;
+//
+//import user.User;
+//
+////
+////
+//public class ApplicantController {
+//    private User user;
+//
+//    public ApplicantController(Applicant user) {
+//        this.user = user;
+//    }
 //
 //
-public class ApplicantController {
-
-    public ApplicantController(Applicant user) {
-    }
-
-
-
-}
+//
+//}

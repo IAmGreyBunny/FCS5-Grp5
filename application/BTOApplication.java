@@ -14,6 +14,7 @@ public class BTOApplication extends Application {
     private String projectId;
     private String applicantId;
     private UnitType unitType;
+    private boolean booked;
 
     /**
      * Constructs a new BTO Application with the provided details.
@@ -73,4 +74,11 @@ public class BTOApplication extends Application {
      * @param unitType the unit type to be set
      */
     public void setUnitType(UnitType unitType) { this.unitType = unitType; }
+
+    public boolean getBooking() {
+        return booked;
+    }
+    public void setBooking(boolean flatBook) {
+        booked = flatBook;
+    }
 }
